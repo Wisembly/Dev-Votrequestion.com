@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sql>
+<datatypes db="mysql">
+	<group label="Numeric" color="rgb(238,238,170)">
+		<type label="Integer" length="0" sql="INTEGER" re="INT" quote=""/>
+		<type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
+		<type label="Single precision" length="0" sql="FLOAT" quote=""/>
+		<type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
+	</group>
+
+	<group label="Character" color="rgb(255,200,200)">
+		<type label="Char" length="1" sql="CHAR" quote="'"/>
+		<type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
+		<type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
+		<type label="Binary" length="1" sql="BINARY" quote="'"/>
+		<type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
+		<type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
+	</group>
+
+	<group label="Date &amp; Time" color="rgb(200,255,200)">
+		<type label="Date" length="0" sql="DATE" quote="'"/>
+		<type label="Time" length="0" sql="TIME" quote="'"/>
+		<type label="Datetime" length="0" sql="DATETIME" quote="'"/>
+		<type label="Year" length="0" sql="YEAR" quote=""/>
+		<type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
+	</group>
+	
+	<group label="Miscellaneous" color="rgb(200,200,255)">
+		<type label="ENUM" length="1" sql="ENUM" quote=""/>
+		<type label="SET" length="1" sql="SET" quote=""/>
+		<type label="Bit" length="0" sql="bit" quote=""/>
+	</group>
+</datatypes><table x="191" y="12" name="Auth">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Users" row="id" />
+</row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="id_place" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="auth" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>user_id</part>
+<part>auth</part>
+<part>id_place</part>
+</key>
+<comment>Table qui attribue les droits des users sur différentes places. Par exemple, JDoe peur être admin sur la Place X et modérateur sur la Place Y</comment>
+</table>
+<table x="13" y="151" name="Users">
+<row name="id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="Votes" row="user_id" />
+<relation table="Quotes" row="user_id" />
+<relation table="Abonnements" row="user_id" />
+<relation table="Stats_Users" row="user_id" />
+</row>
+<row name="username" null="0" autoincrement="0">
+<datatype>VARCHAR(150)</datatype>
+</row>
+<row name="password" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="email" null="0" autoincrement="0">
+<datatype>VARCHAR(150)</datatype>
+</row>
+<row name="active" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="signup" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="lastsignin" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="optin" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>Table actuelle utilisée par le framework d'UserManagement</comment>
+</table>
+<table x="369" y="12" name="Groups">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+<relation table="Auth" row="auth" />
+</row>
+<row name="name" null="1" autoincrement="0">
+<datatype>VARCHAR(20)</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>Table qui répertorie les différents groupes de VQ : utilisateur, animateur, modérateur, admin, admin_sys</comment>
+</table>
+<table x="375" y="183" name="Places">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+<relation table="Auth" row="id_place" />
+<relation table="Events" row="id_place" />
+<relation table="Abonnements" row="id_place" />
+</row>
+<row name="nom" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="short" null="0" autoincrement="0">
+<datatype>VARCHAR(20)</datatype>
+</row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="html" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="logo" null="1" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+<default>NULL</default></row>
+<row name="password" null="1" autoincrement="0">
+<datatype>VARCHAR(20)</datatype>
+<default>NULL</default></row>
+<row name="css_perso" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="redirect" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+<comment>Une Place = l'Oréal, Capgé, Total. Un endroit dédié à Une boite/Un event particulier. Dedans peuvent se trouver plusieurs events</comment>
+</table>
+<table x="515" y="186" name="Events">
+<row name="id" null="0" autoincrement="1">
+<datatype>INTEGER</datatype>
+<relation table="Quotes" row="id_event" />
+<relation table="Votes" row="id_event" />
+<relation table="Stats_Events" row="id_event" />
+</row>
+<row name="id_place" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="nom" null="1" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+<default>NULL</default></row>
+<row name="short" null="0" autoincrement="0">
+<datatype>VARCHAR(20)</datatype>
+</row>
+<row name="tw_hashtag" null="1" autoincrement="0">
+<datatype>VARCHAR(100)</datatype>
+<default>NULL</default></row>
+<row name="last_tweet_id" null="1" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>NULL</default></row>
+<row name="lang" null="0" autoincrement="0">
+<datatype>VARCHAR(2)</datatype>
+<default>'en'</default></row>
+<row name="desc" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="start" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="stop" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="moderation" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="alaune" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="sondage" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="feedback" null="1" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+<default>NULL</default></row>
+<row name="last_action" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="last_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>id_place</part>
+</key>
+<comment>Un event = 1 session de réunion de personnes. IE: Sur la Place Total, on peut avoir deux réunions simultanées, une sur le pétrole et l'autre sur le gasoile</comment>
+</table>
+<table x="702" y="10" name="Quotes">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Polls_Answers" row="id_quote" />
+<relation table="Answers" row="id_quote" />
+<relation table="Votes" row="id_quote" />
+</row>
+<row name="id_event" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="user" null="1" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<default>NULL</default><comment>Username (fetch twitter, email éventuellement)</comment>
+</row>
+<row name="quote" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="time" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default> </default></row>
+<row name="votes" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="answer" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="moyen_post" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><comment>0: web 1: webmobile 2: sms 3: twitter 4: email 5: widget</comment>
+</row>
+<row name="moderation" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="sondage" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default><comment>Est-ce que cette quote est un sondage?</comment>
+</row>
+<row name="ip" null="1" autoincrement="0">
+<datatype>VARCHAR(15)</datatype>
+<default>NULL</default></row>
+<row name="idtweet" null="1" autoincrement="0">
+<datatype>VARCHAR(50)</datatype>
+<default>NULL</default></row>
+<row name="favori" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>id_event</part>
+<part>user_id</part>
+</key>
+<comment>Table des questions. 1 question = 1 quote</comment>
+</table>
+<table x="517" y="6" name="Votes">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="id_event" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="id_quote" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="ip" null="1" autoincrement="0">
+<datatype>VARCHAR(15)</datatype>
+<default>NULL</default></row>
+<row name="time" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>id_event</part>
+<part>id_quote</part>
+<part>user_id</part>
+</key>
+<comment>Les votes pour les questions qu'on "like". Table permettant d'empêcher les gens de voter plusieurs fois, et aussi d'afficher d'une autre couleur les quotes pour lesquelles on a voté</comment>
+</table>
+<table x="920" y="10" name="Polls">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="id_quote" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<relation table="Quotes" row="id" />
+</row>
+<row name="value" null="0" autoincrement="0">
+<datatype>VARCHAR(255)</datatype>
+</row>
+<row name="votes" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>id_quote</part>
+</key>
+<comment>L'intitulé d'un sondage est un quote, pour lequel on a mis le flag sondage à 1. Ici, on énumère les différentes réponses proposées pour le sondage</comment>
+</table>
+<table x="919" y="141" name="Polls_Answers">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="id_quote" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="ip" null="0" autoincrement="0">
+<datatype>VARCHAR(15)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>id_quote</part>
+</key>
+<comment>Ici, table qui empêche les gens de voter plusieurs fois</comment>
+</table>
+<table x="920" y="271" name="Answers">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="id_quote" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="answer" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="user" null="0" autoincrement="0">
+<datatype>VARCHAR(25)</datatype>
+<comment>Username juste. Pas besoin de linker avec user_id</comment>
+</row>
+<row name="time" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>id_quote</part>
+</key>
+<comment>Ici, réponse(s) par écrit de la part du modérateur/animateur à certaines questions</comment>
+</table>
+<table x="652" y="415" name="Stats_Events">
+<row name="id_event" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="total_questions" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="validated_questions" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="total_votes" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="total_users" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="max_connected_users" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_event</part>
+</key>
+</table>
+<table x="168" y="195" name="Abonnements">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="id_place" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="plan" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="signup" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>user_id</part>
+<part>id_place</part>
+</key>
+<comment>Cette table gère le type de Plan acheté, par qui, jusqu'à quand. Historique par user de ce qui a été acheter. Renouveler plan. Etc</comment>
+</table>
+<table x="170" y="361" name="Stats_Users">
+<row name="user_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="total_quotes" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="validated_quotes" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="total_votes" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="votes_for_quotes" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="answered_quotes" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="places_used" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<row name="events_used" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>0</default></row>
+<key type="PRIMARY" name="">
+<part>user_id</part>
+</key>
+<comment>Attribution badge/rewards pour les users</comment>
+</table>
+<table x="848" y="434" name="Archived_Places">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1025" y="434" name="Archived_Events">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="847" y="489" name="Archived_Quotes">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1030" y="490" name="Archived_Polls">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+</sql>
