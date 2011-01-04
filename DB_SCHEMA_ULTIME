@@ -60,6 +60,7 @@
 <relation table="Stats_User" row="user_id" />
 <relation table="Answer" row="user_id" />
 <relation table="Auth" row="user_id" />
+<relation table="Poll_Answer" row="user_id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -78,7 +79,7 @@
 </key>
 <comment>Table qui répertorie les différents groupes de VQ : utilisateur, animateur, modérateur, admin, admin_sys</comment>
 </table>
-<table x="324" y="293" name="Event">
+<table x="330" y="292" name="Event">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <relation table="Auth" row="event_id" />
@@ -105,9 +106,10 @@
 <datatype>VARCHAR(4)</datatype>
 <default>NULL</default><comment>Pin iPhone</comment>
 </row>
-<row name="???css_perso" null="1" autoincrement="0">
+<row name="has_css_perso" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><comment>Bool</comment>
+</row>
 <row name="redirect" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><comment>Pour déterminer si on squizze la page Event pour accéder directement au Wall. Doit être auto disable si 2 Walls</comment>
@@ -169,10 +171,11 @@
 <row name="feedback" null="1" autoincrement="0">
 <datatype>VARCHAR(255)</datatype>
 <default>NULL</default></row>
-<row name="???last_action" null="1" autoincrement="0">
+<row name="has_css_perso" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
-<row name="???last_id" null="1" autoincrement="0">
+<default>NULL</default><comment>BOOL</comment>
+</row>
+<row name="last_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
@@ -180,12 +183,12 @@
 <part>event_id</part>
 </key>
 </table>
-<table x="671" y="8" name="Quotes">
+<table x="675" y="8" name="Quotes">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Poll_Answer" row="id_quote" />
-<relation table="Answer" row="id_quote" />
-<relation table="Vote" row="id_quote" />
+<default>NULL</default><relation table="Poll_Answer" row="quote_id" />
+<relation table="Answer" row="quote_id" />
+<relation table="Vote" row="quote_id" />
 </row>
 <row name="id_wall" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
@@ -240,11 +243,11 @@
 </key>
 <comment>Table des questions. 1 question = 1 quote</comment>
 </table>
-<table x="498" y="13" name="Vote">
+<table x="498" y="5" name="Vote">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_quote" null="0" autoincrement="0">
+<row name="quote_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
 <row name="user_id" null="1" autoincrement="0">
@@ -259,7 +262,7 @@
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
-<part>id_quote</part>
+<part>quote_id</part>
 <part>user_id</part>
 </key>
 <comment>Les votes pour les questions qu'on "like". Table permettant d'empêcher les gens de voter plusieurs fois, et aussi d'afficher d'une autre couleur les quotes pour lesquelles on a voté</comment>
@@ -288,7 +291,10 @@
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_quote" null="0" autoincrement="0">
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="quote_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
 <row name="source_id" null="1" autoincrement="0">
@@ -299,21 +305,22 @@
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
-<part>id_quote</part>
+<part>quote_id</part>
 <part>source_id</part>
+<part>user_id</part>
 </key>
 <comment>Ici, table qui empêche les gens de voter plusieurs fois</comment>
 </table>
-<table x="969" y="344" name="Answer">
+<table x="958" y="321" name="Answer">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="id_quote" null="0" autoincrement="0">
+<row name="quote_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
-<row name="user_id" null="0" autoincrement="0">
+<row name="user_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-</row>
+<default>NULL</default></row>
 <row name="answer" null="0" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 </row>
@@ -322,12 +329,12 @@
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
-<part>id_quote</part>
+<part>quote_id</part>
 <part>user_id</part>
 </key>
 <comment>Ici, réponse(s) par écrit de la part du modérateur/animateur à certaines questions</comment>
 </table>
-<table x="719" y="420" name="Stats_Wall">
+<table x="692" y="421" name="Stats_Wall">
 <row name="wall_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
@@ -403,7 +410,7 @@
 </key>
 <comment>Attribution badge/rewards pour les users</comment>
 </table>
-<table x="809" y="261" name="Source">
+<table x="806" y="273" name="Source">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Poll_Answer" row="source_id" />
