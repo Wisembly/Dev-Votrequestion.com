@@ -30,7 +30,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="165" y="26" name="Auth">
+</datatypes><table x="170" y="25" name="Auth">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -78,7 +78,7 @@
 </key>
 <comment>Table qui répertorie les différents groupes de VQ : utilisateur, animateur, modérateur, admin, admin_sys</comment>
 </table>
-<table x="333" y="303" name="Event">
+<table x="324" y="293" name="Event">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <relation table="Auth" row="event_id" />
@@ -117,7 +117,7 @@
 </key>
 <comment>Event = L'orélal, l'événement TCFRemix</comment>
 </table>
-<table x="500" y="172" name="Wall">
+<table x="503" y="177" name="Wall">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <relation table="Quotes" row="id_wall" />
@@ -230,7 +230,7 @@
 <row name="idtweet" null="1" autoincrement="0">
 <datatype>VARCHAR(50)</datatype>
 <default>NULL</default></row>
-<row name="favori" null="1" autoincrement="0">
+<row name="is_favori" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
@@ -240,7 +240,7 @@
 </key>
 <comment>Table des questions. 1 question = 1 quote</comment>
 </table>
-<table x="477" y="18" name="Vote">
+<table x="498" y="13" name="Vote">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -350,7 +350,7 @@
 <part>wall_id</part>
 </key>
 </table>
-<table x="77" y="220" name="Abonnements">
+<table x="97" y="215" name="Abonnements">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
