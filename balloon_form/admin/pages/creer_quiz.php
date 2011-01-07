@@ -13,11 +13,11 @@
 <table>
     <tr>
     <form action="?action=insert&id=<?php echo $id;?>" method="post">
-        <td><button name="text" type="submit">Add text</button></td>
-        <td><button name="select" type="submit">Add select</button></td>
-        <td><button name="checkbox" type="submit">Add checkbox</button></td>
-        <td><button name="radio" type="submit">Add radio</button></td>
-        <td><button name="textarea" type="submit">Add textarea</button></td>
+        <td><button <?php if(isset ($_POST["text"])){echo 'style="background-color:coral"';}else{echo 'style="background-color:beige"';}?> name="text" type="submit">Add text</button></td>
+        <td><button <?php if(isset ($_POST["select"])){echo 'style="background-color:coral"';}else{echo 'style="background-color:beige"';}?> name="select" type="submit">Add select</button></td>
+        <td><button <?php if(isset ($_POST["checkbox"])){echo 'style="background-color:coral"';}else{echo 'style="background-color:beige"';}?> name="checkbox" type="submit">Add checkbox</button></td>
+        <td><button <?php if(isset ($_POST["radio"])){echo 'style="background-color:coral"';}else{echo 'style="background-color:beige"';}?> name="radio" type="submit">Add radio</button></td>
+        <td><button <?php if(isset ($_POST["textarea"])){echo 'style="background-color:coral"';}else{echo 'style="background-color:beige"';}?> name="textarea" type="submit">Add textarea</button></td>
     </form>
     </tr>
 </table>
@@ -60,6 +60,11 @@ foreach ($donnees_item as $donnee_item){
     switch ($type_aff){
         case 'text':
             echo $donnee_item["label"]."&nbsp;:&nbsp;<input name='".$donnee_item["label"]."' type='text'/>";
+            if($donnee_item["is_requiried"] == 1){echo "<span style='color:red'>*</span>";}
+            echo"<br/>";
+            break;
+        case 'textarea':
+            echo $donnee_item["label"]."&nbsp;:&nbsp;<textarea name='".$donnee_item["label"]."'></textarea>";
             if($donnee_item["is_requiried"] == 1){echo "<span style='color:red'>*</span>";}
             echo"<br/>";
             break;

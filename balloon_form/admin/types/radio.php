@@ -14,14 +14,14 @@ $option_type ="radio";
                 $label = $_POST["label"];
                 $required = $_POST["requis"];
                 if(empty ($required)){$required = 0;}else{$required = 1;}
-                $quiz_item->add_item_quiz("select",$_GET["id"],$label,$required);
+                $quiz_item->add_item_quiz($option_type,$_GET["id"],$label,$required);
                 header("?action=insert&id=".$_GET["id"]);
             }
     }
 ?>
 
 <fieldset>
-    <legend><?php UcFirstAndToLower($option_type);?></legend>
+    <legend><?php echo ucfirst($option_type);?></legend>
 <form action="" method="post">
     Label :<input name="label" type="text"/><?php echo "&nbsp;".$error1;?><br/>
     Options :<input name="options" type="text"/><?php echo "&nbsp;".$error2;?><br/>
