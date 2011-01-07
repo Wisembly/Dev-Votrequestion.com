@@ -6,8 +6,14 @@
         <?php
         require_once '../classes/quiz.php';
         require_once '../classes/quiz_item.php';
+        require_once '../classes/quiz_item_option.php';
         $var = connectDB();
         ?>
+        <style>
+            img {
+                border: 0;
+            }
+        </style>
     </head>
     <body>
         <h2>Bienvenue dans l'administration</h2>

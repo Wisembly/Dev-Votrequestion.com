@@ -14,6 +14,16 @@ $option_type ="select";
                 $required = $_POST["requis"];
                 if(empty ($required)){$required = 0;}else{$required = 1;}
                 $quiz_item->add_item_quiz($option_type,$_GET["id"],$label,$required);
+                $last_id = $quiz_item->get_id_for_quiz($_GET["id"]);
+
+                $list_option = array();
+                $list_option = split(';',$options);
+
+                foreach ($list_option as $option){
+                    $quiz_item_option->add_item_option($last_id,$option);
+                }
+
+
                 header("?action=insert&id=".$_GET["id"]);
             }
     }
@@ -26,7 +36,7 @@ $option_type ="select";
     Options :<input name="options" type="text"/><?php echo "&nbsp;".$error2;?><br/>
     Requis :<input name="requis" type="checkbox"><br/>
     <button type="submit">Ajouter</button>
-    <input type="hidden" name="<?php $option_type;?>"/><br/>
+    <input type="hidden" name="<?php echo $option_type;?>"/><br/>
     <span><b>Astuce :</b> Séparer les options avec des ;</span>
 </form>
 </fieldset>

@@ -31,6 +31,7 @@ if(isset($_POST["textarea"])){$menu_item = "textarea";}
 
 //include par rapport à index.php dans admin
 $quiz_item = new Quiz_Item();
+$quiz_item_option = new Quiz_Item_Option();
 if(isset($menu_item)){
     switch($menu_item){
         case "text":
@@ -53,21 +54,72 @@ if(isset($menu_item)){
 ?>
 <hr/>
 <u>Rendu du formulaire :</u><br/>
+<table>
 <?php
 $donnees_item = $quiz_item->list_item_quiz($_GET["id"]);
 foreach ($donnees_item as $donnee_item){
     $type_aff = $donnee_item["type"];
     switch ($type_aff){
         case 'text':
-            echo $donnee_item["label"]."&nbsp;:&nbsp;<input name='".$donnee_item["label"]."' type='text'/>";
+            echo "<tr><td>";
+            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td><input name='".$donnee_item["label"]."' type='text'/>";
             if($donnee_item["is_requiried"] == 1){echo "<span style='color:red'>*</span>";}
-            echo"<br/>";
+            echo "</td><td><img src='../img/edit.png' /></td>";
+            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
             break;
         case 'textarea':
-            echo $donnee_item["label"]."&nbsp;:&nbsp;<textarea name='".$donnee_item["label"]."'></textarea>";
+            echo "<tr><td>";
+            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td><textarea name='".$donnee_item["label"]."'></textarea>";
             if($donnee_item["is_requiried"] == 1){echo "<span style='color:red'>*</span>";}
-            echo"<br/>";
+            echo "</td><td><img src='../img/edit.png' /></td>";
+            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
             break;
+        case 'select':
+            echo "<tr><td>";
+            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>
+            <select name='".$donnee_item["label"]."'>";
+                $datas = $quiz_item_option->get_item_option($donnee_item["id"]);
+                foreach ($datas as $data){
+                    echo "<option value=''>".$data["label"]."</option>";
+                }
+            echo"</select>";
+            if($donnee_item["is_requiried"] == 1){echo "<span style='color:red'>*</span>";}
+            echo "</td><td><img src='../img/edit.png' /></td>";
+            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
+            break;
+        case 'radio':
+            echo "<tr><td>";
+            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>";
+                $datas = $quiz_item_option->get_item_option($donnee_item["id"]);
+                foreach ($datas as $data){
+                    echo $data["label"]."<input type=radio name=".$donnee_item["label"]." value=".$data["label"]."><br/>";
+                }
+            if($donnee_item["is_requiried"] == 1){echo "<span style='color:red'>*</span>";}
+            echo "</td><td><img src='../img/edit.png' /></td>";
+            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
+            break;
+        case 'checkbox':
+            echo "<tr><td>";
+            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>";
+                $datas = $quiz_item_option->get_item_option($donnee_item["id"]);
+                foreach ($datas as $data){
+                    echo $data["label"]."<input type=checkbox name=".$donnee_item["label"]." value=".$data["label"]."><br/>";
+                }
+            if($donnee_item["is_requiried"] == 1){echo "<span style='color:red'>*</span>";}
+            echo "</td><td><img src='../img/edit.png' /></td>";
+            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
+            break;
+
     }
+}
+?>
+</table>
+
+
+<?php
+if(isset($_GET["delete"])){
+
+    $quiz_item->delete_element($_GET["delete"]);
+    echo "<a href='?action=insert&id=".$_GET["id"]."'>Rafrechir</a>";
 }
 ?>
