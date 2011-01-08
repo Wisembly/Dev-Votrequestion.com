@@ -11,7 +11,7 @@
                 <th colspan="3">Actions</th>
             </tr>
             <?php
-                $donnees = $quiz->list_quiz();
+                $donnees = $quiz->getAll();
                 foreach($donnees as $donnee){
                     echo "<tr>";
                     echo "<td>".$donnee["nom"]."</td>";

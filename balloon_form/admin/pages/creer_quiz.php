@@ -3,7 +3,7 @@
     <legend>Informations</legend>
 <?php
         $quiz = new Quiz();
-        $reponse = $quiz->detail_quiz($_GET["id"]);
+        $reponse = $quiz->find($_GET["id"]);
         echo "<u>Nom du quizz</u>: ".$reponse[0]["nom"]."<br/>";
         echo "<u>Description</u>: ".$reponse[0]["description"];
         $id = $reponse[0]["id"];
@@ -56,7 +56,7 @@ if(isset($menu_item)){
 <u>Rendu du formulaire :</u><br/>
 <table>
 <?php
-$donnees_item = $quiz_item->list_item_quiz($_GET["id"]);
+$donnees_item = $quiz_item->getAllByQuiz($_GET["id"]);
 foreach ($donnees_item as $donnee_item){
     $type_aff = $donnee_item["type"];
     switch ($type_aff){
@@ -78,7 +78,7 @@ foreach ($donnees_item as $donnee_item){
             echo "<tr><td>";
             echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>
             <select name='".$donnee_item["label"]."'>";
-                $datas = $quiz_item_option->get_item_option($donnee_item["id"]);
+                $datas = $quiz_item_option->getAllByQuizItem($donnee_item["id"]);
                 foreach ($datas as $data){
                     echo "<option value=''>".$data["label"]."</option>";
                 }
@@ -90,7 +90,7 @@ foreach ($donnees_item as $donnee_item){
         case 'radio':
             echo "<tr><td>";
             echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>";
-                $datas = $quiz_item_option->get_item_option($donnee_item["id"]);
+                $datas = $quiz_item_option->getAllByQuizItem($donnee_item["id"]);
                 foreach ($datas as $data){
                     echo $data["label"]."<input type=radio name=".$donnee_item["label"]." value=".$data["label"]."><br/>";
                 }
@@ -101,7 +101,7 @@ foreach ($donnees_item as $donnee_item){
         case 'checkbox':
             echo "<tr><td>";
             echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>";
-                $datas = $quiz_item_option->get_item_option($donnee_item["id"]);
+                $datas = $quiz_item_option->getAllByQuizItem($donnee_item["id"]);
                 foreach ($datas as $data){
                     echo $data["label"]."<input type=checkbox name=".$donnee_item["label"]." value=".$data["label"]."><br/>";
                 }
@@ -119,7 +119,7 @@ foreach ($donnees_item as $donnee_item){
 <?php
 if(isset($_GET["delete"])){
 
-    $quiz_item->delete_element($_GET["delete"]);
+    $quiz_item->delete($_GET["delete"]);
     echo "<a href='?action=insert&id=".$_GET["id"]."'>Rafrechir</a>";
 }
 ?>

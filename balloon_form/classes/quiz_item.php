@@ -15,7 +15,7 @@ class Quiz_Item
 
 
     //Sauvgarde l'idem dans la base de données
-    public function add_item_quiz($type, $quiz_id, $label, $required)
+    public function addByTypeAndQuiz($type, $quiz_id, $label, $required)
     {
         $this->type = $type;
         $this->quiz_id = $quiz_id;
@@ -26,14 +26,14 @@ class Quiz_Item
         $reponse = insert("quiz_item",$champs,$valeur);
     }
 
-    public function list_item_quiz($quiz_id)
+    public function getAllByQuiz($quiz_id)
     {
         $quiz = array("type" => "quiz_id", "id" => $quiz_id);
         $data  = select("quiz_item","",$quiz);
         return $data;
     }
 
-    public function get_id_for_quiz($quiz_id)
+    public function findByQuiz($quiz_id)
     {
         $quiz = array("type" => "quiz_id", "id" => $quiz_id);
         $data  = select("quiz_item","id",$quiz,"id","DESC","1");
@@ -41,7 +41,7 @@ class Quiz_Item
         return $lastID;
     }
 
-    public function delete_element($id)
+    public function delete($id)
     {
         $table = "quiz_item_option";
         $options = array("type" => "id_quiz_item", "id" => $id);

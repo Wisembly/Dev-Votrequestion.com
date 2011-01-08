@@ -13,13 +13,13 @@ class Quiz
     }
 
     //Liste des quiz
-    function list_quiz()
+    function getAll()
     {
         $data  = select("quiz","","");
         return $data;
     }
 
-    function detail_quiz($quiz_id)
+    function find($quiz_id)
     {
         $quiz = array("type" => "id", "id" => $quiz_id);
         $data  = select("quiz","",$quiz);
@@ -27,7 +27,7 @@ class Quiz
     }
 
     //Ajoute un quiz
-    function add_quiz()
+    function add()
     {
         $champs = "'nom','description'";
         $valeur = "'".$this->nom."','".$this->description."'";
@@ -35,14 +35,14 @@ class Quiz
     }
 
     //Modifier un quiz
-    function edit_quiz()
+    function update()
     {
 
     }
 
 
     //Supprime un quiz avec ces options et reponse
-    function remove_quiz()
+    function remove()
     {
 
     }
