@@ -30,7 +30,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="372" y="20" name="Auth">
+</datatypes><table x="375" y="21" name="Auth">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -51,7 +51,7 @@
 </key>
 <comment>Table qui attribue les droits des users sur différentes places. Par exemple, JDoe peur être admin sur la Place X et modérateur sur la Place Y</comment>
 </table>
-<table x="22" y="15" name="sfGuard">
+<table x="12" y="63" name="sfGuard">
 <row name="id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <relation table="Vote" row="user_id" />
@@ -67,7 +67,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="571" y="12" name="Groups">
+<table x="522" y="22" name="Groups">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <relation table="Auth" row="group_id" />
@@ -80,7 +80,7 @@
 </key>
 <comment>Table qui répertorie les différents groupes de VQ : utilisateur, animateur, modérateur, admin, admin_sys</comment>
 </table>
-<table x="514" y="144" name="Event">
+<table x="509" y="154" name="Event">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <relation table="Auth" row="event_id" />
@@ -120,7 +120,7 @@
 </key>
 <comment>Event = L'orélal, l'événement TCFRemix</comment>
 </table>
-<table x="664" y="186" name="Wall">
+<table x="650" y="178" name="Wall">
 <row name="id" null="0" autoincrement="1">
 <datatype>INTEGER</datatype>
 <relation table="Quotes" row="id_wall" />
@@ -244,7 +244,7 @@
 </key>
 <comment>Table des questions. 1 question = 1 quote</comment>
 </table>
-<table x="693" y="35" name="Vote">
+<table x="698" y="20" name="Vote">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -335,7 +335,7 @@
 </key>
 <comment>Ici, réponse(s) par écrit de la part du modérateur/animateur à certaines questions</comment>
 </table>
-<table x="892" y="434" name="Stats_Wall">
+<table x="835" y="416" name="Stats_Wall">
 <row name="wall_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
@@ -358,10 +358,11 @@
 <part>wall_id</part>
 </key>
 </table>
-<table x="332" y="366" name="Subscription">
+<table x="171" y="253" name="Subscription">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="Chosen_Option" row="subscription_id" />
+</row>
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
@@ -371,12 +372,16 @@
 <row name="offer_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
-<row name="suscribed_at" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-</row>
 <row name="voucher_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="suscribed_at" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+</row>
+<row name="has_options" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<comment>Bool</comment>
+</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 <part>user_id</part>
@@ -386,7 +391,7 @@
 </key>
 <comment>Cette table gère le type de Plan acheté, par qui, jusqu'à quand. Historique par user de ce qui a été acheter. Renouveler plan. Etc</comment>
 </table>
-<table x="195" y="11" name="Stats_User">
+<table x="198" y="23" name="Stats_User">
 <row name="user_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 </row>
@@ -432,7 +437,7 @@
 </key>
 <comment>Quel moyen de post?</comment>
 </table>
-<table x="184" y="310" name="Voucher">
+<table x="352" y="201" name="Voucher">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Subscription" row="voucher_id" />
@@ -468,7 +473,7 @@
 </key>
 <comment>Gestion des tickets de réduction</comment>
 </table>
-<table x="16" y="275" name="Offer">
+<table x="12" y="132" name="Offer">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="Voucher" row="offer_id" />
@@ -477,7 +482,7 @@
 <row name="name" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="price_id" null="1" autoincrement="0">
+<row name="price" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="sms_allow" null="1" autoincrement="0">
@@ -501,5 +506,40 @@
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
+</table>
+<table x="12" y="383" name="Option">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="Chosen_Option" row="option_id" />
+</row>
+<row name="offer_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="0" autoincrement="0">
+<datatype>VARCHAR(150)</datatype>
+</row>
+<row name="price" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="170" y="452" name="Chosen_Option">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="subscription_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="option_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+<part>subscription_id</part>
+<part>option_id</part>
+</key>
+<comment>Timestamp Table</comment>
 </table>
 </sql>
