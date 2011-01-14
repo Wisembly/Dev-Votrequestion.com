@@ -1,7 +1,7 @@
 <?php
 function connectDB(){
-    $var = mysql_pconnect("localhost:8889","root","root") or die("Imposible de connecter à la Base de données");
-    mysql_select_db("balloon_sondage", $var) or die ("Imposible de trouver la base de données");
+    $var = mysql_pconnect("localhost:8889","root","root") or die("Impossible de connecter à la Base de données");
+    mysql_select_db("balloon_sondage", $var) or die ("Impossible de trouver la base de données");
 return $var;
 }
 
@@ -10,8 +10,8 @@ return $var;
 //Fonction insert
 function insert($table,$champs,$valeur){
     $query = "INSERT INTO `".$table."`(".$champs.") VALUE(".$valeur.")";
-    //echo $query;
-    $reponse = mysql_query($query) or die ("Imposible d'exécuter la requette d'insertion");
+    echo $query;
+    $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette d'insertion");
     return $reponse;
 }
 
@@ -33,7 +33,7 @@ function select($table,$selection,$options,$orderby = NULL,$sens = NULL,$limit =
         $query  = $query."LIMIT ".$limit."";
     }
     //echo $query;
-    $reponse = mysql_query($query) or die ("Imposible d'exécuter la requette de selection");
+    $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette de selection");
     $temp =array();
     while($data = mysql_fetch_array($reponse)){
         array_push($temp, $data);
@@ -44,6 +44,6 @@ function select($table,$selection,$options,$orderby = NULL,$sens = NULL,$limit =
 //Fonction de delete
 function delete($table,$options){
     $query = "DELETE FROM `".$table."` WHERE `".$options["type"]."`=".$options["id"]."";
-    $reponse = mysql_query($query) or die ("Imposible d'exécuter la requette de suppression");
+    $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette de suppression");
 }
 ?>

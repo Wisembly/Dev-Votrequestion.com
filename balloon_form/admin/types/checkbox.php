@@ -1,5 +1,7 @@
 <?php
 $option_type ="checkbox";
+$error1 = '' ;
+$error2 = '' ;
 
     if(isset($_POST["label"])){
         $label = $_POST["label"];
@@ -13,14 +15,14 @@ $option_type ="checkbox";
                 $label = $_POST["label"];
                 $required = $_POST["requis"];
                 if(empty ($required)){$required = 0;}else{$required = 1;}
-                $quiz_item->add_item_quiz($option_type,$_GET["id"],$label,$required);
-                $last_id = $quiz_item->get_id_for_quiz($_GET["id"]);
+                $quizz_item->addByTypeAndQuizz($option_type,$_GET["id"],$label,$required);
+                $last_id = $quizz_item->findByQuizz($_GET["id"]);
 
                 $list_option = array();
                 $list_option = split(';',$options);
 
                 foreach ($list_option as $option){
-                    $quiz_item_option->add_item_option($last_id,$option);
+                    $quizz_item_option->addByQuizz($last_id,$option);
                 }
 
 

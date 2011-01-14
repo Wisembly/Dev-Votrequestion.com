@@ -1,7 +1,7 @@
 <?php
 require_once 'base.php';
 
-class Quiz
+class Quizz
 {
     public $id;
     public $nom;
@@ -12,36 +12,36 @@ class Quiz
     {
     }
 
-    //Liste des quiz
+    //Liste des quizz
     function getAll()
     {
-        $data  = select("quiz","","");
+        $data  = select("quizz","","");
         return $data;
     }
 
-    function find($quiz_id)
+    function find($quizz_id)
     {
-        $quiz = array("type" => "id", "id" => $quiz_id);
-        $data  = select("quiz","",$quiz);
+        $quizz = array("type" => "id", "id" => $quizz_id);
+        $data  = select("quizz","",$quizz);
         return $data;
     }
 
-    //Ajoute un quiz
+    //Ajoute un quizz
     function add()
     {
         $champs = "'nom','description'";
         $valeur = "'".$this->nom."','".$this->description."'";
-        $reponse = insert("quiz",$champs,$valeur);
+        $reponse = insert("quizz",$champs,$valeur);
     }
 
-    //Modifier un quiz
+    //Modifier un quizz
     function update()
     {
 
     }
 
 
-    //Supprime un quiz avec ces options et reponse
+    //Supprime un quizz avec ces options et reponse
     function remove()
     {
 

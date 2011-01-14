@@ -1,4 +1,5 @@
 <?php
+	$error = '' ;
     if(isset($_POST["label"])){
         $label = $_POST["label"];
         if ($label == ""){
@@ -9,7 +10,7 @@
                 $label = $_POST["label"];
                 $required = $_POST["requis"];
                 if(empty ($required)){$required = 0;}else{$required = 1;}
-                $quiz_item->add_item_quiz("text",$_GET["id"],$label,$required);
+                $quizz_item->addByTypeAndQuizz("text",$_GET["id"],$label,$required);
                 header("?action=insert&id=".$_GET["id"]);
             }
     }

@@ -4,9 +4,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Interface admin</title>
         <?php
-        require_once '../classes/quiz.php';
-        require_once '../classes/quiz_item.php';
-        require_once '../classes/quiz_item_option.php';
+        require_once '../classes/quizz.php';
+        require_once '../classes/quizz_item.php';
+        require_once '../classes/quizz_item_option.php';
         $var = connectDB();
         ?>
         <style>
@@ -22,17 +22,17 @@
                 $menu = $_GET["action"];
                 switch ($menu){
                     case "insert":
-                        include 'pages/creer_quiz.php';
+                        include 'pages/creer_quizz.php';
                         break;
                     case "liste":
-                        include 'pages/liste_quiz.php';
+                        include 'pages/liste_quizz.php';
                         break;
                     default:
-                        include 'pages/liste_quiz.php';
+                        include 'pages/liste_quizz.php';
                         break;
                 }
             }else{
-                include 'pages/liste_quiz.php';
+                include 'pages/liste_quizz.php';
             }
         ?>
 

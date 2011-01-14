@@ -1,7 +1,7 @@
-<u>Liste des quiz :</u>
+<u>Liste des quizz :</u>
 
         <?php
-        $quiz = new Quiz();
+        $quizz = new Quizz();
         ?>
 
         <table border="1">
@@ -11,7 +11,7 @@
                 <th colspan="3">Actions</th>
             </tr>
             <?php
-                $donnees = $quiz->getAll();
+                $donnees = $quizz->getAll();
                 foreach($donnees as $donnee){
                     echo "<tr>";
                     echo "<td>".$donnee["nom"]."</td>";
