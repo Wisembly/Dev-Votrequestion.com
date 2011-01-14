@@ -15,7 +15,7 @@ class Quizz
     //Liste des quizz
     function getAll()
     {
-        $data  = select("quizz","","");
+        $data  = select("quizz","","","id DESC");
         return $data;
     }
 

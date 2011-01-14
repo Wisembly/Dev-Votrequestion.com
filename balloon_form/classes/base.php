@@ -6,11 +6,10 @@ return $var;
 }
 
 
-
 //Fonction insert
 function insert($table,$champs,$valeur){
     $query = "INSERT INTO `".$table."`(".$champs.") VALUE(".$valeur.")";
-    echo $query;
+    // echo $query;
     $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette d'insertion");
     return $reponse;
 }
@@ -24,7 +23,7 @@ function select($table,$selection,$options,$orderby = NULL,$sens = NULL,$limit =
         $query = $query."WHERE `".$options["type"]."`=".$options["id"]." ";
     }
     if (!empty($orderby)){
-        $query = $query."ORDER BY `".$orderby."`";
+        $query = $query."ORDER BY ".$orderby."";
     }
     if (!empty($sens)){
         $query = $query." ".$sens." ";
@@ -32,7 +31,7 @@ function select($table,$selection,$options,$orderby = NULL,$sens = NULL,$limit =
     if (!empty($limit)){
         $query  = $query."LIMIT ".$limit."";
     }
-    //echo $query;
+    // echo $query;
     $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette de selection");
     $temp =array();
     while($data = mysql_fetch_array($reponse)){

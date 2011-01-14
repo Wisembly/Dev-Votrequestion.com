@@ -29,7 +29,7 @@ class Quizz_Item
     public function getAllByQuizz($quizz_id)
     {
         $quizz = array("type" => "quizz_id", "id" => $quizz_id);
-        $data  = select("quizz_item","",$quizz);
+        $data  = select("quizz_item","",$quizz,"id ASC");
         return $data;
     }
 
