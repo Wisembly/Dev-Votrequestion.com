@@ -2,10 +2,30 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+        <title>Quizz Balloon</title>
+        <?php
+        require_once 'classes/quizz.php';
+        require_once 'classes/quizz_item.php';
+        require_once 'classes/quizz_item_option.php';
+        $var = connectDB();
+        ?>
     </head>
     <body>
         <?php
+		if ( !isset($_GET['quizz_id']) )
+		{
+			// voir ce qu'on y met
+		} else
+		{
+			$quizz_id = $_GET['quizz_id'];
+			$quizz= new Quizz();
+			
+			echo '<table>';
+			echo $quizz->showQuizz($quizz_id);
+			echo'</table>';
+			
+		}
+		
         // put your code here
         ?>
     </body>
