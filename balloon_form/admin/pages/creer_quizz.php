@@ -54,72 +54,15 @@ if(isset($menu_item)){
 ?>
 <hr/>
 <u>Rendu du formulaire :</u><br/>
-<table>
 <?php
-$donnees_item = $quizz_item->getAllByQuizz($_GET["id"]);
-foreach ($donnees_item as $donnee_item){
-    $type_aff = $donnee_item["type"];
-    switch ($type_aff){
-        case 'text':
-            echo "<tr><td>";
-            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td><input name='".$donnee_item["label"]."' type='text'/>";
-            if($donnee_item["is_required"] == 1){echo "<span style='color:red'>*</span>";}
-            echo "</td><td><img src='../img/edit.png' /></td>";
-            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
-            break;
-        case 'textarea':
-            echo "<tr><td>";
-            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td><textarea name='".$donnee_item["label"]."'></textarea>";
-            if($donnee_item["is_required"] == 1){echo "<span style='color:red'>*</span>";}
-            echo "</td><td><img src='../img/edit.png' /></td>";
-            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
-            break;
-        case 'select':
-            echo "<tr><td>";
-            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>
-            <select name='".$donnee_item["label"]."'>";
-                $datas = $quizz_item_option->getAllByQuizzItem($donnee_item["id"]);
-                foreach ($datas as $data){
-                    echo "<option value=''>".$data["label"]."</option>";
-                }
-            echo"</select>";
-            if($donnee_item["is_required"] == 1){echo "<span style='color:red'>*</span>";}
-            echo "</td><td><img src='../img/edit.png' /></td>";
-            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
-            break;
-        case 'radio':
-            echo "<tr><td>";
-            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>";
-                $datas = $quizz_item_option->getAllByQuizzItem($donnee_item["id"]);
-                foreach ($datas as $data){
-                    echo $data["label"]."<input type=radio name=".$donnee_item["label"]." value=".$data["label"]."><br/>";
-                }
-            if($donnee_item["is_required"] == 1){echo "<span style='color:red'>*</span>";}
-            echo "</td><td><img src='../img/edit.png' /></td>";
-            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
-            break;
-        case 'checkbox':
-            echo "<tr><td>";
-            echo $donnee_item["label"]."&nbsp;:&nbsp;</td><td>";
-                $datas = $quizz_item_option->getAllByQuizzItem($donnee_item["id"]);
-                foreach ($datas as $data){
-                    echo $data["label"]."<input type=checkbox name=".$donnee_item["label"]." value=".$data["label"]."><br/>";
-                }
-            if($donnee_item["is_required"] == 1){echo "<span style='color:red'>*</span>";}
-            echo "</td><td><img src='../img/edit.png' /></td>";
-            echo "<td><a href ='?action=insert&id=".$_GET["id"]."&delete=".$donnee_item["id"]."'><img src='../img/delete.png'/></td><tr></a>";
-            break;
+$quizz_id = $_GET['id'];
+$quizz= new Quizz();
+$quizz->isAdmin();
 
-    }
-}
-?>
-</table>
+echo $quizz->showQuizz($quizz_id);
 
-
-<?php
 if(isset($_GET["delete"])){
-
     $quizz_item->delete($_GET["delete"]);
-    echo "<a href='?action=insert&id=".$_GET["id"]."'>Rafrechir</a>";
+    echo "<a href='?action=insert&id=".$_GET["id"]."'>Rafraichir</a>";
 }
 ?>

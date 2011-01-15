@@ -27,13 +27,15 @@
                     case "liste":
                         include 'pages/liste_quizz.php';
                         break;
+					case "create":
+						include 'pages/new_quizz.php';
+						break;
                     default:
                         include 'pages/liste_quizz.php';
                         break;
                 }
-            }else{
+            }else
                 include 'pages/liste_quizz.php';
-            }
         ?>
 
         

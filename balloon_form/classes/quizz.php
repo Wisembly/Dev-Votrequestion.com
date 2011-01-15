@@ -6,6 +6,7 @@ class Quizz
     public $id;
     public $nom;
     public $description;
+	private $isAdmin = false;
 
     //Constructeur
     public function __construct() 
@@ -47,6 +48,11 @@ class Quizz
 
     }
 
+	public function isAdmin()
+	{
+		$this->isAdmin = true;
+	}
+	
 	//Affiche un Quizz
 	public function showQuizz($byId)
 	{
@@ -58,7 +64,7 @@ class Quizz
 		$options = $classItems->getAllByQuizz($byId);
 		
 		// initialisation de la variable container
-		$tmp_data = '';
+		$tmp_data = '<table id="show_quizz">';
 		
 		// on parcours le tableau des items
 		foreach ($options as $donnee_item){
@@ -66,7 +72,8 @@ class Quizz
 		    
 			// on entame un nouveau tr
 			$tmp_data .= '<tr><td class="col-label">'.$donnee_item["label"].'&nbsp;:&nbsp;';
-			if($donnee_item["is_required"] == 1){$tmp_data .= '<span class="required">*</span>';}
+			if( $donnee_item['is_required'] == 1 )
+				$tmp_data .= '<span class="required">*</span>';
 			$tmp_data .= '</td><td class="col-field">';
 
 			// on détecte le type d'input et on l'affiche proprement
@@ -97,10 +104,19 @@ class Quizz
 					break;
 		    }
 		
-		    $tmp_data .= "</tr>";
+			if ( $this->isAdmin )
+				$tmp_data .= '</td><td><img src="../img/edit.png"/></td><td><a href ="?action=insert&id='.$_GET['id'].'&delete='.$donnee_item['id'].'"><img src="../img/delete.png"/>' ;
+		    $tmp_data .= '</td></tr>';
 		}
+		
+			$tmp_data .= '</table>';
 
 		return $tmp_data;
+	}
+
+	function hasVoted()
+	{
+		
 	}
 }
 

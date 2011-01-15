@@ -20,9 +20,8 @@
 			$quizz_id = $_GET['quizz_id'];
 			$quizz= new Quizz();
 			
-			echo '<table>';
+			
 			echo $quizz->showQuizz($quizz_id);
-			echo'</table>';
 			
 		}
 		
