@@ -7,6 +7,8 @@ require_once('common.php');
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Form Balloon</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.isrequired.js"></script>
     </head>
     <body>
         <?php
@@ -32,7 +34,7 @@ require_once('common.php');
 			{
 				$reponse = $answer->recupAnswer();
 				if ( $answer->registerAnswer($form_id,$token->getToken()) )
-					echo 'Votre Form a bien été pris en compte!';
+					echo 'Votre participation a bien été pris en compte!';
 				else
 					echo 'Une erreur est survenue, votre réponse n\'a pas été prise en compte. Veuillez contacter un administrateur.';
 			}
@@ -41,10 +43,10 @@ require_once('common.php');
 				/* on regarde si le formulaire a déjà été répondu */
 				//  formulaire non répondu par cet user
 				if ( !$answer->hasAnswer($form_id,$token->getToken()) ) {
-					echo '<form action="index.php?form_id='.$form_id.'" method="POST"/>';
+					echo '<form action="index.php?form_id='.$form_id.'" method="POST">';
 					echo '<input type="hidden" name="send_form" value="true"/>';
 					echo $form->showForm($form_id);
-					echo '<input type="submit" value="Envoyer"/>';
+					echo '<span id="showSubmit" style="display:none;"><input type="submit" value="Envoyer"/></span><span id="alert">Vous devez renseigner tous les champs obligatoires pour soumettre ce formulaire</span>';
 					echo '</form>';
 				}
 				else    // possède une réponse de cet user

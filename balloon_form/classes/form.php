@@ -84,21 +84,24 @@ class Form
 		foreach ($options as $donnee_item){
 		    $type_aff = $donnee_item["type"];
 			$count++ ;
+			$class_required = '' ;
 		    
 			// on entame un nouveau tr
 			$tmp_data .= '<tr><td class="col-label">'.$donnee_item["label"].'&nbsp;:&nbsp;';
-			if( $donnee_item['is_required'] == 1 )
+			if( $donnee_item['is_required'] == 1 ) {
 				$tmp_data .= '<span class="required">*</span>';
+				$class_required = 'class="isRequired"' ;
+			}
 			$tmp_data .= '</td><td class="col-field">';
 
 			// on détecte le type d'input et on l'affiche proprement
 		    switch ($type_aff)
 			{
 		        case 'text':
-		            $tmp_data .= '<input name="'.$donnee_item["id"].'" type="text"/>';
+		            $tmp_data .= '<input name="'.$donnee_item["id"].'" type="text" '.$class_required.'/>';
 					break;
 		        case 'textarea':
-		            $tmp_data .= '<textarea name="'.$donnee_item["id"].'"></textarea>';
+		            $tmp_data .= '<textarea name="'.$donnee_item["id"].'" '.$class_required.'></textarea>';
 					break;
 		        case 'select':
 		            $tmp_data .= '<select name="'.$donnee_item["id"].'">';
@@ -108,14 +111,18 @@ class Form
 		            $tmp_data .="</select>";
 					break;
 		        case 'radio':
+						$tmp_data .= '<ul '.$class_required.'>' ;
 		                $datas = $classOptions->getAllByFormItem($donnee_item["id"]);
 		                foreach ($datas as $data)
-		                    $tmp_data .= $data["label"].'<input type="radio" name="'.$donnee_item["id"].'" value="'.$data["label"].'">';
+		                    $tmp_data .= '<li><input type="radio" name="'.$donnee_item["id"].'" value="'.$data["label"].'">'.$data["label"].'</li>';
+						$tmp_data .= '</ul>' ;
 					break;
 		        case 'checkbox':
+						$tmp_data .= '<ul '.$class_required.'>' ;
 		                $datas = $classOptions->getAllByFormItem($donnee_item["id"]);
 		                foreach ($datas as $data)
-		                    $tmp_data .= $data["label"].'<input type="checkbox" name="'.$donnee_item['id'].'[]" value="'.$data["label"].'">';
+		                    $tmp_data .= '<li><input type="checkbox" name="'.$donnee_item['id'].'[]" value="'.$data["label"].'" id="checkbox_'.$donnee_item["id"].'">'.$data["label"].'</li>';
+						$tmp_data .= '</ul>' ;
 					break;
 		    }
 		
