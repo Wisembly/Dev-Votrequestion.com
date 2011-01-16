@@ -13,14 +13,14 @@ $option_type ="select";
                 $label = $_POST["label"];
                 $required = $_POST["requis"];
                 if(empty ($required)){$required = 0;}else{$required = 1;}
-                $quizz_item->addByTypeAndQuizz($option_type,$_GET["id"],$label,$required);
-                $last_id = $quizz_item->findByQuizz($_GET["id"]);
+                $form_item->addByTypeAndForm($option_type,$_GET["id"],$label,$required);
+                $last_id = $form_item->findByForm($_GET["id"]);
 
                 $list_option = array();
                 $list_option = split(';',$options);
 
                 foreach ($list_option as $option){
-                    $quizz_item_option->addByQuizz($last_id,$option);
+                    $form_item_option->addByForm($last_id,$option);
                 }
 
 

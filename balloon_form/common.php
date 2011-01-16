@@ -1,9 +1,9 @@
 <?php
 	require_once 'classes/token.php';
-    require_once 'classes/quizz.php';
-	require_once 'classes/quizz_answer.php';
-    require_once 'classes/quizz_item.php';
-    require_once 'classes/quizz_item_option.php';
+    require_once 'classes/form.php';
+	require_once 'classes/form_answer.php';
+    require_once 'classes/form_item.php';
+    require_once 'classes/form_item_option.php';
 
 	// connexion à la DB
 	$var = connectDB();

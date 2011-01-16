@@ -1,7 +1,7 @@
 <?php
 require_once 'base.php';
 
-class Quizz
+class Form
 {
     public $id;
     public $nom;
@@ -13,39 +13,50 @@ class Quizz
     {
     }
 
-    //Liste des quizz
+    //Liste des form
     function getAll()
     {
-        $data  = select("quizz","","","id DESC");
+        $data  = select("form","","","id DESC");
         return $data;
     }
 
-    function find($quizz_id)
+    function find($form_id)
     {
-        $quizz = array("type" => "id", "id" => $quizz_id);
-        $data  = select("quizz","",$quizz);
+        $form = array("type" => "id", "id" => $form_id);
+        $data  = select("form","",$form);
         return $data;
     }
 
-    //Ajoute un quizz
-    function add()
+    //Ajoute un form
+    function add($nom,$description)
     {
-        $champs = "'nom','description'";
-        $valeur = "'".$this->nom."','".$this->description."'";
-        $reponse = insert("quizz",$champs,$valeur);
+        $champs = "nom,description";
+        $valeur = "'".mysql_real_escape_string($nom)."','".mysql_real_escape_string($description)."'";
+        $reponse = insert('form',$champs,$valeur);
+
+		// on récupère désormais le tout faichement créé id de form qu'on va retourner
+        $data  = select('form','id','','id','DESC','1');
+        $lastID = $data[0]['id'];
+        return $lastID;
     }
 
-    //Modifier un quizz
+	// A des items?
+	public function hasItems($form_id)
+	{
+		return select_count('form_item',"form_id = '$form_id'") == 0 ? false : true ;
+	}
+	
+    //Modifier un form
     function update()
     {
 
     }
 
 
-    //Supprime un quizz avec ces options et reponse
-    function remove()
+    //Supprime un form avec ses options et réponses
+    function remove($form_id)
     {
-
+		
     }
 
 	public function isAdmin()
@@ -53,22 +64,26 @@ class Quizz
 		$this->isAdmin = true;
 	}
 	
-	//Affiche un Quizz
-	public function showQuizz($byId)
+	//Affiche un Form
+	public function showForm($byId)
 	{
 		// on instancie les classes nécessaires
-		$classItems = new Quizz_Item();
-		$classOptions = new Quizz_Item_Option();
+		$classItems = new Form_Item();
+		$classOptions = new Form_Item_Option();
 		
-		// on récupère toutes les options du quizz
-		$options = $classItems->getAllByQuizz($byId);
+		// on récupère toutes les options du form
+		$options = $classItems->getAllByForm($byId);
 		
 		// initialisation de la variable container
-		$tmp_data = '<table id="show_quizz">';
+		$tmp_data = '<table id="show_form">';
+		
+		// compte nombre de champs
+		$count = 0 ;
 		
 		// on parcours le tableau des items
 		foreach ($options as $donnee_item){
 		    $type_aff = $donnee_item["type"];
+			$count++ ;
 		    
 			// on entame un nouveau tr
 			$tmp_data .= '<tr><td class="col-label">'.$donnee_item["label"].'&nbsp;:&nbsp;';
@@ -87,18 +102,18 @@ class Quizz
 					break;
 		        case 'select':
 		            $tmp_data .= '<select name="'.$donnee_item["id"].'">';
-		                $datas = $classOptions->getAllByQuizzItem($donnee_item["id"]);
+		                $datas = $classOptions->getAllByFormItem($donnee_item["id"]);
 		                foreach ($datas as $data)
 		                    $tmp_data .= "<option value='".$data["label"]."'>".$data["label"]."</option>";
 		            $tmp_data .="</select>";
 					break;
 		        case 'radio':
-		                $datas = $classOptions->getAllByQuizzItem($donnee_item["id"]);
+		                $datas = $classOptions->getAllByFormItem($donnee_item["id"]);
 		                foreach ($datas as $data)
 		                    $tmp_data .= $data["label"].'<input type="radio" name="'.$donnee_item["id"].'" value="'.$data["label"].'">';
 					break;
 		        case 'checkbox':
-		                $datas = $classOptions->getAllByQuizzItem($donnee_item["id"]);
+		                $datas = $classOptions->getAllByFormItem($donnee_item["id"]);
 		                foreach ($datas as $data)
 		                    $tmp_data .= $data["label"].'<input type="checkbox" name="'.$donnee_item['id'].'[]" value="'.$data["label"].'">';
 					break;
@@ -110,7 +125,7 @@ class Quizz
 		}
 		
 			$tmp_data .= '</table>';
-
+			
 		return $tmp_data;
 	}
 

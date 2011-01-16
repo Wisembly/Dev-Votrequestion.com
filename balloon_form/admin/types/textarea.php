@@ -9,7 +9,7 @@
                 $label = $_POST["label"];
                 $required = $_POST["requis"];
                 if(empty ($required)){$required = 0;}else{$required = 1;}
-                $quizz_item->addByTypeAndQuizz("textarea",$_GET["id"],$label,$required);
+                $form_item->addByTypeAndForm("textarea",$_GET["id"],$label,$required);
                 header("?action=insert&id=".$_GET["id"]);
             }
     }

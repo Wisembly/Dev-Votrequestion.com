@@ -2,9 +2,9 @@
 <fieldset>
     <legend>Informations</legend>
 <?php
-        $quizz = new Quizz();
-        $reponse = $quizz->find($_GET["id"]);
-        echo "<u>Nom du quizzz</u>: ".$reponse[0]["nom"]."<br/>";
+        $form = new Form();
+        $reponse = $form->find($_GET["id"]);
+        echo "<u>Nom du formz</u>: ".$reponse[0]["nom"]."<br/>";
         echo "<u>Description</u>: ".$reponse[0]["description"];
         $id = $reponse[0]["id"];
 ?>
@@ -30,8 +30,8 @@ if(isset($_POST["radio"])){$menu_item = "radio";}
 if(isset($_POST["textarea"])){$menu_item = "textarea";}
 
 //include par rapport à index.php dans admin
-$quizz_item = new Quizz_Item();
-$quizz_item_option = new Quizz_Item_Option();
+$form_item = new Form_Item();
+$form_item_option = new Form_Item_Option();
 if(isset($menu_item)){
     switch($menu_item){
         case "text":
@@ -55,14 +55,14 @@ if(isset($menu_item)){
 <hr/>
 <u>Rendu du formulaire :</u><br/>
 <?php
-$quizz_id = $_GET['id'];
-$quizz= new Quizz();
-$quizz->isAdmin();
+$form_id = $_GET['id'];
+$form= new Form();
+$form->isAdmin();
 
-echo $quizz->showQuizz($quizz_id);
+echo $form->showForm($form_id);
 
 if(isset($_GET["delete"])){
-    $quizz_item->delete($_GET["delete"]);
+    $form_item->delete($_GET["delete"]);
     echo "<a href='?action=insert&id=".$_GET["id"]."'>Rafraichir</a>";
 }
 ?>

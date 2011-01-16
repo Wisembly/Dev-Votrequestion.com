@@ -1,7 +1,7 @@
-<u>Liste des quizz :</u>
+<u>Liste des form :</u>
 
         <?php
-        $quizz = new Quizz();
+        $form = new Form();
         ?>
 
         <table border="1">
@@ -11,15 +11,15 @@
                 <th colspan="3">Actions</th>
             </tr>
             <?php
-                $donnees = $quizz->getAll();
+                $donnees = $form->getAll();
                 foreach($donnees as $donnee){
                     echo "<tr>";
                     echo "<td>".$donnee["nom"]."</td>";
                     echo "<td>".$donnee["description"]."</td>";
                     echo "<td>";
-                    ?> <img src="../img/edit.png" alt="Edition">
+                    ?> <a href="../index.php?form_id=<?php echo $donnee[id];?>"><img src="../img/viewForm.png" alt="Voir le Form"></a>
                     <?php echo "</td><td>"; ?>
-                    <img src="../img/delete.png" alt="Supprimer">
+                    <a href="?action=delete&id=<?php echo $donnee[id];?>"><img src="../img/delete.png" alt="Supprimer"></a>
                     <?php echo "</td><td>"; ?>
                     <a href="?action=insert&id=<?php echo $donnee[id];?>"><img src="../img/insert.png" alt="Inserer"></a>
                     <?php echo"</td>";
