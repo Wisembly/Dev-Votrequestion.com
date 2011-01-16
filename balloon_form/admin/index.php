@@ -31,6 +31,9 @@ require_once '../common.php';
 					case 'delete':
 						include 'pages/delete_form.php';
 						break;
+					case 'reponses':
+						include 'pages/show_reponses.php';
+						break;
                     default:
                         include 'pages/liste_form.php';
                         break;

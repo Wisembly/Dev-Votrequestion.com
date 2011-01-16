@@ -8,11 +8,13 @@ Class Answer
 	{	
 	}
 	
+	// on regarde si le mec a déjà répondu au formulaire
 	public function hasAnswer($form_id,$token)
 	{
 		return select_count('form_answer',"form_id='$form_id' AND token='$token'") == 0 ? false : true ;
 	}
 	
+	// on récupère toutes les variables POST à la soumission d'un formulaire
 	public function recupAnswer()
 	{
 		$form_item_id = '' ;
@@ -38,10 +40,11 @@ Class Answer
 		return $this->answer;
 	}
 
+	// on insère dans la base et on valide les flags nécessaires
 	public function registerAnswer($form_id,$token)
 	{
 		// on vérifie que la réponse n'exite pas déjà pour cet user (resend de formulaire par exemple)
-		if ( select_count('form_answer',"form_id = '$form_id' AND token = '$token'") != 0 )
+		if ( $this->hasAnswer($form_id,$token) )
 		{
 			$reponse  = -1 ;
 		}
