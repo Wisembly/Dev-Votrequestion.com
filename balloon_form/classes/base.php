@@ -8,8 +8,8 @@ return $var;
 
 //Fonction insert
 function insert($table,$champs,$valeur){
-    $query = "INSERT INTO `".$table."`(".$champs.") VALUE(".$valeur.")";
-    // echo $query;
+    $query = "INSERT INTO `$table`($champs) VALUE($valeur)";
+    echo $query;
     $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette d'insertion");
     return $reponse;
 }
@@ -44,5 +44,14 @@ function select($table,$selection,$options,$orderby = NULL,$sens = NULL,$limit =
 function delete($table,$options){
     $query = "DELETE FROM `".$table."` WHERE `".$options["type"]."`=".$options["id"]."";
     $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette de suppression");
+}
+
+// Fonction select count
+function select_count($table,$where_clause)
+{
+	$query = "SELECT COUNT(*) as nbre FROM `".$table."` WHERE $where_clause";
+	$count = mysql_fetch_array(mysql_query($query)) or die('Erreur dans la requête select_count');
+	
+	return $count['nbre'];
 }
 ?>

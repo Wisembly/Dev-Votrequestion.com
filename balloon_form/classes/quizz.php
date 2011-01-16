@@ -80,27 +80,27 @@ class Quizz
 		    switch ($type_aff)
 			{
 		        case 'text':
-		            $tmp_data .= '<input name="'.$donnee_item["label"].'" type="text"/>';
+		            $tmp_data .= '<input name="'.$donnee_item["id"].'" type="text"/>';
 					break;
 		        case 'textarea':
-		            $tmp_data .= '<textarea name="'.$donnee_item["label"].'"></textarea>';
+		            $tmp_data .= '<textarea name="'.$donnee_item["id"].'"></textarea>';
 					break;
 		        case 'select':
-		            $tmp_data .= '<select name="'.$donnee_item["label"].'">';
+		            $tmp_data .= '<select name="'.$donnee_item["id"].'">';
 		                $datas = $classOptions->getAllByQuizzItem($donnee_item["id"]);
 		                foreach ($datas as $data)
-		                    $tmp_data .= "<option value=''>".$data["label"]."</option>";
+		                    $tmp_data .= "<option value='".$data["label"]."'>".$data["label"]."</option>";
 		            $tmp_data .="</select>";
 					break;
 		        case 'radio':
 		                $datas = $classOptions->getAllByQuizzItem($donnee_item["id"]);
 		                foreach ($datas as $data)
-		                    $tmp_data .= $data["label"]."<input type=radio name=".$donnee_item["label"]." value=".$data["label"].">";
+		                    $tmp_data .= $data["label"].'<input type="radio" name="'.$donnee_item["id"].'" value="'.$data["label"].'">';
 					break;
 		        case 'checkbox':
 		                $datas = $classOptions->getAllByQuizzItem($donnee_item["id"]);
 		                foreach ($datas as $data)
-		                    $tmp_data .= $data["label"]."<input type=checkbox name=".$donnee_item["label"]." value=".$data["label"].">";
+		                    $tmp_data .= $data["label"].'<input type="checkbox" name="'.$donnee_item['id'].'[]" value="'.$data["label"].'">';
 					break;
 		    }
 		
@@ -114,10 +114,7 @@ class Quizz
 		return $tmp_data;
 	}
 
-	function hasVoted()
-	{
-		
-	}
+
 }
 
 ?>

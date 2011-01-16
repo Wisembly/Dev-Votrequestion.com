@@ -4,9 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Interface admin</title>
         <?php
-        require_once '../classes/quizz.php';
-        require_once '../classes/quizz_item.php';
-        require_once '../classes/quizz_item_option.php';
+        require_once '../common.php';
         $var = connectDB();
         ?>
         <style>
