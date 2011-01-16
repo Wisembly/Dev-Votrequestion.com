@@ -3,6 +3,7 @@
 Class Answer
 {
 	private $answer = array();
+	private $total_answers = 0 ;
 	
 	public function __construct()
 	{	
@@ -62,6 +63,24 @@ Class Answer
 	
 		// on retourne le true ou false final
 		return $reponse ;
+	}
+
+	// on récupère toutes les réponses du formulaire
+	public function getAllStats($byFormId)
+	{
+		$this->total_answers = select_count('form_answer',"form_id = '$byFormId'");
+		
+		/* To Be Continued.. */
+	}
+	
+	public function getAllAnswersByItem($withItemId)
+	{
+		return select('form_item_answer','value',array('type' => 'form_item_id', 'id' => $withItemId),'timestamp','DESC');
+	}
+	
+	public function getAllAnswersByForm($withFormId)
+	{
+		return select('form_item_answer','value',array('type' => 'form_id', 'id' => $withFormId),'form_item_id','ASC');
 	}
 }
 

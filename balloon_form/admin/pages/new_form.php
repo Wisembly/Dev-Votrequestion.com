@@ -10,9 +10,11 @@
 	}
 	
 ?>
+	<a href="?action=liste">Retour à la liste</a><br/><br/>
+
 <form action="index.php?action=create" method="POST"/>
 <fieldset>
-    <legend>Créer un nouveau Quiz</legend>
+    <legend>Créer un nouveau Formulaire</legend>
 	<table>
 		<tr>
 			<td class="col-label">Nom du Quiz</td>

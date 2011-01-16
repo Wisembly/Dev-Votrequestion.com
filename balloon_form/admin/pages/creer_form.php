@@ -2,11 +2,15 @@
 <fieldset>
     <legend>Informations</legend>
 <?php
-        $form = new Form();
-        $reponse = $form->find($_GET["id"]);
-        echo "<u>Nom du formz</u>: ".$reponse[0]["nom"]."<br/>";
-        echo "<u>Description</u>: ".$reponse[0]["description"];
-        $id = $reponse[0]["id"];
+
+	if ( !(isset($_GET['id']) && is_numeric($_GET['id'])) )
+		die('Erreur');
+		
+	$form = new Form();
+	$reponse = $form->find($_GET["id"]);
+	echo "<u>Nom du formulaire</u>: ".$reponse[0]["nom"]."<br/>";
+	echo "<u>Description</u>: ".$reponse[0]["description"];
+	$id = $reponse[0]["id"];
 ?>
 </fieldset>
 <br/>
