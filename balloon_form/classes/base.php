@@ -5,7 +5,7 @@ function connectDB()
 {
 	global $sql_r ;
     $var = mysql_pconnect("localhost:8889","root","root") or die("Impossible de connecter à la Base de données");
-    mysql_select_db("balloon_sondage", $var) or die ("Impossible de trouver la base de données");
+    mysql_select_db("balloon_form", $var) or die ("Impossible de trouver la base de données");
 	$sql_r++ ;
 return $var;
 }
