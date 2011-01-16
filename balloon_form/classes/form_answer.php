@@ -40,14 +40,22 @@ Class Answer
 
 	public function registerAnswer($form_id,$token)
 	{
-				
-		// on parcours l'array des réponses
-		foreach ( $this->answer as $value )
-			if ( is_numeric($value[0]) )
-				insert('form_item_answer', '`form_id`,`form_item_id`,`value`', "'$form_id','".$value[0]."','".mysql_real_escape_string($value[1])."'");
+		// on vérifie que la réponse n'exite pas déjà pour cet user (resend de formulaire par exemple)
+		if ( select_count('form_answer',"form_id = '$form_id' AND token = '$token'") != 0 )
+		{
+			$reponse  = -1 ;
+		}
+		else
+		{					
+			// on parcours l'array des réponses
+			foreach ( $this->answer as $value )
+				if ( is_numeric($value[0]) )
+					insert('form_item_answer', '`form_id`,`form_item_id`,`value`', "'$form_id','".$value[0]."','".mysql_real_escape_string($value[1])."'");
 
-		// maintenant qu'on a inséré toutes les réponses à tous les items, on empêche le gars de re-voter
-		$reponse = insert('form_answer','`form_id`,`token`,`timestamp`',"'$form_id','$token','".time()."'");
+			// maintenant qu'on a inséré toutes les réponses à tous les items, on empêche le gars de re-voter
+			$reponse = insert('form_answer','`form_id`,`token`,`timestamp`',"'$form_id','$token','".time()."'");
+			$reponse = $reponse ? 1 : 0 ; 
+		}
 	
 		// on retourne le true ou false final
 		return $reponse ;

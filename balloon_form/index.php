@@ -33,10 +33,20 @@ require_once('common.php');
 			if ( isset($_POST['send_form']) && $_POST['send_form'] == true )
 			{
 				$reponse = $answer->recupAnswer();
-				if ( $answer->registerAnswer($form_id,$token->getToken()) )
-					echo 'Votre participation a bien été pris en compte!';
-				else
-					echo 'Une erreur est survenue, votre réponse n\'a pas été prise en compte. Veuillez contacter un administrateur.';
+				switch($answer->registerAnswer($form_id,$token->getToken()))
+				{
+					case '-1':
+						echo 'Vous avez déjà envoyé votre participation pour ce formulaire';
+						break;
+					case '1':
+						echo 'Votre participation a bien été pris en compte!';
+						break;
+					case '0' :
+					default:	
+						echo 'Une erreur est survenue, votre réponse n\'a pas été prise en compte. Veuillez contacter un administrateur.';
+					break;
+					
+				}
 			}
 			else    // pas de présence de réponse 
 			{
