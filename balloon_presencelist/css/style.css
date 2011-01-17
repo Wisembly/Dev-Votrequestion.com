@@ -18,4 +18,23 @@
     border:1px solid black;
     margin-bottom: 2px;
     background-color: beige;
+    color: black;
+}
+
+.aList
+{
+    text-decoration: none;
+}
+
+#user:hover
+{
+    background-color: burlywood;
+}
+
+#has_checked
+{
+    border:1px solid black;
+    margin-bottom: 2px;
+    background-color: yellowgreen;
+    color: black;
 }

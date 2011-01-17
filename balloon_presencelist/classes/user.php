@@ -35,7 +35,9 @@ class User extends Main {
 
     public function check_user($user_id)
     {
-        
+        $where = array('id'=>'id','value'=>$user_id);
+        $retour = Base::update($this->nom_table,'has_checked','1',$where);
+        return $retour;
     }
 }
 ?>
