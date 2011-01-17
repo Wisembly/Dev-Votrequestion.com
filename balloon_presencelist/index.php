@@ -3,20 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-session_start();
-include_once 'classes/base.php';
-include_once 'classes/main.php';
-include_once 'classes/user.php';
-include_once 'classes/hotesse.php';
-include_once 'classes/status.php';
-
-$base = new Base();
-$connection = $base->connection();
-
-$main = new Main();
-$hotesse = new Hotesse();
-$user = new User();
-$status = new Status();
+include 'common.php';
 
 if(isset($_POST['login']))
 {
@@ -55,7 +42,7 @@ if(isset($_GET['user']) && isset($_SESSION['connect'])  )
 if(isset($_SESSION['connect']))
     {
     ?><a href="logout.php">Logout (<?php echo $_SESSION['connect'];?>)</a> - <a href="import/index.php">Import file</a>
-    <br/><?php
+    <br/><div id="refrech"><a href="index.php"><input type="button" value="Rafrechir"/></a></div><?php
         //On affiche les participants
         $data = $main->get_list_main();
         echo '<u>NOM :</u> '.$data[0]['nom'];

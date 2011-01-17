@@ -39,5 +39,12 @@ class User extends Main {
         $retour = Base::update($this->nom_table,'has_checked','1',$where);
         return $retour;
     }
+
+    public function get_user_checked()
+    {
+        $where = array('type'=>'has_checked','id'=>'1');
+        $list_main = Base::select($this->nom_table,'',$where,'time','DESC');
+        return $list_main;
+    }
 }
 ?>
