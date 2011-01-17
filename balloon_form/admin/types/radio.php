@@ -22,9 +22,6 @@ $option_type ="radio";
                 foreach ($list_option as $option){
                     $form_item_option->addByForm($last_id,$option);
                 }
-
-
-                header("?action=insert&id=".$_GET["id"]);
             }
     }
 ?>
