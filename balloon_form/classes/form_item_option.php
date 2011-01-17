@@ -22,7 +22,7 @@ class Form_Item_Option extends Form_Item
     public function getAllByFormItem($form_item_id)
     {
         $form = array("type" => "id_form_item", "id" => $form_item_id);
-        $data  = select("form_item_option","",$form);
+        $data  = select("form_item_option","",$form,'id','ASC');
         return $data;
     }
 }
