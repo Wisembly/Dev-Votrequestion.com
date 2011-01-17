@@ -29,13 +29,22 @@ if(isset($_GET['user']) && isset($_SESSION['connect'])  )
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html class="ui-mobile portrait min-width-320px min-width-480px max-width-768px max-width-1024px">
   <head>
     <title>Index - PresenceList</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.0a2.min.css">
+    <script type="text/javascript" src="javascript/jquery.mobile-1.0a2.min.js"></script>
+    <script type="text/javascript" src="javascript/jquery.js"></script>-->
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
+
   </head>
-  <body>
+  <body class="ui-mobile-viewport">
+      <div id="jqm-home" class="ui-page ui-body-b ui-page-active" data-theme="b" data-role="page">
+          <a href="test.html" class="ui-link-inherit" data-rel="dialog" data-inline="true">ICI</a>
 <?php
 
 
@@ -48,21 +57,54 @@ if(isset($_SESSION['connect']))
         echo '<u>NOM :</u> '.$data[0]['nom'];
 
         $list_user = $user->get_list_user();
+        ?>
+    <div class="ui-content">
+        <ul class="ui-listview ui-listview-inset ui-corner-all ui-shadow" data-dividertheme="b" data-theme="c" data-inset="true" role="listbox">
+            <li class="ui-li ui-li-divider ui-btn ui-bar-b ui-corner-top ui-btn-up-undefined" 
+                data-role="list-divider" role="heading" tabindex="0">Liste des inscrits</li>
+        <?php
         foreach ($list_user as $one_user)
         {
 
-            if($one_user['has_checked'] == 0){
-            ?>
-    <a href="index.php?user=<?php echo $one_user['id']; ?>" class="aList">
-    <div id="user">
-        <?php
-            }else{echo '<div id="has_checked">';}
-        echo strtoupper($one_user["nom"])."<br/>".ucfirst(strtolower($one_user["prenom"]));
-        ?>
-    </div>
-        </a>
+            if($one_user['has_checked'] != 0){
+                ?>
+
+            <li class="ui-btn ui-btn-icon-right ui-li ui-btn-up-c" role="option" tabindex="-1" data-theme="c">
+                <div class="ui-btn-inner">
+                    <div class="ui-btn-text">
+                        <?php
+                        echo strtoupper($one_user["nom"])."<br/>".ucfirst(strtolower($one_user["prenom"]));
+                        ?>
+                    </div>
+                    
+                </div>
+                
+            </li>
+
             <?php
+
+            }else{
+            ?>
+    
+        <li class="ui-btn ui-btn-icon-right ui-li ui-btn-up-c" role="option" tabindex="-1" data-theme="c">
+            <div class="ui-btn-inner">
+            <div class="ui-btn-text">
+                <a href="index.php?user=<?php echo $one_user['id']; ?>" class="ui-link-inherit" data-rel="dialog"  >
+                <?php
+                echo strtoupper($one_user["nom"])."<br/>".ucfirst(strtolower($one_user["prenom"]));
+                ?>
+                </a>
+            </div>
+            <span class="ui-icon ui-icon-arrow-r"></span>
+        </div>
+        </li>
+            <?php
+            }
         }
+        ?>
+        </ul>
+    </div>
+        <?php
     }
 else
     {
@@ -80,6 +122,9 @@ else
     <?php
     }
 ?>
+
+    
     <div style="text-align: center">Powered by Balloon</div>
+      </div>
   </body>
 </html>
