@@ -87,7 +87,7 @@ class Form
 			$class_required = '' ;
 		    
 			// on entame un nouveau tr
-			$tmp_data .= '<tr><td class="col-label">'.$donnee_item["label"].'&nbsp;:&nbsp;';
+			$tmp_data .= '<tr><td class="col-label">'.$donnee_item["label"].'&nbsp;';
 			if( $donnee_item['is_required'] == 1 ) {
 				$tmp_data .= '<span class="required">*</span>';
 				$class_required = 'class="isRequired"' ;
