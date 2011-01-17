@@ -10,26 +10,26 @@
  * @author nicolas
  */
 class Base {
-    private $database;
+    private $bdd;
     private $login;
     private $password;
-    private $database;
+    private $table;
     private $sql_r;
 
     public function __construct()
     {
         // Information base de données
-        $this->database = 'localhost';
+        $this->bdd = 'localhost';
         $this->login = 'root';
         $this->password = 'root';
-        $this->database = 'balloon_presencelist';
+        $this->table = 'balloon_presencelist';
         $this->sql_r = 0;
     }
     
     public function connection()
     {
-        $chaine = mysql_connect($this->database,  $this->login, $this->password) or die ('Connection impossible !!');
-        mysql_selectdb($this->database,$chaine) or die('Database not find !!');
+        $chaine = mysql_connect($this->bdd,  $this->login, $this->password) or die ('Connection impossible !!');
+        mysql_selectdb($this->table,$chaine) or die('Database not find !!');
         return $chaine;
     }
 

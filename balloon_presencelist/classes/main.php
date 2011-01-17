@@ -15,15 +15,18 @@ class Main extends Base {
     private $nb_participants;
     private $nom;
     private $description;
+    private $nom_base;
 
     public function __construct()
     {
+        $this->nom_base = 'presencelist_main';
         parent::__construct();
     }
 
-    private function get_list_main()
+    public function get_list_main()
     {
-        
+        $list_main = Base::select($this->nom_base,"","");
+        return $list_main;
     }
 }
 ?>

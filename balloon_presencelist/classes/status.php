@@ -8,9 +8,7 @@
  * Description of status
  *
  * @author nicolas
- * `id` int(11) NOT NULL AUTO_INCREMENT,
-  `value` varchar(32) NOT NULL,
-  `class_css` varchar(32) NOT NULL,
+ * 
  */
 class Status extends User {
     private $status_id;
