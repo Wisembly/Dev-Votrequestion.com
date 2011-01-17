@@ -53,7 +53,7 @@ Class Answer
 		{					
 			// on parcours l'array des réponses
 			foreach ( $this->answer as $value )
-				if ( is_numeric($value[0]) )
+				if ( is_numeric($value[0]) && !empty($value[1]) )
 					insert('form_item_answer', '`form_id`,`form_item_id`,`value`', "'$form_id','".$value[0]."','".mysql_real_escape_string($value[1])."'");
 
 			// maintenant qu'on a inséré toutes les réponses à tous les items, on empêche le gars de re-voter
