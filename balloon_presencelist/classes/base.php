@@ -93,6 +93,19 @@ class Base {
             return $reponse ;
     }
 
+    function update($table,$champs,$valeur,$where)
+    {
+        global $sql_r ;
+        $query = "UPDATE `$table` SET $champs = '$valeur' WHERE ".$where['id']."=".$where["value"];
+        // echo $query;
+        $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette d'update");
+
+            if ( $reponse )
+                    $sql_r++ ;
+
+        return $reponse;
+    }
+
     // Fonction select count
     function select_count($table,$where_clause)
     {

@@ -1,0 +1,21 @@
+/* 
+    Document   : style
+    Created on : 17 janv. 2011, 13:11:30
+    Author     : nicolas
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+
+#user
+{
+    border:1px solid black;
+    margin-bottom: 2px;
+    background-color: beige;
+}

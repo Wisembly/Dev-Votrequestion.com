@@ -38,6 +38,7 @@ if(isset($_POST['login']))
   <head>
     <title>Index - PresenceList</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
 <?php
@@ -49,6 +50,18 @@ if(isset($_SESSION['connect']))
         //On affiche les participants
         $data = $main->get_list_main();
         echo '<u>NOM :</u> '.$data[0]['nom'];
+
+        $list_user = $user->get_list_user();
+        foreach ($list_user as $one_user)
+        {
+            ?>
+    <div id="user">
+        <?php
+        echo strtoupper($one_user["nom"])."<br/>".ucfirst(strtolower($one_user["prenom"]));
+        ?>
+    </div>
+            <?php
+        }
     }
 else
     {

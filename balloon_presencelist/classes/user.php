@@ -11,7 +11,7 @@
  * 
  */
 class User extends Main {
-    private $id_user;
+    private $user_id;
     private $main_id;
     private $hotesse_id;
     private $status_id;
@@ -19,13 +19,21 @@ class User extends Main {
     private $prenom;
     private $has_checked;
     private $time;
+    private $nom_table;
 
     public function __construct()
     {
+        $this->nom_table = 'presencelist_user';
         parent::__construct();
     }
 
     public function get_list_user()
+    {
+        $list_main = Base::select($this->nom_table,'','');
+        return $list_main;
+    }
+
+    public function check_user($user_id)
     {
         
     }
