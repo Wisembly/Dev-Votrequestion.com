@@ -24,9 +24,6 @@ $error2 = '' ;
                 foreach ($list_option as $option){
                     $form_item_option->addByForm($last_id,$option);
                 }
-
-
-                header("Location: ?action=insert&id=".$_GET["id"]);
             }
     }
 ?>

@@ -11,7 +11,6 @@
                 $required = $_POST["requis"];
                 if(empty ($required)){$required = 0;}else{$required = 1;}
                 $form_item->addByTypeAndForm("text",$_GET["id"],$label,$required);
-                header("?action=insert&id=".$_GET["id"]);
             }
     }
 ?>
