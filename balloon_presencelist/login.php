@@ -8,6 +8,7 @@ if(isset($_POST['name']))
                 if(strtolower($une_hotesse['login']) == strtolower($_POST['name']))
                 {
                     $_SESSION['connect'] = strtolower($_POST['name']);
+                    $_SESSION['id_hotesse'] = $une_hotesse['id'];
                     header('Location: index.php');
                 }
             }

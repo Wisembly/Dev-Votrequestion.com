@@ -43,7 +43,7 @@ class Base {
     {
             global $sql_r ;
         $query = "INSERT INTO `$table`($champs) VALUE($valeur)";
-        // echo $query;
+        //echo $query;die();
         $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette d'insertion");
 
             if ( $reponse )

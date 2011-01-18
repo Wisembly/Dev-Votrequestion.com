@@ -1,25 +1,28 @@
 <?php
-include '../common.php';
+//include '../common.php';
 
-$donnees = $user->get_user_checked();
+$donnees_order_alpha = $user->get_user_checked();
+$donnees_order_time = $user->get_list_user_time();
+?>
 
+<?php
 foreach ($donnees as $donnee)
     {
-        echo '<div id ="has_checked">';
-        echo '<table border="0">';
-        echo '<tr>';
+        ?>
 
-            echo '<td>';
-            echo strtoupper($donnee["nom"])."<br/>".ucfirst(strtolower($donnee["prenom"]));
-            echo '</td>';
 
-            echo '<td>';
-            echo $donnee["time"];
-            echo '</td>';
 
-        echo '</tr>';
-        echo '</table>';
-        echo '</div>';
+            <li data-theme="c" data-inset="true" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-c">
+                <a href="#" class="ui-link-inherit">
+                    <?php
+                    echo strtoupper($donnee["nom"])." ".ucfirst(strtolower($donnee["prenom"]));
+                    ?>
+                </a>
+            </li>
+        
+
+
+    <?php
     }
 
 

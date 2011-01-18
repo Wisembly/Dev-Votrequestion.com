@@ -77,3 +77,21 @@
   </div>
     <div style="text-align: center">Powered by Balloon</div>
       </div>
+
+
+<script type="text/javascript">
+        var refresh = 10;
+        var count = 10 ;
+        var refreshId = setInterval(function()
+        {
+             $('#responsecontainer').load('reload.php');
+        }, refresh*1000);
+        var refreshCount = setInterval(function()
+        {
+            if ( count != 0 )
+                count--;
+            else
+                count = refresh;
+             $('#responsecount b').html(count);
+        }, 1*1000);
+    </script>

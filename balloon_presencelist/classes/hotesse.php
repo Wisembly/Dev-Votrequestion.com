@@ -9,7 +9,7 @@
  *
  * @author nicolas
  */
-class Hotesse extends User {
+class Hotesse extends Actions {
     private $id_hotesse;
     private $login;
     private $real_name;

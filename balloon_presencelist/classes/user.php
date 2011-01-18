@@ -29,9 +29,10 @@ class User extends Main {
 
     public function get_list_user()
     {
-        $list_main = Base::select($this->nom_table,'','');
+        $list_main = Base::select($this->nom_table,'','','nom','ASC');
         return $list_main;
     }
+
 
     public function check_user($user_id)
     {
@@ -40,10 +41,31 @@ class User extends Main {
         return $retour;
     }
 
-    public function get_user_checked()
+    public function uncheck_user($user_id)
+    {
+        $where = array('id'=>'id','value'=>$user_id);
+        $retour = Base::update($this->nom_table,'has_checked','0',$where);
+        return $retour;
+    }
+
+    public function if_check_user($user_id)
+    {
+        $where = array('type'=>'id','id'=>$user_id);
+        $user = Base::select($this->nom_table,'has_checked',$where);
+        return $user;
+    }
+
+    public function get_user_checked_order_time()
     {
         $where = array('type'=>'has_checked','id'=>'1');
         $list_main = Base::select($this->nom_table,'',$where,'time','DESC');
+        return $list_main;
+    }
+
+    public function get_user_checked_order_alpha()
+    {
+        $where = array('type'=>'has_checked','id'=>'1');
+        $list_main = Base::select($this->nom_table,'',$where,'nom','ASC');
         return $list_main;
     }
 }
