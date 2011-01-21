@@ -16,17 +16,17 @@ class Main extends Base {
     private $nb_arrive;
     private $nom;
     private $description;
-    private $nom_base;
+    protected $nom_table_main;
 
     public function __construct()
     {
-        $this->nom_base = 'presencelist_main';
+        $this->nom_table_main = 'presencelist_main';
         parent::__construct();
     }
  
     public function get_list_main()
     {
-        $list_main = Base::select($this->nom_base,"","");
+        $list_main = Base::select($this->nom_table_main,"","");
         return $list_main;
     }
 }

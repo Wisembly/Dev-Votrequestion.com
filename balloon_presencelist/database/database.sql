@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Mar 18 Janvier 2011 à 15:26
+-- Généré le : Ven 21 Janvier 2011 à 12:37
 -- Version du serveur: 5.1.44
--- Version de PHP: 5.3.2
+-- Version de PHP: 5.2.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -22,16 +22,11 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 CREATE TABLE `presencelist_action` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `user_id` mediumint(9) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `time` int(11) NOT NULL,
   `hotesse_id` mediumint(9) NOT NULL,
   `type` tinyint(1) NOT NULL COMMENT 'Check =1 /UnCheck =0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Contenu de la table `presencelist_action`
---
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -45,12 +40,6 @@ CREATE TABLE `presencelist_hotesse` (
   `real_name` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Contenu de la table `presencelist_hotesse`
---
-
-INSERT INTO `presencelist_hotesse` VALUES(1, 'toto', 'toto');
 
 -- --------------------------------------------------------
 
@@ -67,12 +56,6 @@ CREATE TABLE `presencelist_main` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
---
--- Contenu de la table `presencelist_main`
---
-
-INSERT INTO `presencelist_main` VALUES(1, 0, 0, 'presence_list_test', 'ceci est un test');
-
 -- --------------------------------------------------------
 
 --
@@ -86,11 +69,6 @@ CREATE TABLE `presencelist_status` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
---
--- Contenu de la table `presencelist_status`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -100,20 +78,10 @@ CREATE TABLE `presencelist_status` (
 CREATE TABLE `presencelist_user` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `presencelist_id` mediumint(9) NOT NULL,
-  `hotesse_id` mediumint(9) DEFAULT NULL,
   `status_id` mediumint(9) NOT NULL,
   `nom` varchar(64) NOT NULL,
   `prenom` varchar(64) NOT NULL,
   `has_checked` tinyint(1) NOT NULL DEFAULT '0',
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Contenu de la table `presencelist_user`
---
-
-INSERT INTO `presencelist_user` VALUES(1, 1, NULL, 1, 'philipp', 'nicolas', 0, '2011-01-18 15:26:27');
-INSERT INTO `presencelist_user` VALUES(2, 1, NULL, 1, 'nova', 'mamie', 0, '2011-01-18 15:26:27');
-INSERT INTO `presencelist_user` VALUES(3, 1, NULL, 1, 'vador', 'dark', 0, '2011-01-18 15:26:27');
-INSERT INTO `presencelist_user` VALUES(4, 1, NULL, 1, 'durand', 'christophe', 0, '2011-01-18 15:26:27');
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;

@@ -106,6 +106,19 @@ class Base {
         return $reponse;
     }
 
+	function update2($table,$what,$where)
+	{
+		global $sql_r ;
+        $query = "UPDATE `$table` SET $what WHERE $where";
+        // echo $query;
+        $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette d'update");
+
+            if ( $reponse )
+                    $sql_r++ ;
+
+        return $reponse;
+	}
+
     // Fonction select count
     function select_count($table,$where_clause)
     {

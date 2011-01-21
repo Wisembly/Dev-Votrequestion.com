@@ -3,8 +3,8 @@ include 'common.php';
 
 if(!isset($_SESSION['connect'])){header('Location: login.php');}
 
-
-
+if( !(isset($_GET['user']) && is_numeric($_GET['user'])) ) header('Location: index.php'); else $user_id = $_GET['user'];
+	
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -23,14 +23,18 @@ if(!isset($_SESSION['connect'])){header('Location: login.php');}
 	<div data-role="content" data-theme="b">
 
             <div class="ui-content">
-                ceci est la page detail <?php if(isset($_GET['user'])){ echo $_GET['user'];} ?>
-                <?php 
-                $retour = $user->if_check_user($_GET['user']);
-                if($retour[0][0] == 0){;
+<?php 
+
+			$info = $user->getInfo($user_id);
+			echo '<img src="images/avatar-empty.gif" style="float:left;margin-right:10px;"/><h1>'.strtoupper($info[0]['nom']).' '.ucFirst($info[0]['prenom']).'</h1><br/>'.$info[0]['other_info'];	
+			
+            $retour = $user->if_check_user($user_id);
+            if($retour[0][0] == 0)
+			{
                         ?>
-                <a href="pages/confirm.php?user=<?php echo $_GET['user'];?>" rel="external" data-role="button" data-icon="check" style="background:-moz-linear-gradient(center top , #006633, #006633) repeat scroll 0 0 #006633">Checkin</a>
+                <a href="pages/confirm.php?user=<?php echo $user_id;?>" rel="external" data-role="button" data-icon="check" style="background:-moz-linear-gradient(center top , #006633, #006633) repeat scroll 0 0 #006633">Checkin</a>
                 <?php }else{ ?>
-                <a href="pages/unckeck.php?user=<?php echo $_GET['user'];?>" rel="external" data-role="button" data-icon="check">Uncheckin</a>
+                <a href="pages/unckeck.php?user=<?php echo $user_id;?>" rel="external" data-role="button" data-icon="check">Uncheckin</a>
                 <?php }?>
                 <a href="index.php" rel="external" data-role="button" data-icon="check" style="background:-moz-linear-gradient(center top , #CC0000, #CC0000) repeat scroll 0 0 #CC0000">Cancel</a>
             </div>

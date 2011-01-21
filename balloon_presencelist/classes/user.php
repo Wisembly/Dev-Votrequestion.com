@@ -38,14 +38,16 @@ class User extends Main {
     {
         $where = array('id'=>'id','value'=>$user_id);
         $retour = Base::update($this->nom_table,'has_checked','1',$where);
-        return $retour;
+		$retour2 = Base::update2($this->nom_table_main,'nb_arrive = (nb_arrive+1)',"id = '1'");
+        return $retour && $retour2;
     }
 
     public function uncheck_user($user_id)
     {
         $where = array('id'=>'id','value'=>$user_id);
         $retour = Base::update($this->nom_table,'has_checked','0',$where);
-        return $retour;
+		$retour2 = Base::update2($this->nom_table_main,'nb_arrive = (nb_arrive-1)',"id = '1'");
+        return $retour && $retour2;
     }
 
     public function if_check_user($user_id)
@@ -68,5 +70,10 @@ class User extends Main {
         $list_main = Base::select($this->nom_table,'',$where,'nom','ASC');
         return $list_main;
     }
+
+	public function getInfo($user_id)
+	{
+		return Base::select($this->nom_table,'',array('type'=>'id','id'=>$user_id));
+	}
 }
 ?>

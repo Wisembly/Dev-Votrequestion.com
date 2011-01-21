@@ -40,6 +40,7 @@
       <div data-role="page">
 	<div data-role="header" data-theme="c"><h3>Liste des inscrits - <?php
 
+		$active = array('','');
         if(isset($_GET['type']))
             {
                 $type = $_GET['type'];
@@ -48,16 +49,18 @@
                     case 'al':
                         echo "Ordre d'arrivée";
                         $donnees = $user->get_user_checked_order_time();
+						$active[0] = 'class="ui-btn-active"' ;
                         break;
                     case 'ar':
                         echo "Ordre d'alphabétique";
                         $donnees= $user->get_user_checked_order_alpha();
+						$active[1] = 'class="ui-btn-active"' ;
                         break;
 
                 }
             }
-        else{ echo "Ordre d'alphabétique";$donnees = $user->get_user_checked_order_alpha();}?></h3>
-        <a href="index.php" rel="external" data-icon="gear"><div id="responsecount">Refresh dans <b></b> secondes</div></a>
+        else{ echo "Ordre d'alphabétique";$donnees = $user->get_user_checked_order_alpha(); $active[0] = 'class="ui-btn-active"' ;}?></h3>
+        <a href="index.php?type=<?php echo $type; ?>" rel="external" data-icon="gear"><div id="responsecount">Rafraichir la liste</div></a>
         </div>
 	<div data-role="content" data-theme="c">
 
@@ -75,12 +78,12 @@ foreach ($donnees as $donnee)
     {
         $current_letter ='';
 
-    $first_letter = substr($one_user['nom'],0,1);
+    $first_letter = substr($donnee['nom'],0,1);
                  if($first_letter != $current_letter)
                      {
                      $current_letter = $first_letter;
 
-                     if($type == 'al'){
+                     if($type == 'ar'){
                      ?>
              <li data-theme="a" data-role="list-divider" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a"><?php echo strtoupper($first_letter);?></li>
                     <?php
@@ -119,8 +122,8 @@ foreach ($donnees as $donnee)
 	<div data-role="footer" data-id="foo1" data-position="fixed">
             <div data-role="navbar">
 			<ul>
-				<li><a href="index.php?type=al" rel="external" class="ui-btn-active">Ordre alphabétique</a></li>
-				<li><a href="index.php?type=ar" rel="external">Ordre d'arrivée</a></li>
+				<li><a href="index.php?type=al" rel="external" <?php echo $active[0]; ?>>Ordre d'arrivée</a></li>
+				<li><a href="index.php?type=ar" rel="external" <?php echo $active[1]; ?>>Ordre alphabétique</a></li>
 			</ul>
 		</div>
         </div>
