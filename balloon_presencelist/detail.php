@@ -12,7 +12,7 @@ if( !(isset($_GET['user']) && is_numeric($_GET['user'])) ) header('Location: ind
     <title>Detail</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.css" />
     <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
 

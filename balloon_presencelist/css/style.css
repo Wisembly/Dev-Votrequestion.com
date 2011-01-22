@@ -11,7 +11,9 @@
    Syntax recommendation http://www.w3.org/TR/REC-CSS2/
 */
 
-
+html,body {
+	font-family: Helvetica, Arial, sans-serif;
+}
 
 #user
 {
@@ -45,4 +47,62 @@
     float: right;
     top:10px;
     right: 10px;
+}
+
+.ui-btn {
+	height:3em;
+	line-height:3em;
+	padding-left:2em;
+}
+
+.list-divider {
+	background: #5E87B0 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81A8CE), to(#5E87B0));
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81A8CE), to(#5E87B0));
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81A8CE), to(#5E87B0));
+	border: 1px solid #456F9A;
+	color: white;
+	text-shadow: #254F7A 0px -1px 1px;
+}
+
+a.iframe {
+	text-decoration:none;
+}
+
+ul#alphabet{
+	height:3em;
+	text-align:center;
+	display:block;
+	margin:0;
+	padding:1em;
+	background:#000;
+	z-index:99999;
+	font-size:1.2em;
+	list-style:none;
+	
+	background: #5E87B0 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81A8CE), to(#5E87B0));
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81A8CE), to(#5E87B0));
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81A8CE), to(#5E87B0));
+	border-bottom: 1px solid #456F9A;
+	color: white;
+	text-shadow: #254F7A 0px -1px 1px;
+}
+
+ul#alphabet a {
+	text-decoration:none;
+	color:#fff;
+	margin-top:1em;
+	font-size:2em;
+	padding:0.1em;
+}
+
+ul#alphabet li {
+	display: inline;
+}
+
+li a.top {
+	float:right;
+	padding-right:2em;
+	font-size:2em;
+	color:#fff;
+	text-decoration:none;
 }

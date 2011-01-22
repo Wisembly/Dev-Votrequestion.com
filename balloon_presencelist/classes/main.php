@@ -29,5 +29,17 @@ class Main extends Base {
         $list_main = Base::select($this->nom_table_main,"","");
         return $list_main;
     }
+
+	public function getTotal()
+	{
+		$total = Base::select($this->nom_table_main,'nb_participants',array('type'=>'id','id'=>1));
+		return $total[0]['nb_participants'];
+	}
+	
+	public function getArrive()
+	{
+		$total = Base::select($this->nom_table_main,'nb_arrive',array('type'=>'id','id'=>1));
+		return $total[0]['nb_arrive'];
+	}
 }
 ?>

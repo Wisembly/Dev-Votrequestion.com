@@ -18,12 +18,11 @@ class Base {
 
     public function __construct()
     {
-        // Information base de données
         $this->bdd = 'localhost';
-        $this->login = 'root';
-        $this->password = 'root';
-        $this->table = 'balloon_presencelist';
-        $this->sql_r = 0;
+               $this->login = 'root';
+               $this->password = 'root';
+               $this->table = 'balloon_presencelist';
+               $this->sql_r = 0;
     }
     
     public function connection()

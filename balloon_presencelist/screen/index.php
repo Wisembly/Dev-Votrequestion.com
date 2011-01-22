@@ -62,6 +62,9 @@
         else{ echo "Ordre d'alphabétique";$donnees = $user->get_user_checked_order_alpha(); $active[0] = 'class="ui-btn-active"' ;}?></h3>
         <a href="index.php?type=<?php echo $type; ?>" rel="external" data-icon="gear"><div id="responsecount">Rafraichir la liste</div></a>
         </div>
+<p><h2>
+<?php echo $main->getArrive().' arrivés sur '.$main->getTotal().' attendus'; ?>
+</h2></p>
 	<div data-role="content" data-theme="c">
 
             
@@ -71,27 +74,21 @@
 <div id="myContent">
     <?php //include 'reload.php';
 
-
-    
-
+$current_letter ='';
 foreach ($donnees as $donnee)
+{
+    $first_letter = $donnee['nom'][0];
+
+    if($first_letter != $current_letter)
     {
-        $current_letter ='';
+        $current_letter = $first_letter;
 
-    $first_letter = substr($donnee['nom'],0,1);
-                 if($first_letter != $current_letter)
-                     {
-                     $current_letter = $first_letter;
-
-                     if($type == 'ar'){
-                     ?>
-             <li data-theme="a" data-role="list-divider" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a"><?php echo strtoupper($first_letter);?></li>
-                    <?php
-                     }
-                     }
-                       ?>
-
-
+        if($type == 'ar')
+		{
+echo'<li data-theme="a" data-role="list-divider" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a">'.strtoupper($current_letter).'</li>';
+        }
+    }
+          ?>
             <li data-theme="c" data-inset="true" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-c">
                 <a href="#" class="ui-link-inherit">
                     <?php

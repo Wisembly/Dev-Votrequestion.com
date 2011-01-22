@@ -22,47 +22,27 @@ if(isset($_GET['user']) && isset($_SESSION['connect'])  )
   <head>
     <title>Index - PresenceList</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="css/jquery.mobile.css" />
-	<link rel="stylesheet" href="css/style.css"/>	
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.0a2.min.css">
+    <script type="text/javascript" src="javascript/jquery.mobile-1.0a2.min.js"></script>
+    <script type="text/javascript" src="javascript/jquery.js"></script>-->
 
-	
-	<script type="text/javascript" src="javascript/jquery.js"></script>
-	<script type="text/javascript" src="javascript/js.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
+
   </head>
   <body class="ui-mobile-viewport">
-	<a name="search"></a>
-	<div id="alphabet"><ul id="alphabet">
-<?php	
-
-	$a = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-	foreach ( $a as $a )
-		echo '<li><a href="#'.$a.'">'.$a.'</a></li>';
-?>	
-	</ul>
-	</div>
-	<h2 style="float:right;">
-	<?php echo $main->getArrive().' arrivés sur '.$main->getTotal().' attendus'; ?>
-	</h2>
        <div data-role="page">
 	<div data-role="header" data-theme="b" data-nobackbtn="true">
             <?php
             $data = $main->get_list_main();
             ?>
-            <!--<a href="index.php" rel="external" data-icon="gear">Rafraichir</a>
+            <h3>Checking list - <?php echo $data[0]['nom'];?></h3>
+            <a href="index.php" rel="external" data-icon="gear">Rafraichir</a>
             <a href="import/index.php" rel="external" data-icon="gear" class="ui-btn-right" style="margin-right:140px;">Import file</a>
-            <a href="logout.php" rel="external" data-icon="gear" class="ui-btn-right">Logout (<?php echo $_SESSION['connect'];?>)</a>-->
-			
-				<div class="ui-field-contain ui-body ui-br" data-role="fieldcontain">
-                    <label class="ui-input-text" for="name">Search:</label>
-                    <input style="width: 100%" class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c" type="text" name="name" id="search" value=""  />
-                </div>
-			
-			<div id="results_search"></div>
+            <a href="logout.php" rel="external" data-icon="gear" class="ui-btn-right">Logout (<?php echo $_SESSION['connect'];?>)</a>
         </div>
-
-
-
-	<div id="content" data-role="content" data-theme="b">
+	<div data-role="content" data-theme="b">
          <?php
          //recuperation des donnees
          $list_user = $user->get_list_user();
@@ -77,8 +57,8 @@ if(isset($_GET['user']) && isset($_SESSION['connect'])  )
                  if($first_letter != $current_letter)
                      {
                      $current_letter = $first_letter;
-                     ?><a name="<?php echo strtoupper($first_letter);?>"></a>
-             <li data-theme="a" data-role="list-divider" class="ui-btn list-divider ui-btn-icon-right ui-li ui-btn-up-a"><?php echo strtoupper($first_letter);?><a class="top" href="#search">Top</a></li>
+                     ?>
+             <li data-theme="a" data-role="list-divider" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-a"><?php echo strtoupper($first_letter);?></li>
                     <?php
                      }
                  ?>
@@ -88,16 +68,17 @@ if(isset($_GET['user']) && isset($_SESSION['connect'])  )
             
                     <?php
                     if($one_user['has_checked'] != 0){
-                        echo '<a class="iframe" href="detail.php?user='.$one_user['id'].'" data-rel="dialog"><li data-theme="e" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-e"><s>';
+                        echo '<li data-theme="e" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-e">';
+                        echo '<a href="detail.php?user='.$one_user['id'].'" data-rel="dialog" class="ui-link-inherit"><s>';
                         echo strtoupper($one_user["nom"])." ".ucfirst(strtolower($one_user["prenom"]));
-                        echo '</s></li></a>';
+                        echo '</s></a></li>';
                     }
                     else{ ?>
-                    
-                    <a href="detail.php?user=<?php echo $one_user['id']; ?>" data-rel="dialog" class="iframe"><li data-theme="c" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-c">
+                    <li data-theme="c" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-c">
+                    <a href="detail.php?user=<?php echo $one_user['id']; ?>" data-rel="dialog" class="ui-link-inherit">
                         <?php echo strtoupper($one_user["nom"])." ".ucfirst(strtolower($one_user["prenom"]));?>
-                    </li></a>
-                    
+                    </a>
+                    </li>
                     <?php }?>
              
              
