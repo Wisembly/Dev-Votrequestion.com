@@ -8,8 +8,10 @@ if ( isset($_POST['name']) )
 {
 	$nom = addslashes(strtoupper($_POST['name']));
 	$prenom = addslashes(ucFirst(strtolower($_POST['prenom'])));
-	$other = addslashes($_POST['other'])."<br/>AJOUT DURANT EMARGEMENT";
+	$other = "<b>Type d'Invité</b> : ".addslashes($_POST['type']).'<br/><b>Société</b> : '.addslashes($_POST['societe']).'<br/><b>Invitant</b> : '.addslashes($_POST['invitant']).'<br/><b>Commentaires</b> : '.addslashes($_POST['commentaires']).'<br/><b>VIP</b> : '.addslashes($_POST['vip']).'<br/><b>Modif</b> : <br/><b>AJOUT DURANT EMARGEMENT</b>';
 	
+	$other = mysql_real_escape_string(addslashes($other));
+
 	if ( $user->add_user($nom,$prenom,$other) && $action->action_new_user($_SESSION['id_hotesse']) )
 		$flag = true ;
 }
@@ -51,13 +53,39 @@ if ( isset($_POST['name']) )
 									    <label for="name">Prénom:</label>
 									    <input type="text" name="prenom" id="prenom" value=""  />
 									</div>
-
+									
 									<div data-role="fieldcontain">
-										<label for="textarea">Autres informations:</label>
-										<textarea cols="40" rows="12" name="other" id="other"></textarea>
+									    <label for="name">Type d'invité:</label>
+									    <input type="text" name="type" id="type" value=""  />
 									</div>
+									
+									<div data-role="fieldcontain">
+									    <label for="name">Société:</label>
+									    <input type="text" name="societe" id="societe" value=""  />
 									</div>
+									
+									<div data-role="fieldcontain">
+									    <label for="name">Invitant:</label>
+									    <input type="text" name="invitant" id="invitant" value=""  />
+									</div>
+									
+									<div data-role="fieldcontain">
+									    <label for="name">Commentaires:</label>
+									    <input type="text" name="commentaires" id="commentaires" value=""  />
+									</div>
+									
+									<div data-role="fieldcontain">
+									    <label for="name">VIP:</label>
+									    <input type="text" name="vip" id="vip" value=""  />
+									</div>
+									
+									<div data-role="fieldcontain">
+									    <label for="name">Modif:</label>
+									    <input type="text" name="modif" id="modif" value=""  />
+									</div>
+									
 								</div>
+							</div>
 
 								<button type="submit" data-theme="a" class="ui-btn-hidden" tabindex="-1">Submit</button>
 							</fieldset>

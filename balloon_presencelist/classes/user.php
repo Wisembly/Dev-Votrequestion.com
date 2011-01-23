@@ -107,12 +107,15 @@ class User extends Main {
 
 	public function add_user($nom,$prenom,$other)
 	{
-		if ( Base::insert($this->nom_table,"`nom`,`prenom`,`other_info`,`has_checked`","'$nom','$prenom','$other','1'") )
+		if ( Base::insert($this->nom_table,"`presencelist_id`,`nom`,`prenom`,`other_info`,`has_checked`","'1','$nom','$prenom','$other','1'") )
+		{
 			$retour = Base::update2($this->nom_table_main,'nb_participants = (nb_participants+1)',"id = '1'");
-		else
-			$retour = false ;
+			$retour2 = Base::update2($this->nom_table_main,'nb_arrive = (nb_arrive+1)',"id = '1'");
+		}
+		else {
+			$retour = false ; $retour2 = false ; }
 			
-		return $retour;
+		return ($retour && $retour2) ;
 	}
 }
 ?>
