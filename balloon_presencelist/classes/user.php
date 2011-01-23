@@ -33,7 +33,6 @@ class User extends Main {
         return $list_main;
     }
 
-
     public function check_user($user_id)
     {
         $where = array('id'=>'id','value'=>$user_id);
@@ -84,14 +83,14 @@ class User extends Main {
 		if ( sizeof($test) == 1 || $test[1] == '' )
 		{
 			if( sizeof($test) > 1 )	$what = $test[0];
-			$sql = "SELECT id,nom,prenom FROM ".$this->nom_table." WHERE `nom` LIKE  '%$what%' OR `prenom` LIKE  '%$what%' AND has_checked = '0' ORDER BY nom ASC";
+			$sql = "SELECT id,nom,prenom FROM ".$this->nom_table." WHERE (`nom` LIKE  '%$what%' OR `prenom` LIKE  '%$what%') AND has_checked = '0' ORDER BY nom ASC";
 		}
 		else
 		{
 			$first = $test[0];
 			$second = $test[1];
 
-			$sql = "SELECT id,nom,prenom FROM ".$this->nom_table." WHERE (`nom` = '$first' AND `prenom` LIKE '$second%') OR (`prenom` = '$first' AND `prenom` LIKE '$second%') AND has_checked = '0' ORDER BY nom ASC";
+			$sql = "SELECT id,nom,prenom FROM ".$this->nom_table." WHERE ((`nom` = '$first' AND `prenom` LIKE '$second%') OR (`prenom` = '$first' AND `prenom` LIKE '$second%')) AND has_checked = '0' ORDER BY nom ASC";
 		}
 			
 		$table .= '<h3>Results:</h3>';
@@ -104,6 +103,16 @@ class User extends Main {
 		}
 		
 		return $table.'<br/>';
+	}
+
+	public function add_user($nom,$prenom,$other)
+	{
+		if ( Base::insert($this->nom_table,"`nom`,`prenom`,`other_info`,`has_checked`","'$nom','$prenom','$other','1'") )
+			$retour = Base::update2($this->nom_table_main,'nb_participants = (nb_participants+1)',"id = '1'");
+		else
+			$retour = false ;
+			
+		return $retour;
 	}
 }
 ?>

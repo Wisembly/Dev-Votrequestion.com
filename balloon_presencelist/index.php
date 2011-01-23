@@ -40,7 +40,8 @@ if(isset($_GET['user']) && isset($_SESSION['connect'])  )
 ?>	
 	</ul>
 	</div>
-	<h2 style="float:right;">
+	<a id="ajout" href="ajout.php" class="ui-btn ui-btn-icon-left ui-btn-corner-all ui-shadow ui-btn-up-b">Ajouter un Invité non présent dans la liste</a>
+	<h2 style="float:right;margin-right:2em;">
 	<?php echo $main->getArrive().' arrivés sur '.$main->getTotal().' attendus'; ?>
 	</h2>
        <div data-role="page">
@@ -71,16 +72,16 @@ if(isset($_GET['user']) && isset($_SESSION['connect'])  )
              <?php
              $current_letter ='';
              foreach ($list_user as $one_user)
-                {
+             {
              
-                 $first_letter = substr($one_user['nom'],0,1);
+                 $first_letter = strtoupper($one_user['nom'][0]);
                  if($first_letter != $current_letter)
-                     {
+                 {
                      $current_letter = $first_letter;
                      ?><a name="<?php echo strtoupper($first_letter);?>"></a>
-             <li data-theme="a" data-role="list-divider" class="ui-btn list-divider ui-btn-icon-right ui-li ui-btn-up-a"><?php echo strtoupper($first_letter);?><a class="top" href="#search">Top</a></li>
+             <li data-theme="a" data-role="list-divider" class="ui-btn list-divider ui-btn-icon-right ui-li ui-btn-up-a"><b><?php echo strtoupper($current_letter);?></b><a class="top" href="#search">Top</a></li>
                     <?php
-                     }
+                 }
                  ?>
 
 

@@ -39,5 +39,12 @@ class Actions extends User {
         $reponse = Base::select($this->nom_table,'',$where);
         return $reponse;
     }
+
+	public function action_new_user($hotesse_id)
+	{
+		$last_id = mysql_fetch_object(mysql_query("SELECT id FROM presencelist_user ORDER BY id DESC LIMIT 1"));
+		$result = mysql_query("INSERT INTO ".$this->nom_table." SET user_id = '".$last_id->id."', time = '".time()."', hotesse_id = '$hotesse_id', type = '2'");
+		return $result;
+	}
 }
 ?>

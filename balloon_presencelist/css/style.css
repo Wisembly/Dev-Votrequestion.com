@@ -64,6 +64,10 @@ html,body {
 	text-shadow: #254F7A 0px -1px 1px;
 }
 
+.list-divider b {
+	font-size:2em;
+}
+
 a.iframe {
 	text-decoration:none;
 }
@@ -105,4 +109,9 @@ li a.top {
 	font-size:2em;
 	color:#fff;
 	text-decoration:none;
+}
+
+#ajout {
+	float:left;
+	width:50%;
 }
