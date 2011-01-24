@@ -26,5 +26,11 @@ class Hotesse extends Actions {
         $list_main = Base::select($this->nom_base,"","");
         return $list_main;
     }
+
+	public function get_hotesse($id)
+	{
+		$hotesse = Base::select($this->nom_base,'real_name',array('type'=>'id','id'=>$id));
+		return $hotesse[0]['real_name'];
+	}
 }
 ?>

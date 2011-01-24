@@ -107,7 +107,7 @@ if(isset($_GET['user']) && isset($_SESSION['connect'])  )
              ?>
 	</ul>
         </div>
-	<div data-role="footer" data-theme="b">Powered by Balloon</div>
+		<div data-role="footer" class="ui-bar-b ui-footer" style="text-align:center;">Powered by Balloon</div>
     </div>
   </body>
 </html>

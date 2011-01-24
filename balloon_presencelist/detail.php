@@ -39,7 +39,7 @@ if( !(isset($_GET['user']) && is_numeric($_GET['user'])) ) header('Location: ind
                 <a href="index.php" rel="external" data-role="button" data-icon="check" style="background:-moz-linear-gradient(center top , #CC0000, #CC0000) repeat scroll 0 0 #CC0000">Cancel</a>
             </div>
         </div>
-	<div data-role="footer" data-theme="b">Powered by Balloon</div>
+	<div data-role="footer" data-theme="b" style="text-align:center;">Powered by Balloon</div>
     </div>
   </body>
 </html>
