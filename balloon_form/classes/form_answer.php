@@ -45,7 +45,8 @@ Class Answer
 	public function registerAnswer($form_id,$token)
 	{
 		// on vérifie que la réponse n'exite pas déjà pour cet user (resend de formulaire par exemple)
-		if ( $this->hasAnswer($form_id,$token) )
+//		if ( $this->hasAnswer($form_id,$token) )
+            	if ( false )
 		{
 			$reponse  = -1 ;
 		}
@@ -58,7 +59,7 @@ Class Answer
 
 			// maintenant qu'on a inséré toutes les réponses à tous les items, on empêche le gars de re-voter
 			$reponse = insert('form_answer','`form_id`,`token`,`timestamp`',"'$form_id','$token','".time()."'");
-			$reponse = $reponse ? 1 : 0 ; 
+			$reponse = $reponse ? 1 : 0 ;
 		}
 	
 		// on retourne le true ou false final
@@ -75,12 +76,12 @@ Class Answer
 	
 	public function getAllAnswersByItem($withItemId)
 	{
-		return select('form_item_answer','value',array('type' => 'form_item_id', 'id' => $withItemId),'timestamp','DESC');
+		return select('form_item_answer','value',array(array('type' => 'form_item_id', 'id' => $withItemId)),'timestamp','DESC');
 	}
 	
 	public function getAllAnswersByForm($withFormId)
 	{
-		return select('form_item_answer','value',array('type' => 'form_id', 'id' => $withFormId),'form_item_id','ASC');
+		return select('form_item_answer','value',array(array('type' => 'form_id', 'id' => $withFormId)),'form_item_id','ASC');
 	}
 }
 

@@ -22,6 +22,9 @@ require_once '../common.php';
                     case 'insert':
                         include 'pages/creer_form.php';
                         break;
+                    case 'edit':
+                        include 'pages/creer_form.php';
+                        break;
                     case 'liste':
                         include 'pages/liste_form.php';
                         break;

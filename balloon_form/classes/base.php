@@ -26,13 +26,24 @@ function insert($table,$champs,$valeur)
 }
 
 //Fonction de selection
-function select($table,$selection,$options,$orderby = NULL,$sens = NULL,$limit = NULL)
+// table : nom de la table
+// selection : * si vide, sinon spécifier un ou des champ(s)
+// where : rajouter un ou des clauses where
+// orderby : specifier un option pour le triage
+// sens : DESC ou ASC
+// limit : nombre de reponse
+function select($table,$selection,$where,$orderby = NULL,$sens = NULL,$limit = NULL)
 {
     global $sql_r ;
 	if(empty($selection)){$selection = "*";}
     $query = "SELECT ".$selection." FROM `".$table."`";
-    if (!empty($options)){
-        $query = $query."WHERE `".$options["type"]."`=".$options["id"]." ";
+    if (!empty($where)){
+        $flag_where = 0;
+        foreach($where as $_where){
+            if($flag_where == 1){ $query = $query." AND ";}else{ $query = $query."WHERE ";}
+            $query = $query."`".$_where["type"]."`=".$_where["id"]." ";
+            $flag_where = 1;
+        }
     }
     if (!empty($orderby)){
         $query = $query."ORDER BY ".$orderby."";
@@ -43,7 +54,7 @@ function select($table,$selection,$options,$orderby = NULL,$sens = NULL,$limit =
     if (!empty($limit)){
         $query  = $query."LIMIT ".$limit."";
     }
-    // echo $query;
+    //echo $query;die();
     $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette de selection");
     $temp =array();
 	$sql_r++ ;
@@ -66,6 +77,17 @@ function delete($table,$options)
 	return $reponse ;	
 }
 
+function update($table,$champs,$valeur,$where)
+{
+    global $sql_r ;
+    $query = "UPDATE `$table` SET $champs = '$valeur' WHERE ".$where['id']."=".$where["value"];
+    //die($query);
+    $reponse = mysql_query($query) or die ("Impossible d'exécuter la requette d'update");
+    if ( $reponse )
+        $sql_r++ ;
+        return $reponse;
+}
+
 // Fonction select count
 function select_count($table,$where_clause)
 {
@@ -77,9 +99,28 @@ function select_count($table,$where_clause)
 	return $count['nbre'];
 }
 
+
 function show_nbre_sql()
 {
 	global $sql_r ;
 	return $sql_r ;
+}
+
+function get_answer_item($formId)
+{
+    $query= "SELECT * FROM form_item_answer AS A ";
+    $query.="LEFT OUTER JOIN form_item AS I ";
+    $query.="ON A.form_item_id = I.id ";
+    $query.="WHERE A.form_id = '".$formId."' ORDER BY A.form_item_id ASC,A.id DESC";
+
+    //echo $query;die();
+    $reponse = mysql_query($query) or die("SELECT JOINT ERROR");
+    $temp =array();
+	
+
+    while($data = mysql_fetch_array($reponse))
+        array_push($temp, $data);
+
+    return $temp;
 }
 ?>

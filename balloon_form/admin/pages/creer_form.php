@@ -1,4 +1,41 @@
+<?php
+if(isset($_GET['action'])){
+    $action = $_GET['action'];
+
+    if(isset($_GET['edit'])){
+        $item_edit = $_GET['edit'];
+        if(isset($_POST[$item_edit])){
+            if(isset($_POST['options'])){
+                $idItem = $_GET['edit'];
+                $list = explode(";", $_POST["options"]);
+                $champs = 'label';
+                $fio = new Form_Item_Option();
+                $fio->deleteOptionForItem($idItem);
+                foreach($list as $item){
+                    $fio->addByForm($idItem, $item);
+                }
+            }
+            $champs = 'label';
+            $valeur = $_POST[$item_edit];
+
+            $id = $_GET['edit'];
+            $fi = new Form_Item();
+            $fi->edit($id,$champs,$valeur);
+            header('Location : index.php?action=insert&id='.$_GET['id']);
+        }
+    }
+
+
+    if($action == 'insert'){
+?>
 <a href="?action=liste">Retour à la liste</a><br/>
+<?php
+    }else{
+?>
+<a href="?action=insert&id=<?php echo $_GET['id'];?>">Retour au formulaire</a><br/>
+<?php
+    }
+    ?>
 <fieldset>
     <legend>Informations</legend>
 <?php
@@ -14,6 +51,9 @@
 ?>
 </fieldset>
 <br/>
+<?php
+    if($action == 'insert'){
+?>
 <table>
     <tr>
     <form action="?action=insert&id=<?php echo $id;?>" method="post">
@@ -25,7 +65,9 @@
     </form>
     </tr>
 </table>
-
+<?php
+    }
+?>
 <?php
 if(isset($_POST["text"])){$menu_item = "text";}
 if(isset($_POST["select"])){$menu_item = "select";}
@@ -56,17 +98,22 @@ if(isset($menu_item)){
     }
 }
 ?>
-<hr/>
-<u>Rendu du formulaire :</u><br/>
-<?php
-$form_id = $_GET['id'];
-$form= new Form();
-$form->isAdmin();
+    <hr/>
+    <?php if($action == 'insert'){ echo '<u>Rendu du formulaire :</u>';} else{ echo '<u>Edition du formulaire</u>';}?>
+    <br/>
+    <?php
+    $form_id = $_GET['id'];
+    $form= new Form();
+    $form->isAdmin();
 
-echo $form->showForm($form_id);
-
-if(isset($_GET["delete"])){
-    $form_item->delete($_GET["delete"]);
-    echo "<a href='?action=insert&id=".$_GET["id"]."'>Rafraichir</a>";
+    if($action == 'insert'){
+        echo $form->showForm($form_id,"insert");
+    }else{
+        echo $form->showForm($form_id,"edit");
+    }
+    if(isset($_GET["delete"])){
+        $form_item->delete($_GET["delete"]);
+        echo "<a href='?action=insert&id=".$_GET["id"]."'>Rafraichir</a>";
+    }
 }
 ?>

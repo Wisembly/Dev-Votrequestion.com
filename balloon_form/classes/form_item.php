@@ -28,7 +28,7 @@ class Form_Item
 
     public function getAllByForm($form_id)
     {
-        $form = array("type" => "form_id", "id" => $form_id);
+        $form = array(array("type" => "form_id", "id" => $form_id));
         $data  = select("form_item","",$form,"id ASC");
         return $data;
     }
@@ -36,7 +36,7 @@ class Form_Item
 	// retourne last id du dernier item
     public function findByForm($form_id)
     {
-        $form = array("type" => "form_id", "id" => $form_id);
+        $form = array(array("type" => "form_id", "id" => $form_id));
         $data  = select("form_item","id",$form,"id","DESC","1");
         $lastID = $data[0]["id"];
         return $lastID;
@@ -45,12 +45,19 @@ class Form_Item
     public function delete($id)
     {
         $table = "form_item_option";
-        $options = array("type" => "id_form_item", "id" => $id);
+        $options = array(array("type" => "id_form_item", "id" => $id));
         delete($table,$options);
 
         $table = "form_item";
-        $options = array("type" => "id", "id" => $id);
+        $options = array(array("type" => "id", "id" => $id));
         delete($table,$options);
+    }
+
+    public function edit($id,$champs,$valeur)
+    {
+        $table = "form_item";
+        $where = array("id" => "id", "value" => $id);
+        update($table,$champs,$valeur,$where);
     }
 }
 ?>

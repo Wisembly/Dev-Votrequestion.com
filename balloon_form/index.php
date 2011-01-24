@@ -52,7 +52,9 @@ require_once('common.php');
 			{
 				/* on regarde si le formulaire a déjà été répondu */
 				//  formulaire non répondu par cet user
-				if ( !$answer->hasAnswer($form_id,$token->getToken()) ) {
+//				if ( !$answer->hasAnswer($form_id,$token->getToken()) ) {
+                            	if ( true ) {
+
 					echo '<form action="index.php?form_id='.$form_id.'" method="POST">';
 					echo '<input type="hidden" name="send_form" value="true"/>';
 					echo $form->showForm($form_id);
