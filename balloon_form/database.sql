@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Serveur: localhost
--- Généré le : Dim 16 Janvier 2011 à 18:00
+-- Généré le : Lun 24 Janvier 2011 à 09:42
 -- Version du serveur: 5.1.44
 -- Version de PHP: 5.2.13
 
@@ -30,7 +30,7 @@ CREATE TABLE `form` (
 -- Contenu de la table `form`
 --
 
-INSERT INTO `form` (`id`, `nom`, `description`) VALUES(1, 'Test 1', 'Premier test');
+INSERT INTO `form` VALUES(1, 'Test 1', 'Premier test');
 
 -- --------------------------------------------------------
 
@@ -44,12 +44,13 @@ CREATE TABLE `form_answer` (
   `token` varchar(32) COLLATE utf8_bin NOT NULL,
   `timestamp` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `form_answer`
 --
 
+INSERT INTO `form_answer` VALUES(1, 1, '1fd2d741744bc8238d22dc3449750815', 1295200355);
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,7 @@ CREATE TABLE `form_item` (
 -- Contenu de la table `form_item`
 --
 
-INSERT INTO `form_item` (`id`, `form_id`, `type`, `label`, `is_required`) VALUES(1, 1, 'text', 'Hello World!', 0);
+INSERT INTO `form_item` VALUES(1, 1, 'text', 'Hello World!', 0);
 
 -- --------------------------------------------------------
 
@@ -84,12 +85,16 @@ CREATE TABLE `form_item_answer` (
   `form_item_id` mediumint(9) NOT NULL,
   `value` varchar(255) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `form_item_answer`
 --
 
+INSERT INTO `form_item_answer` VALUES(1, 1, 1, 'Super!');
+INSERT INTO `form_item_answer` VALUES(2, 1, 1, 'Encore une réponse!');
+INSERT INTO `form_item_answer` VALUES(3, 1, 1, 'Que des réponses!');
+INSERT INTO `form_item_answer` VALUES(5, 1, 1, 'héhéhé');
 
 -- --------------------------------------------------------
 
