@@ -8,7 +8,7 @@
             <tr>
                 <th>Nom</th>
                 <th>Description</th>
-                <th colspan="4">Actions</th>
+                <th colspan="5">Actions</th>
             </tr>
             <?php
                 $donnees = $form->getAll();
@@ -21,7 +21,9 @@
                     <?php echo "</td><td>"; ?>
 					<a href="?action=reponses&id=<?php echo $donnee['id'];?>"><img src="../img/chart.png" alt="Voir les réponses"></a>
                     <?php echo "</td><td>"; ?>
-                    <a href="?action=delete&id=<?php echo $donnee['id'];?>"><img src="../img/delete.png" alt="Supprimer"></a>
+                                        <a href="pages/export_to_xls.php?id=<?php echo $donnee['id'];?>"  target="_blank">EXPORT</a>
+                    <?php echo "</td><td>"; ?>
+                                        <a href="?action=delete&id=<?php echo $donnee['id'];?>"><img src="../img/delete.png" alt="Supprimer"></a>
                     <?php echo "</td><td>"; ?>
                     <a href="?action=insert&id=<?php echo $donnee['id'];?>"><img src="../img/insert.png" alt="Inserer"></a>
                     <?php echo"</td>";

@@ -31,5 +31,14 @@ class ShowAnswer {
         $nb = select_count($table,$idForm);
         return $nb;
     }
+
+
+    //REQUETE D EXPORT XLS
+
+    function getDataForExport($form_id)
+    {
+        $data = getDataExport($form_id);
+        return $data;
+    }
 }
 ?>

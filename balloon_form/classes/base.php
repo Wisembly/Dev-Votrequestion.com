@@ -123,4 +123,22 @@ function get_answer_item($formId)
 
     return $temp;
 }
+
+
+function getDataExport($form_id)
+{
+    $query = "SELECT I.label,A.value,I.type FROM form_item_answer AS A ";
+    $query.= "LEFT OUTER JOIN form_item AS I ";
+    $query.= "ON A.form_item_id = I.id ";
+    $query.= "WHERE A.form_id ='".$form_id."' ORDER BY A.form_item_id ASC, A.id ASC";
+
+    $reponse = mysql_query($query) or die("SELECT JOINT ERROR");
+    $temp =array();
+
+
+    while($data = mysql_fetch_array($reponse))
+        array_push($temp, $data);
+
+    return $temp;
+}
 ?>

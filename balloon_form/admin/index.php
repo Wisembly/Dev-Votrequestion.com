@@ -1,4 +1,18 @@
 <?php
+if(isset($_GET['action']))
+    {
+    if($_GET['action'] == 'open'){
+
+        
+        ?>
+<script type="text/javascript">
+    window.location.replace("export/download.php?file=<?php echo $_GET['file'];?>");
+</script>
+        <?php
+        
+    }
+    }
+
 require_once '../common.php';
 ?>
 
@@ -19,9 +33,6 @@ require_once '../common.php';
             if(isset($_GET["action"])){
                 $menu = $_GET["action"];
                 switch ($menu){
-                    case 'insert':
-                        include 'pages/creer_form.php';
-                        break;
                     case 'edit':
                         include 'pages/creer_form.php';
                         break;
