@@ -24,30 +24,44 @@ echo "<h5><u>Nombre de participant(s) unique(s) : ".$nb_part."</u></h5>";
         //print_r($datas);die();
         foreach ($datas as $data)
         {
+            //echo ($change_cat."<br/>");
             
             if($data['form_item_id'] != $flag)
                 {
+                
                 if($change_cat == 'select' || $change_cat == 'checkbox' || $change_cat == 'radio'){
-                //print_r($array_name);echo '</br>'; print_r($array_count);echo '</br>';
+
+                    //print_r($array_name);echo '</br>'; print_r($array_count);echo '</br>';
+
+
+                    //On récupère le nombre de vote
                     $total = 0;
+
                     foreach($array_name as $name)
                     {
                         $key = array_search($name,$array_name);
                         $total += $array_count[$key];
                     }
+                    
                     echo '<u>Nombre de votes :</u>'.$total."<br/>";
 
+                    //On calcule de pourcentage
                 foreach($array_name as $name)
                     {
                         $key = array_search($name,$array_name);
                         $cp = ($array_count[$key]*100)/$total;
                         echo $name." :".$array_count[$key]."(".round($cp,2)."%)<br/>";
                     }
-                   $total=0;
 
+                    
+                   $total=0;
                 }
+
+
+
                 if(sizeof($array_name) != 0){$array_name = array(); }
                 if(sizeof($array_count) != 0){$array_count = array(); }
+
                 if($change_cat == 'text' || $change_cat == 'textarea')
                     {
                     echo '</ul>';$change_cat = "";
@@ -56,7 +70,8 @@ echo "<h5><u>Nombre de participant(s) unique(s) : ".$nb_part."</u></h5>";
                 if($data != 0){echo '<h2>'.$data['label'].' ('.$data['type'].')</h2>';}
                 $flag = $data['form_item_id'];
                 if($data != 0){
-                if($data['type'] != $change_cat){
+
+                    //Suivant le type on affiche le resultat
                     switch($data['type'])
                         {
                             case 'text':
@@ -75,10 +90,11 @@ echo "<h5><u>Nombre de participant(s) unique(s) : ".$nb_part."</u></h5>";
                                     }
                                     //print_r($array_name);echo '</br>';print_r($array_count);
                                 echo '</u><br/>';
+                                
                                 break;
                         }
                     $change_cat = $data['type'];
-                    }
+                    
                 }
                 }
 
