@@ -176,7 +176,7 @@ class dbal_mysql extends dbal
 
 			if ($this->query_result === false)
 			{
-				if (($this->query_result = mysql_query($query) === false)
+				if (($this->query_result = mysql_query($query)) === false)
 				{
 					$this->sql_error($query);
 				}
