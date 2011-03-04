@@ -7,6 +7,7 @@ body{
 	font-family: "Trebuchet MS",Trebuchet,sans-serif;
 }
 
+
 .content{
 	width:900px;
 	margin:auto;
@@ -52,6 +53,7 @@ img.logo{
 	margin: 0 auto 30px;
 	width:413px;
 	margin-top:60px;
+	border:none;
 }
 
 #search{
@@ -79,10 +81,6 @@ color:grey;
 #balloon{
 	text-align:center;
 	margin-top:140px;
-}
-
-#balloon a{
-	text-decoration:none;
 }
 
 #balloon .logoballoon{
@@ -127,3 +125,31 @@ color:grey;
 #star1, #star2{
 	float:right;
 }
+
+/*Page User*/
+
+#user_profile{
+	width:600px;
+	margin:auto;
+}
+
+.user_picture{
+	float:left;
+	width:100px;
+	margin-right:5px;
+}
+
+#user_historic{
+	margin-top:20px;
+	padding: 5px 5px 5px 5px;
+	border: solid 1px #445a63;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+}
+
