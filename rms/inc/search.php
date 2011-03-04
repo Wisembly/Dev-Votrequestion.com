@@ -28,13 +28,13 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		</p><br/><br/>
 			
 		<p class="p2">Rate him</p>
-		<div id="star0"></div>
+		<div id="star0" value="<?php echo $id; ?>"></div>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
 					$('#star0').raty({
 					  cancel:     false,
-					  half:       true,
+					  half:       false,
 					  size:       24,
 					  starHalf:   'star-half-big.png',
 					  starOff:    'star-off-big.png',
@@ -48,7 +48,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 	<br/><h2>Rate other speakers in the same conferences...</h2>
 <?php
 
-$conferences = mysql_query("SELECT C.id FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']) or die(mysql_error());
+$conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']) or die(mysql_error());
 
 while ($conference = mysql_fetch_row($conferences))
 {
@@ -56,11 +56,11 @@ while ($conference = mysql_fetch_row($conferences))
 ?>
 
 	<div id="speaker_conferences">
-		<p class="titreconf p2">Why Balloon will become a giant?</p><br/>
+		<p class="titreconf p2"><?php echo $conference[1]; ?></p><br/>
 
 <?php
 
-	$other_speakers = mysql_query("SELECT real_name, url_avatar FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]." AND S.id != '".$id."'");
+	$other_speakers = mysql_query("SELECT S.id, real_name, url_avatar FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]." AND S.id != '".$id."'");
 	
 	$i = 0;
 	
@@ -70,13 +70,13 @@ while ($conference = mysql_fetch_row($conferences))
 ?>
 		<div class="speaker">
 			<img class="speaker_picture" src="<?php echo $other_speaker['url_avatar']; ?>">
-			<?php echo $other_speaker['real_name']; ?><div id="star<?php $i++; ?>" class="fivestars"></div>
+			<?php echo $other_speaker['real_name']; ?><div id="star<?php echo $i++; ?>" class="fivestars" value="<?php echo $other_speaker['id']; ?>"></div>
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
-							$('#star<?php $i++; ?>').raty({
+							$('#star<?php echo $i; ?>').raty({
 							  cancel:     false,
-							  half:       true,
+							  half:       false,
 							  size:       24,
 							  starHalf:   'star-half-big.png',
 							  starOff:    'star-off-big.png',
