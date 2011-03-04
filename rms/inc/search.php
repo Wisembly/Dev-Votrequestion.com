@@ -21,18 +21,25 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 	<img class="speaker_picture" src="<?php echo $speaker['url_avatar']; ?>">
 	<div class="speaker_description">
 		<h2><?php echo $speaker['real_name']; ?></h2>
-		<p>
+		<p class="p1">
 			<?php $speaker['position']; ?><br/>
 			<?php $speaker['company']; ?><br/>
 			<?php $speaker['bio']; ?>
 		</p><br/><br/>
 			
-		<p>Rate him</p>
+		<p class="p2">Rate him</p>
 		<div id="star"></div>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
-					$('#star').raty();
+					$('#star').raty({
+					  cancel:     false,
+					  half:       true,
+					  size:       24,
+					  starHalf:   'star-half-big.png',
+					  starOff:    'star-off-big.png',
+					  starOn:     'star-on-big.png'
+					});
 				});
 			</script>
 		</div>
@@ -49,7 +56,7 @@ while ($conference = mysql_fetch_assoc($conferences))
 ?>
 
 	<div id="speaker_conferences">
-		<p class="titreconf">Why Balloon will become a giant?</p><br/>
+		<p class="titreconf p2">Why Balloon will become a giant?</p><br/>
 
 <?php
 
@@ -65,7 +72,14 @@ while ($conference = mysql_fetch_assoc($conferences))
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
-							$('#star').raty();
+							$('#star').raty({
+							  cancel:     false,
+							  half:       true,
+							  size:       24,
+							  starHalf:   'star-half-big.png',
+							  starOff:    'star-off-big.png',
+							  starOn:     'star-on-big.png'
+							});
 						});
 					</script>
 				</div>
