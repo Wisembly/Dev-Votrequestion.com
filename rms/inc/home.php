@@ -26,7 +26,7 @@ include 'header.php';
 		}).blur(function() {
 			if (this.value == "")
 				this.value = "Enter a speaker name";
-		}).autocomplete("ajax/search.php");
+		}).autocomplete("ajax/search.ajax.php");
 		$("#speaker_name").result(function(event, data) {
 			if (data) {
 				window.location = "?page=search&name=" + data[0].replace(/[^a-zA-Z0-9]/g,'') + "&id=" + data[1];
