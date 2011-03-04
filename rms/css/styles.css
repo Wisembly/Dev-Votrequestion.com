@@ -1,0 +1,129 @@
+html {
+	background: url(../img/bg.png) repeat;
+}
+
+body{
+	background: url(../img/background.png) no-repeat scroll center top #547785;
+	font-family: "Trebuchet MS",Trebuchet,sans-serif;
+}
+
+.content{
+	width:900px;
+	margin:auto;
+}
+
+.clear{
+	clear:both;
+}
+
+h1{
+	font-size: 25px;
+	text-align:center;
+	font-weight:bold;
+	text-shadow:white 0.5px 0.4px 1px;
+}
+
+h2{
+	font-size: 25px;
+	color:white;
+	font-weight:bold;
+	text-shadow:white 0.5px 0.4px 1px;
+}
+
+p1{
+	font-size: 15px;
+	font-weight:bold;
+	text-shadow:white 0.5px 0.4px 1px;
+}
+
+p2{
+	font-size: 18px;
+	font-weight:bold;
+	text-shadow:white 0.5px 0.4px 1px;
+}
+
+
+#description{
+	margin-top:-20px;
+}
+
+img.logo{
+	display:block;
+	margin: 0 auto 30px;
+	width:413px;
+	margin-top:60px;
+}
+
+#search{
+	margin-top:80px;
+}
+
+#speaker_name{
+height:60px;
+width:500px;
+display:block;
+margin:auto;
+border: solid 1px black;
+border-top-left-radius: 5px;
+border-bottom-right-radius: 5px;
+border-top-right-radius: 5px;
+border-bottom-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+-moz-border-radius-bottomright: 5px;
+-moz-border-radius-bottomleft: 5px;
+font-size:30px;
+color:grey;
+}
+
+#balloon{
+	text-align:center;
+	margin-top:140px;
+}
+
+#balloon a{
+	text-decoration:none;
+}
+
+#balloon .logoballoon{
+	vertical-align:middle;
+	width:80px;
+	border:none;
+}
+
+#speaker_profile{
+	width:600px;
+	margin:auto;
+}
+
+.speaker_picture{
+	float:left;
+	margin-right:5px;
+}
+
+.speaker_description{
+	margin-left:80px;
+}
+
+#speaker_conferences{
+	margin-top:20px;
+	padding: 5px 5px 5px 5px;
+	border: solid 1px #445a63;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+}
+
+.speaker{
+	margin-top:20px;
+	margin-bottom:0px;
+}
+
+#star1, #star2{
+	float:right;
+}
