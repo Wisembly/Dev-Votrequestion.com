@@ -22,10 +22,10 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 	<div class="speaker_description">
 		<h2><?php echo $speaker['real_name']; ?></h2>
 		<p class="p1">
-			<?php $speaker['position']; ?><br/>
-			<?php $speaker['company']; ?><br/>
-			<?php $speaker['bio']; ?>
-		</p><br/><br/>
+			<?php if ($speaker['position'] != '</p>') echo $speaker['position']; ?><br/>
+			<?php if ($speaker['company'] != '</p>') echo $speaker['company']; ?><br/>
+			<?php if ($speaker['bio'] != '</p>') echo $speaker['bio']; ?>
+		</p>
 			
 		<p class="p2">Rate him</p>
 		<div id="star0" class="starR"><input type="hidden" value=<?php echo $id; ?> /></div>
@@ -50,6 +50,8 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 
 $conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']) or die(mysql_error());
 
+$i = 1;
+
 while ($conference = mysql_fetch_row($conferences))
 {
 
@@ -62,15 +64,13 @@ while ($conference = mysql_fetch_row($conferences))
 
 	$other_speakers = mysql_query("SELECT S.id, real_name, url_avatar FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]." AND S.id != '".$id."'");
 	
-	$i = 0;
-	
 	while ($other_speaker = mysql_fetch_assoc($other_speakers))
 	{
 	
 ?>
 		<div class="speaker">
-			<img class="speaker_picture" src="<?php echo $other_speaker['url_avatar']; ?>">
-			<?php echo $other_speaker['real_name']; ?><div id="star<?php echo $i++; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>"><input type="hidden" value=<?php echo $other_speaker['id']; ?> /></div>
+			<img class="speaker_picture" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>">
+			<?php echo $other_speaker['real_name']; ?><div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>"><input type="hidden" value=<?php echo $other_speaker['id']; ?> /></div>
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
@@ -88,13 +88,19 @@ while ($conference = mysql_fetch_row($conferences))
 		</div><div class="clear"></div>
 		
 <?php
-		
+		$i++;
 	}
+	
+?>
+
+	</div>
+
+<?php
+	
 }
 
 ?>
 
-	</div>
 </div>
 
 <script type="text/javascript">
