@@ -10,8 +10,13 @@
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="stylesheet" media="all" href="css/styles.css" />
 	<link rel="stylesheet" media="all" href="css/jquery.autocomplete.css" />
-	<script type="text/javascript" src="js/scripts.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript">
+	if (typeof jQuery == 'undefined')
+	{
+	    document.write(unescape("%3Cscript src='js/jquery-1.4.2.min.js' type='text/javascript'%3E%3C/script%3E"));
+	}
+	</script>
 	<script type="text/javascript" src="js/raty/jquery.raty.min.js"></script>
 	<script type="text/javascript" src="js/autocomplete/jquery.autocomplete.min.js"></script>
 
