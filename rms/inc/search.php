@@ -22,10 +22,10 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 	<div class="speaker_description">
 		<h2><?php echo $speaker['real_name']; ?></h2>
 		<p class="p1">
-			<?php $speaker['position']; ?><br/>
-			<?php $speaker['company']; ?><br/>
-			<?php $speaker['bio']; ?>
-		</p><br/><br/>
+			<?php if ($speaker['position'] != '</p>') echo $speaker['position']; ?><br/>
+			<?php if ($speaker['company'] != '</p>') echo $speaker['company']; ?><br/>
+			<?php if ($speaker['bio'] != '</p>') echo $speaker['bio']; ?>
+		</p>
 			
 		<p class="p2">Rate him</p>
 		<div id="star0" class="starR"><input type="hidden" value=<?php echo $id; ?> /></div>
