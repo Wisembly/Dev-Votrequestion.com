@@ -32,7 +32,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
-					$('#star').raty({
+					$('#star0').raty({
 					  cancel:     false,
 					  half:       true,
 					  size:       24,
@@ -65,6 +65,8 @@ while ($conference = mysql_fetch_row($conferences))
 	while ($other_speaker = mysql_fetch_assoc($other_speakers))
 	{
 	
+	$i = 0;
+	
 ?>
 		<div class="speaker">
 			<img class="speaker_picture" src="<?php echo $other_speaker['url_avatar']; ?>">
@@ -72,7 +74,7 @@ while ($conference = mysql_fetch_row($conferences))
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
-							$('#star').raty({
+							$('#star<?php $i++; ?>').raty({
 							  cancel:     false,
 							  half:       true,
 							  size:       24,
