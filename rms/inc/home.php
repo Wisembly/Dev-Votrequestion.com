@@ -34,7 +34,7 @@ include 'header.php';
 			formatItem: function(data, i, n, value) {
 				var img = value.split("..")[1] ;
 				if(img==''){img = "img/profile.gif";}	
-				return "<img src='" + img + "'/> " + value.split(".")[0];
+				return "<img src='" + img + "'/> " + value.split("..")[0];
 			},
 			formatResult: function(data, value) {
 				return value.split(".")[0];
