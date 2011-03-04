@@ -28,7 +28,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		</p><br/><br/>
 			
 		<p class="p2">Rate him</p>
-		<div id="star"></div>
+		<div id="star0"></div>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
@@ -62,15 +62,15 @@ while ($conference = mysql_fetch_row($conferences))
 
 	$other_speakers = mysql_query("SELECT real_name, url_avatar FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]." AND S.id != '".$id."'");
 	
+	$i = 0;
+	
 	while ($other_speaker = mysql_fetch_assoc($other_speakers))
 	{
-	
-	$i = 0;
 	
 ?>
 		<div class="speaker">
 			<img class="speaker_picture" src="<?php echo $other_speaker['url_avatar']; ?>">
-			<?php echo $other_speaker['real_name']; ?><div id="star"></div>
+			<?php echo $other_speaker['real_name']; ?><div id="star<?php $i++; ?>" class="fivestars"></div>
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
