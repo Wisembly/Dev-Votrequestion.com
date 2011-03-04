@@ -41,9 +41,9 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 	<br/><h2>Rate other speakers in the same conferences...</h2>
 <?php
 
-$conferences = mysql_query("SELECT Conference.id, name FROM ".$table_prefix."Conference, ".$table_prefix."SpeakerInConf WHERE Conference.id = SpeakerInConf.id_conf AND id_speaker = ".$speaker['id']);
+$conferences = mysql_query("SELECT C.id FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']) or die(mysql_error());
 
-while ($conference = mysql_fetch_assoc($conferences))
+while ($conference = mysql_fetch_row($conferences))
 {
 
 ?>
@@ -53,7 +53,7 @@ while ($conference = mysql_fetch_assoc($conferences))
 
 <?php
 
-	$other_speakers = mysql_query("SELECT real_name, url_avatar FROM ".$table_prefix."Speaker, ".$table_prefix."SpeakerInConf WHERE Speaker.id = SpeakerInConf.id_speaker AND id_conf = ".$conference['id']." AND Speaker.id != '".$id."'");
+	$other_speakers = mysql_query("SELECT real_name, url_avatar FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]." AND S.id != '".$id."'");
 	
 	while ($other_speaker = mysql_fetch_assoc($other_speakers))
 	{
