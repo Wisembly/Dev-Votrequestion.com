@@ -1,7 +1,6 @@
 <?php
 
 require_once 'db/mysql.php' ;
-
 $db_host = '10.0.211.162';
 $db_user = 'rms';
 $db_pass = 'ball00nSXSW2011';
