@@ -18,6 +18,9 @@ include 'header.php';
 	</form>
 </div>
 
+<br/><h1>or see the best SXSW Speakers</h1>
+<a href="?page=ranking" class="button green">Speaker ranking</a>
+
 <script type="text/javascript">
 	$(function() {
 		$("#speaker_name").click(function() {
