@@ -28,7 +28,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		</p><br/><br/>
 			
 		<p class="p2">Rate him</p>
-		<div id="star0" value="<?php echo $id; ?>"></div>
+		<div id="star0" class="starR"><input type="hidden" value=<?php echo $id; ?> /></div>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
@@ -70,7 +70,7 @@ while ($conference = mysql_fetch_row($conferences))
 ?>
 		<div class="speaker">
 			<img class="speaker_picture" src="<?php echo $other_speaker['url_avatar']; ?>">
-			<?php echo $other_speaker['real_name']; ?><div id="star<?php echo $i++; ?>" class="fivestars" value="<?php echo $other_speaker['id']; ?>"></div>
+			<?php echo $other_speaker['real_name']; ?><div id="star<?php echo $i++; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>"><input type="hidden" value=<?php echo $other_speaker['id']; ?> /></div>
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
@@ -96,3 +96,14 @@ while ($conference = mysql_fetch_row($conferences))
 
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(function() {
+		$(".starR").click(function() {
+			$.post("ajax/rate.ajax.php", {
+				speaker_id: $(this).find("input:first-child").attr("value"),
+				score: $(this).find("input:last-child").attr("value")
+			});
+		});
+	});
+</script>
