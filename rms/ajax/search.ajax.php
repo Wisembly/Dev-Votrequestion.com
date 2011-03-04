@@ -1,6 +1,6 @@
 <?php
 
-require_once '../ajax/search.php';
+require_once '../inc/config.php';
 
 $search = $_GET['q'];
 
