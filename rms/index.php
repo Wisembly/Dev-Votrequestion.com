@@ -6,11 +6,11 @@ if (isset($_GET['page']))
 	
 	switch ($page)
 	{
-		case 'search' :
-			include('inc/search.php');
-			break;
 		case 'ranking' :
 			include 'inc/ranking.php';
+			break;
+		case 'search' :
+			include('inc/search.php');
 			break;
 		default :
 			include('inc/home.php');

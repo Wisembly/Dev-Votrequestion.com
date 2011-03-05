@@ -24,12 +24,14 @@ include 'header.php';
 <script type="text/javascript">
 	$(function() {
 		$("#speaker_name").click(function() {
-			if (this.value == "Enter a speaker name")
-				this.value = "";
-		}).blur(function() {
-			if (this.value == "")
-				this.value = "Enter a speaker name";
-		}).autocomplete("ajax/search.ajax.php",
+			if ($(this).attr("value") == "Enter a speaker name")
+				$(this).attr("value", "");
+		});
+		$("#speaker_name").blur(function() {
+			if ($(this).attr("value") == "")
+				$(this).attr("value", "Enter a speaker name");
+		});
+		$("#speaker_name").autocomplete("ajax/search.ajax.php",
 		{
 			formatItem: function(data, i, n, value) {
 				var img = value.split("..")[1] ;

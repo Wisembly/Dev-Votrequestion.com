@@ -3,9 +3,9 @@ session_start();
 
 require_once "twitteroauth/twitteroauth.php";
 
-define('CONSUMER_KEY','WvboHLGiSoe8KexuwH88A');
-define('CONSUMER_SECRET' ,'V7Z3rTcfsOPAA7aCtbt26FPkCVc0hdtIHIqK0mGTA');
-define("OAUTH_CALLBACK", "http://www.shoesnextdoor.com/tweet/callback.php");
+define('CONSUMER_KEY','tsemaKilSyufnq10OEYY6Q');
+define('CONSUMER_SECRET' ,'UqCHtvcFtII91MdBsSEy2g0MbDOtePPpnWWlzFGidRE');
+define('OAUTH_CALLBACK', 'http://www.ratemyspeaker.com/inc/twitter/callback.php');
 
 $isLoggedOnTwitter = false;
 
@@ -20,6 +20,7 @@ $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oau
 /* On récupère les informations sur le compte Twitter du visiteur */
 $twitterInfos = $connection->get('account/verify_credentials');
 $isLoggedOnTwitter = true;
+$status = $connection->post('statuses/update', array('status', 'test'));
 }
 
 elseif(isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] === $_REQUEST['oauth_token']) {
@@ -39,8 +40,7 @@ unset($_SESSION['oauth_token_secret']);
 if (200 == $connection->http_code) {
 $twitterInfos = $connection->get('account/verify_credentials');
 $isLoggedOnTwitter = true;
-$post = $connection->post('statuses/update', array('status' => 'coucou'));
-echo var_dump($post);
+$status = $connection->post('statuses/update', array('status', 'test'));
 }
 else {
 $isLoggedOnTwitter = false;
@@ -50,23 +50,4 @@ $isLoggedOnTwitter = false;
 else {
 $isLoggedOnTwitter = false;
 }
-
-function postToMyTwitter($message){
-
-require_once "twitteroauth/twitteroauth.php";
-
-echo $token = $access_token['oauth_token'];
-echo $token_secret = $access_token['oauth_token_secret'];
-echo $token;
-
-$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $token, $token_secret);
-$twitterInfos = $connection->get('account/verify_credentials'); 
-
-if (200 == $connection->http_code) {
-$parameters = array('status' => $message);
-$status = $connection->post('statuses/update', $parameters);
-}
-}
-
-postToMyTwitter('Bonjour tout le monde !');
 ?>

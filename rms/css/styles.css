@@ -137,10 +137,15 @@ img.logo{
 
 #balloon{
 	text-align:center;
-	margin-top:140px;
+	margin-top:50px;
 }
 
-#balloon .logoballoon{
+#home {
+	text-align:center;
+	margin-top:80px;
+}
+
+#balloon .logoballoon, #home .logoballoon {
 	vertical-align:middle;
 	width:80px;
 	border:none;
@@ -154,6 +159,14 @@ img.logo{
 .speaker_picture{
 	float:left;
 	margin-right:5px;
+	-webkit-border-radius:2px; 
+	-moz-border-radius:2px;
+	border-radius:2px;
+}
+
+.resizing_image {
+	width:50px;
+	height:50px;
 }
 
 .speaker_description{
@@ -161,6 +174,7 @@ img.logo{
 }
 
 #speaker_conferences{
+	background: rgba(0,0,0,0.1);
 	margin-top:20px;
 	padding: 5px 5px 5px 5px;
 	border: solid 1px #445a63;

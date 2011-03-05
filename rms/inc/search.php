@@ -11,6 +11,17 @@ if (isset($_GET['id']))
 else
 	header('Location: index.php');
 
+function resizing($img)
+{
+	if (empty($img))
+		return null;
+	else
+	{
+		$size = getImageSize($img);
+		return ($size[0] > 50) ? 'resizing_image' : null;
+	}
+}
+
 include 'header.php';
 
 $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker WHERE id = ".$id));
@@ -18,7 +29,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 ?>
 
 <div id="speaker_profile">
-	<img class="speaker_picture" src="<?php echo $speaker['url_avatar']; ?>">
+	<img class="speaker_picture" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : 'img/profile.gif'; ?>">
 	<div class="speaker_description">
 		<h2><?php echo $speaker['real_name']; ?></h2>
 		<p class="p1">
@@ -29,6 +40,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 			
 		<p class="p2">Rate him</p>
 		<div id="star0" class="starR"><input type="hidden" value=<?php echo $id; ?> /></div>
+		<a href="inc/twitter/redirect.php">Tweet !</a>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
@@ -58,7 +70,7 @@ while ($conference = mysql_fetch_row($conferences))
 ?>
 
 	<div id="speaker_conferences">
-		<p class="titreconf p2"><?php echo $conference[1]; ?></p><br/>
+		<p class="titreconf p2"><?php echo $conference[1]; ?></p>
 
 <?php
 
@@ -69,7 +81,7 @@ while ($conference = mysql_fetch_row($conferences))
 	
 ?>
 		<div class="speaker">
-			<img class="speaker_picture" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>">
+			<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>">
 			<?php echo $other_speaker['real_name']; ?><div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>"><input type="hidden" value=<?php echo $other_speaker['id']; ?> /></div>
 				<div class="source">
 					<script type="text/javascript">
@@ -113,3 +125,9 @@ while ($conference = mysql_fetch_row($conferences))
 		});
 	});
 </script>
+
+<?php
+
+include 'footer.php';
+
+?>
