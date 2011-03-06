@@ -47,7 +47,7 @@ while ($speaker = mysql_fetch_assoc($speakers))
 					$(function() {
 						$('#star<?php echo $i; ?>').raty({
 							readOnly:	true,
-							start:		<?php echo ($speaker['nb_stars']/$speaker['nb_ratings']); ?>,
+							start:		<?php echo ($speaker['nb_ratings'] > 0) ? ($speaker['nb_stars']/$speaker['nb_ratings']) : 0; ?>,
 							half:       true,
 							size:       24,
 							starHalf:   'star-half-big.png',
