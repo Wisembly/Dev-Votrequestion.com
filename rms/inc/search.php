@@ -39,18 +39,19 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		</p>
 			
 		<p class="p2">Rate him</p>
-		<div id="star0" class="starR"><input type="hidden" value=<?php echo $id; ?> /></div>
+		<div id="star0" class="starR">
+			<input type="hidden" value=<?php echo $id; ?> />
+		</div>
 		<a href="inc/twitter/redirect.php">Tweet !</a>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
 					$('#star0').raty({
-					  cancel:     false,
-					  half:       false,
-					  size:       24,
-					  starHalf:   'star-half-big.png',
-					  starOff:    'star-off-big.png',
-					  starOn:     'star-on-big.png'
+						half:       false,
+						size:       24,
+						starHalf:   'star-half-big.png',
+						starOff:    'star-off-big.png',
+						starOn:     'star-on-big.png'
 					});
 				});
 			</script>
@@ -78,33 +79,37 @@ while ($conference = mysql_fetch_row($conferences))
 	
 	while ($other_speaker = mysql_fetch_assoc($other_speakers))
 	{
-	
+		if (empty($other_speaker))
+			echo '<div class="speaker">No other speaker</div>';
+		else
+		{
 ?>
 		<div class="speaker">
-			<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>">
-			<?php echo $other_speaker['real_name']; ?><div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>"><input type="hidden" value=<?php echo $other_speaker['id']; ?> /></div>
-				<div class="source">
-					<script type="text/javascript">
-						$(function() {
-							$('#star<?php echo $i; ?>').raty({
-							  cancel:     false,
-							  half:       false,
-							  size:       24,
-							  starHalf:   'star-half-big.png',
-							  starOff:    'star-off-big.png',
-							  starOn:     'star-on-big.png'
-							});
+			<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>" />
+			<?php echo $other_speaker['real_name']; ?>
+			<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>">
+				<input type="hidden" value=<?php echo $other_speaker['id']; ?> />
+			</div>
+			<div class="source">
+				<script type="text/javascript">
+					$(function() {
+						$('#star<?php echo $i; ?>').raty({
+							half:       false,
+							size:       24,
+							starHalf:   'star-half-big.png',
+							starOff:    'star-off-big.png',
+							starOn:     'star-on-big.png'
 						});
-					</script>
-				</div>
-		</div><div class="clear"></div>
+					});
+				</script>
+			</div>
+		</div>
+		<div class="clear"></div>
 		
 <?php
 		$i++;
+		}
 	}
-	
-	if (empty($other_speaker))
-		echo '<div class="speaker">No other speaker</div>';
 ?>
 
 	</div>
@@ -116,7 +121,7 @@ while ($conference = mysql_fetch_row($conferences))
 ?>
 
 </div>
-
+	
 <script type="text/javascript">
 	$(function() {
 		$(".starR").click(function() {

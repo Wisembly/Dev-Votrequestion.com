@@ -12,6 +12,9 @@ if (isset($_GET['page']))
 		case 'search' :
 			include('inc/search.php');
 			break;
+		case 'user' :
+			include('inc/user.php');
+			break;	
 		default :
 			include('inc/home.php');
 			break;

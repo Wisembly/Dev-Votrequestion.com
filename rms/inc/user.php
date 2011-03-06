@@ -1,4 +1,12 @@
-<?php include("includes/header.php"); ?>
+<?php
+
+$title = 'RateMySpeaker';
+$description = null;
+$keywords = null;
+
+include 'header.php';
+
+?>
 
 <div id="user_profile">
 	<img class="user_picture" src="http://a3.twimg.com/profile_images/1169535523/Incubateur_HEC_2010_001_17.jpg">
@@ -7,11 +15,11 @@
 		<p class="p1">Web Entrepreneur, co-founder at @Balloon & Photographer</p1><div class="clear"></div><br/>
 			
 		<p class="p2">Average Note</p2>
-			<div id="star"></div>
+			<div id="star0"></div>
 			<div class="source">
 				<script type="text/javascript">
 					$(function() {
-						$('#star').raty({
+						$('#star0').raty({
 						  cancel:     false,
 						  half:       true,
 						  size:       24,
@@ -34,7 +42,7 @@
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
-							$('#star').raty({
+							$('#star1').raty({
 							  cancel:     false,
 							  half:       true,
 							  size:       24,
@@ -53,7 +61,7 @@
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
-							$('#star').raty({
+							$('#star2').raty({
 							  cancel:     false,
 							  half:       true,
 							  size:       24,
@@ -68,4 +76,8 @@
 	
 	</div>
 </div>
-<?php include("includes/footer.php"); ?>	
+<?php
+
+include 'footer.php';
+
+?>
