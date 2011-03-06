@@ -42,7 +42,11 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		<div id="star0" class="starR">
 			<input type="hidden" value=<?php echo $id; ?> />
 		</div>
-		<a href="http://twitter.com/share?text=Rate%20<?php echo $speaker['real_name'];?>%20on%20RateMySpeaker&amp;url=http%3A%2F%2Fwww.ratemyspeaker.com%2Findex.php%3Fpage%3Dsearch%26id%3D<?php echo $id; ?>&amp;via=ratemyspeaker%20">Tweet !</a>
+		<a href="http://twitter.com/share?text=Rate%20<?php echo $speaker['real_name'];?>%20on%20RateMySpeaker&amp;url=http%3A%2F%2Fwww.ratemyspeaker.com%2Findex.php%3Fpage%3Dsearch%26id%3D<?php echo $id; ?>&amp;via=ratemyspeaker%20">Tweet ! method 1</a><br/>
+		
+		<?php $tinylink = file_get_contents('http://tinyurl.com/api-create.php?url=http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']); ?>
+		
+		<a href="inc/twitter/redirect.php?text=Rate <?php echo $speaker['real_name'];?> on RateMySpeaker <?php echo $tinylink; ?> via @ratemyspeaker&id=<?php echo $id; ?>">Tweet ! method 2</a>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
@@ -79,10 +83,6 @@ while ($conference = mysql_fetch_row($conferences))
 	
 	while ($other_speaker = mysql_fetch_assoc($other_speakers))
 	{
-		if (empty($other_speaker))
-			echo '<div class="speaker">No other speaker</div>';
-		else
-		{
 ?>
 		<div class="speaker">
 			<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>" />
@@ -108,10 +108,12 @@ while ($conference = mysql_fetch_row($conferences))
 		
 <?php
 		$i++;
-		}
 	}
-?>
 
+	if (empty($other_speaker))
+		echo '<div class="speaker">No other speaker</div>';
+
+?>
 	</div>
 
 <?php
@@ -126,7 +128,8 @@ while ($conference = mysql_fetch_row($conferences))
 	$(function() {
 		$(".starR").click(function() {
 			$.post("ajax/rate.ajax.php", {
-				speaker_id: $(this).find("input:first-child").attr("value"),
+				id_user: <?php echo $_SESSION['id_twitter_user']; ?>,
+				id_speaker: $(this).find("input:first-child").attr("value"),
 				score: $(this).find("input:last-child").attr("value")
 			});
 		});

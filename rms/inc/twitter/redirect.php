@@ -18,6 +18,8 @@ $_SESSION['oauth_token_secret'] = $request_token['oauth_token_secret'];
 /* If last connection failed don't display authorization link. */
 switch ($connection->http_code) {
   case 200:
+	$_SESSION['twitter_msg'] = $_GET['text'];
+	$_SESSION['speaker_id'] = $_GET['id'];
     /* Build authorize URL and redirect user to Twitter. */
     $url = $connection->getAuthorizeURL($token);
     header('Location: ' . $url); 

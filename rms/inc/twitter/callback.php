@@ -33,8 +33,34 @@ unset($_SESSION['oauth_token_secret']);
 if (200 == $connection->http_code) {
   /* The user has been verified and the access tokens can be saved for future use */
   $_SESSION['status'] = 'verified';
-  $connection->post('statuses/update', array('status' => 'test2'));
-  header('Location: ../../index.php');
+  
+	/**
+	/ BALLOON
+	*/
+  
+	$post = $connection->post('statuses/update', array('status' => $_SESSION['twitter_msg']));
+	$user = $post->user;
+	
+	require_once '../config.php';
+  
+	mysql_query("INSERT INTO ".$table_prefix."User SET
+		id_twitter = ".$user->id_str.",
+		pseudo = '".$user->screen_name."',
+		name = '".$user->name."',
+		location = '".$user->location."'
+		bio = '".$user->description."',
+		url_avatar = '".$user->profile_image_url."',
+		site = '".$user->url."'"
+	);
+  
+	$_SESSION['id_twitter_user'] = $user->id_str;
+  
+	header('Location: ../../index.php?page=search&id='.$_SESSION['speaker_id']);
+  
+	/**
+	/ FIN BALLOON
+	*/
+  
 } else {
   /* Save HTTP status for error dialog on connnect page.*/
   header('Location: ./clearsessions.php');
