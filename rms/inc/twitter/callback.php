@@ -1,53 +1,41 @@
 <?php
+/**
+ * @file
+ * Take the user when they return from Twitter. Get access tokens.
+ * Verify credentials and redirect to based on response from Twitter.
+ */
+
+/* Start session and load lib */
 session_start();
+require_once('twitteroauth/twitteroauth.php');
+require_once('config.php');
 
-require_once "twitteroauth/twitteroauth.php";
-
-define('CONSUMER_KEY','tsemaKilSyufnq10OEYY6Q');
-define('CONSUMER_SECRET' ,'UqCHtvcFtII91MdBsSEy2g0MbDOtePPpnWWlzFGidRE');
-define('OAUTH_CALLBACK', 'http://www.ratemyspeaker.com/inc/twitter/callback.php');
-
-$isLoggedOnTwitter = false;
-
-if (!empty($_SESSION['access_token']) && !empty($_SESSION['access_token']['oauth_token']) && !empty($_SESSION['access_token']['oauth_token_secret'])) {
-
-// On récupère les tokens, nous sommes identifiés.
-$access_token = $_SESSION['access_token'];
-
-/* On créé la connexion avec Twitter en fournissant les tokens d'accès en paramètres.*/
-$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
-
-/* On récupère les informations sur le compte Twitter du visiteur */
-$twitterInfos = $connection->get('account/verify_credentials');
-$isLoggedOnTwitter = true;
-$status = $connection->post('statuses/update', array('status', 'test'));
+/* If the oauth_token is old redirect to the connect page. */
+if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
+  $_SESSION['oauth_status'] = 'oldtoken';
+  header('Location: ./clearsessions.php');
 }
 
-elseif(isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] === $_REQUEST['oauth_token']) {
-
-// Les tokens d'accès ne sont pas encore stockés, il faut vérifier l'authentification
-/* On créé la connexion avec Twitter en fournissant les tokens d'accès en paramètres.*/
+/* Create TwitteroAuth object with app key/secret and token key/secret from default phase */
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 
-/* On vérifie les tokens et récupère le token d'accès */
+/* Request access tokens from twitter */
 $access_token = $connection->getAccessToken($_REQUEST['oauth_verifier']);
 
-/* On stocke en session les tokens d'accès et on supprime ceux qui ne sont plus utiles. */
+/* Save the access tokens. Normally these would be saved in a database for future use. */
 $_SESSION['access_token'] = $access_token;
+
+/* Remove no longer needed request tokens */
 unset($_SESSION['oauth_token']);
 unset($_SESSION['oauth_token_secret']);
 
+/* If HTTP response is 200 continue otherwise send to connect page to retry */
 if (200 == $connection->http_code) {
-$twitterInfos = $connection->get('account/verify_credentials');
-$isLoggedOnTwitter = true;
-$status = $connection->post('statuses/update', array('status', 'test'));
+  /* The user has been verified and the access tokens can be saved for future use */
+  $_SESSION['status'] = 'verified';
+  $connection->post('statuses/update', array('status' => 'test2'));
+  header('Location: ../../index.php');
+} else {
+  /* Save HTTP status for error dialog on connnect page.*/
+  header('Location: ./clearsessions.php');
 }
-else {
-$isLoggedOnTwitter = false;
-}
-
-}
-else {
-$isLoggedOnTwitter = false;
-}
-?>

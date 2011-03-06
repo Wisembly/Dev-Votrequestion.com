@@ -42,7 +42,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		<div id="star0" class="starR">
 			<input type="hidden" value=<?php echo $id; ?> />
 		</div>
-		<a href="inc/twitter/redirect.php">Tweet !</a>
+		<a href="http://twitter.com/share?text=Rate%20<?php echo $speaker['real_name'];?>%20on%20RateMySpeaker&amp;url=http%3A%2F%2Fwww.ratemyspeaker.com%2Findex.php%3Fpage%3Dsearch%26id%3D<?php echo $id; ?>&amp;via=ratemyspeaker%20">Tweet !</a>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
