@@ -60,7 +60,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 	<br/><h2>Rate other speakers in the same conferences...</h2>
 <?php
 
-$conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']) or die(mysql_error());
+$conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']);
 
 $i = 1;
 
@@ -103,6 +103,8 @@ while ($conference = mysql_fetch_row($conferences))
 		$i++;
 	}
 	
+	if (empty($other_speaker))
+		echo '<div class="speaker">No other speaker</div>';
 ?>
 
 	</div>
