@@ -6,6 +6,11 @@ $title = 'RateMySpeaker';
 $description = null;
 $keywords = null;
 
+if (isset($_GET['pseudo']) && !empty($_GET['pseudo']))
+	$pseudo = $_GET['pseudo'];
+else
+	header('Location: index.php');
+
 function resizing($img)
 {
 	if (empty($img))
@@ -17,9 +22,14 @@ function resizing($img)
 	}
 }
 
-include 'header.php';
+$user = mysql_query("SELECT * FROM ".$table_prefix."User WHERE pseudo = '".$pseudo."'");
 
-$user = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."User WHERE pseudo = '".$_GET['pseudo']."'"));
+if (mysql_num_rows($user) == 0)
+	header('Location: index.php');
+	
+$user = mysql_fetch_assoc($user);
+
+include 'header.php';
 
 if ($user['current_score'] == 5)
 	$message = 'My life missed U #SXSW’s speakers';
