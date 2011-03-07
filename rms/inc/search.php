@@ -39,18 +39,22 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		</p>
 			
 		<p class="p2">Rate him</p>
-		<div id="star0" class="starR"><input type="hidden" value=<?php echo $id; ?> /></div>
-		<a href="inc/twitter/redirect.php">Tweet !</a>
+		<div id="star0" class="starR">
+			<input type="hidden" value=<?php echo $id; ?> />
+		</div>
+		
+		<?php $tinylink = file_get_contents('http://tinyurl.com/api-create.php?url=http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']); ?>
+		
+		<a href="inc/twitter/redirect.php?text=Rate <?php echo $speaker['real_name'];?> on RateMySpeaker <?php echo $tinylink; ?> via @ratemyspeaker&id=<?php echo $id; ?>">Tweet this speaker !</a>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
 					$('#star0').raty({
-					  cancel:     false,
-					  half:       false,
-					  size:       24,
-					  starHalf:   'star-half-big.png',
-					  starOff:    'star-off-big.png',
-					  starOn:     'star-on-big.png'
+						half:       false,
+						size:       24,
+						starHalf:   'star-half-big.png',
+						starOff:    'star-off-big.png',
+						starOn:     'star-on-big.png'
 					});
 				});
 			</script>
@@ -60,7 +64,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 	<br/><h2>Rate other speakers in the same conferences...</h2>
 <?php
 
-$conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']) or die(mysql_error());
+$conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']);
 
 $i = 1;
 
@@ -78,33 +82,37 @@ while ($conference = mysql_fetch_row($conferences))
 	
 	while ($other_speaker = mysql_fetch_assoc($other_speakers))
 	{
-	
 ?>
 		<div class="speaker">
-			<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>">
-			<?php echo $other_speaker['real_name']; ?><div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>"><input type="hidden" value=<?php echo $other_speaker['id']; ?> /></div>
-				<div class="source">
-					<script type="text/javascript">
-						$(function() {
-							$('#star<?php echo $i; ?>').raty({
-							  cancel:     false,
-							  half:       false,
-							  size:       24,
-							  starHalf:   'star-half-big.png',
-							  starOff:    'star-off-big.png',
-							  starOn:     'star-on-big.png'
-							});
+			<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>" />
+			<?php echo $other_speaker['real_name']; ?>
+			<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>">
+				<input type="hidden" value=<?php echo $other_speaker['id']; ?> />
+			</div>
+			<div class="source">
+				<script type="text/javascript">
+					$(function() {
+						$('#star<?php echo $i; ?>').raty({
+							half:       false,
+							size:       24,
+							starHalf:   'star-half-big.png',
+							starOff:    'star-off-big.png',
+							starOn:     'star-on-big.png'
 						});
-					</script>
-				</div>
-		</div><div class="clear"></div>
+					});
+				</script>
+			</div>
+		</div>
+		<div class="clear"></div>
 		
 <?php
 		$i++;
 	}
-	
-?>
 
+	if (empty($other_speaker))
+		echo '<div class="speaker">No other speaker</div>';
+
+?>
 	</div>
 
 <?php
@@ -114,12 +122,13 @@ while ($conference = mysql_fetch_row($conferences))
 ?>
 
 </div>
-
+	
 <script type="text/javascript">
 	$(function() {
 		$(".starR").click(function() {
 			$.post("ajax/rate.ajax.php", {
-				speaker_id: $(this).find("input:first-child").attr("value"),
+				id_user: <?php echo $_SESSION['id_user']; ?>,
+				id_speaker: $(this).find("input:first-child").attr("value"),
 				score: $(this).find("input:last-child").attr("value")
 			});
 		});

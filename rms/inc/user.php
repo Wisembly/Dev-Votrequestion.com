@@ -1,71 +1,86 @@
-<?php include("includes/header.php"); ?>
+<?php
+
+require_once 'config.php';
+
+$title = 'RateMySpeaker';
+$description = null;
+$keywords = null;
+
+include 'header.php';
+
+$user = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."User WHERE pseudo = '".$_GET['pseudo']."'"));
+
+?>
 
 <div id="user_profile">
-	<img class="user_picture" src="http://a3.twimg.com/profile_images/1169535523/Incubateur_HEC_2010_001_17.jpg">
+	<img class="user_picture" src="<?php echo $user['url_avatar']; ?>">
 	<div class="speaker_description">
-		<h2>Romain David</h2>
-		<p class="p1">Web Entrepreneur, co-founder at @Balloon & Photographer</p1><div class="clear"></div><br/>
+		<h2><?php echo $user['pseudo']; ?></h2>
+		<p class="p1"><?php echo $user['bio']; ?></p><div class="clear"></div><br/>
 			
-		<p class="p2">Average Note</p2>
-			<div id="star"></div>
-			<div class="source">
-				<script type="text/javascript">
-					$(function() {
-						$('#star').raty({
-						  cancel:     false,
-						  half:       true,
-						  size:       24,
-						  starHalf:   'star-half-big.png',
-						  starOff:    'star-off-big.png',
-						  starOn:     'star-on-big.png'
-						});
+		<p class="p2">Average Note</p>
+		<div id="star0"></div>
+		<div class="source">
+			<script type="text/javascript">
+				$(function() {
+					$('#star0').raty({
+					  cancel:     false,
+					  half:       true,
+					  size:       24,
+					  starHalf:   'star-half-big.png',
+					  starOff:    'star-off-big.png',
+					  starOn:     'star-on-big.png'
 					});
-				</script>
-			</div>
+				});
+			</script>
+		</div>
 	</div>
 	
 	<br/><h2>His ratings</h2>
 	
-	<div id="user_historic">
-		
-		<div class="speaker">
-			<img class="speaker_picture" src="http://static.sched.org/a/155594/avatar.jpg.50x50px.jpg">
-			Romain David<div id="star1"></div>
-				<div class="source">
-					<script type="text/javascript">
-						$(function() {
-							$('#star').raty({
-							  cancel:     false,
-							  half:       true,
-							  size:       24,
-							  starHalf:   'star-half-big.png',
-							  starOff:    'star-off-big.png',
-							  starOn:     'star-on-big.png'
-							});
-						});
-					</script>
-				</div>
-		</div><div class="clear"></div>
-		
-		<div class="speaker">
-			<img class="speaker_picture" src="http://static.sched.org/a/155594/avatar.jpg.50x50px.jpg">
-			Romain David<div id="star2"></div>
-				<div class="source">
-					<script type="text/javascript">
-						$(function() {
-							$('#star').raty({
-							  cancel:     false,
-							  half:       true,
-							  size:       24,
-							  starHalf:   'star-half-big.png',
-							  starOff:    'star-off-big.png',
-							  starOn:     'star-on-big.png'
-							});
-						});
-					</script>
-				</div>
-		</div><div class="clear"></div>
+	<?php
 	
+	$rates = mysql_query("SELECT real_name, url_avatar, rate FROM ".$table_prefix."Speaker AS S, ".$table_prefix."Rate AS R WHERE S.id = R.id_speaker AND R.id_user = ".$user['id']);
+	
+	$i = 0;
+	
+	if (mysql_num_rows($rates) > 0)
+	{
+		while ($rate = mysql_fetch_arrow($rates))
+		{
+	
+	?>
+	
+	<div id="user_historic">
+		<div class="speaker">
+			<img class="speaker_picture" src="<?php echo $rate['url_avatar']; ?>">
+			<?php echo $rate['real_name']; ?><div id="star<?php echo $i; ?>"></div>
+			<div class="source">
+				<script type="text/javascript">
+					$(function() {
+						$('#star<?php echo $i; ?>').raty({
+							readOnly:	true,
+							start:		<?php echo $rate['rate']; ?>,
+							half:       true,
+							size:       24,
+							starHalf:   'star-half-big.png',
+							starOff:    'star-off-big.png',
+							starOn:     'star-on-big.png'
+						});
+					});
+				</script>
+			</div>
+		</div>
+		<div class="clear"></div>
 	</div>
 </div>
-<?php include("includes/footer.php"); ?>	
+
+<?php
+
+		$i++;
+		}
+	}
+
+include 'footer.php';
+
+?>
