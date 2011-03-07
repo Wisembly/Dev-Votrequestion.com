@@ -2,7 +2,7 @@
 
 require_once 'config.php';
 
-$title = 'RateMySpeaker';
+$title = 'RateMySpeaker - Your profile';
 $description = null;
 $keywords = null;
 
@@ -29,6 +29,7 @@ if (mysql_num_rows($user) == 0)
 	
 $user = mysql_fetch_assoc($user);
 
+$dir = '../' ;
 include 'header.php';
 
 if ($user['current_score'] == 5)
@@ -72,6 +73,7 @@ else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
 						start:		<?php echo $user['current_score']; ?>,
 						half:       true,
 						size:       24,
+						path:		'<?php echo $dir; ?>img/',
 						starHalf:   'star-half-big.png',
 						starOff:    'star-off-big.png',
 						starOn:     'star-on-big.png'
@@ -110,6 +112,7 @@ else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
 									start:		<?php echo $rate['rate']; ?>,
 									half:       true,
 									size:       24,
+									path:		'<?php echo $dir; ?>img/',
 									starHalf:   'star-half-big.png',
 									starOff:    'star-off-big.png',
 									starOn:     'star-on-big.png'

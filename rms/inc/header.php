@@ -58,7 +58,7 @@
 	}
 	else
 	{
-		echo '<div id="twitter_button_connect" ><img width="14px" height="14px" src="'.$_SESSION['url_avatar_user'].'" /> @'.$_SESSION['pseudo_twitter_user'].' : <a href="'.$dir.'index.php?page=user&pseudo='.$_SESSION['pseudo_twitter_user'].'">Your profile</a></div>';
+		echo '<div id="twitter_button_connect" ><img width="14px" height="14px" src="'.$_SESSION['url_avatar_user'].'" /> @'.$_SESSION['pseudo_twitter_user'].' : <a href="'.$dir.'u/'.$_SESSION['pseudo_twitter_user'].'">Your profile</a></div>';
 	}
 ?>
 		
