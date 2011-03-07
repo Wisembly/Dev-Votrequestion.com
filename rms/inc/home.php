@@ -36,7 +36,7 @@ include 'header.php';
 		{
 			formatItem: function(data, i, n, value) {
 				var img = value.split("..")[1] ;
-				if (typeof(img) == "undefined"){img = "img/empty.png";}
+				if (img == 'none'){img = "img/empty.png";}
 				else if(img==''){img = "img/profile.gif";}
 				return "<img src='" + img + "'/> " + value.split("..")[0];
 			},

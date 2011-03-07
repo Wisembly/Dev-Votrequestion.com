@@ -12,7 +12,7 @@ while ($speaker = mysql_fetch_row($speakers))
 }
 
 if (!$results)
-	echo 'none..No results|none';
+	echo 'No results..none|none';
 
 // recherche maison selon firstname && lastname
 // http://stackoverflow.com/questions/4770568/sql-condition-a-b-and-c-like-d-or-a-like-b-and-c-d
