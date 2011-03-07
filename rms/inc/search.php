@@ -9,7 +9,10 @@ $keywords = null;
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 	$id = $_GET['id'];
 else
+{
 	header('Location: index.php');
+	die();
+}
 
 function resizing($img)
 {
