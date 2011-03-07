@@ -1,5 +1,9 @@
-<?php session_start() ?>
-
+<?php 
+	session_start() ;
+	
+	require_once('mobile_device_detect/mobile_device_detect.php');
+	$mobile = mobile_device_detect(true,false,true,true,true,true,true,false,false);
+?>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -33,10 +37,16 @@
 	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	  })();
-
 	</script>
+	
+		<?php 
+			// gestion du hack css mobile
+			echo ($mobile == true) ? '<link rel="stylesheet" media="all" href="css/mobile.css" /><meta content="True" name="HandheldFriendly" /><meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport" />' : null;
+		?>
 </head>
-<body>
+
+<?php echo '<body'.($mobile ? ' onload="window.scrollTo(0, 1)"' : null).'>' ; ?>
+
 	<div class="content">
 		<a href="?index.php"><img class="logo" src="img/logo/logo1.png"></a>
 		<?php
