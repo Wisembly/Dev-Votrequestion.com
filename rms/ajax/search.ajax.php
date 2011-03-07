@@ -18,14 +18,14 @@ function search($what)
 	if ( sizeof($test) == 1 || $test[1] == '')
 	{
 		if( sizeof($test) > 1 )	$what = $test[0];
-		$sql = "SELECT id,real_name,url_avatar FROM ".$table_prefix."Speaker WHERE (lower(firstname) LIKE  '$what%' OR lower(lastname) LIKE  '$what%') ORDER BY real_name ASC LIMIT 5";
+		$sql = "SELECT id,real_name,url_avatar FROM ".$table_prefix."Speaker WHERE (lower(firstname) LIKE  '$what%' OR lower(lastname) LIKE  '$what%') ORDER BY real_name ASC LIMIT 10";
 	}
 	else
 	{
 		$first = $test[0];
 		$second = $test[1];
 
-		$sql = "SELECT id,real_name,url_avatar FROM ".$table_prefix."Speaker WHERE ((lower(firstname) = '$first' AND lower(lastname) LIKE '$second%') OR (lower(lastname) = '$first' AND lower(firstname) LIKE '$second%')) ORDER BY real_name ASC LIMIT 5";
+		$sql = "SELECT id,real_name,url_avatar FROM ".$table_prefix."Speaker WHERE ((lower(firstname) = '$first' AND lower(lastname) LIKE '$second%') OR (lower(lastname) = '$first' AND lower(firstname) LIKE '$second%')) ORDER BY real_name ASC LIMIT 10";
 	}
 		
 	return $sql;

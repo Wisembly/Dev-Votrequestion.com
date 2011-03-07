@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -37,3 +39,11 @@
 <body>
 	<div class="content">
 		<a href="?index.php"><img class="logo" src="img/logo/logo1.png"></a>
+		<?php
+		
+		if (!isset($_SESSION['id_user']))
+			echo '<a href="inc/twitter/redirect.php">Connect to Twitter to rate your speaker</a>';
+		else
+			echo '<a href="?page=user&pseudo='.$_SESSION['pseudo_twitter_user'].'">Your profile</a>';
+		
+		?>

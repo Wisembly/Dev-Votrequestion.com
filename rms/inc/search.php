@@ -42,11 +42,10 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 		<div id="star0" class="starR">
 			<input type="hidden" value=<?php echo $id; ?> />
 		</div>
-		<a href="http://twitter.com/share?text=Rate%20<?php echo $speaker['real_name'];?>%20on%20RateMySpeaker&amp;url=http%3A%2F%2Fwww.ratemyspeaker.com%2Findex.php%3Fpage%3Dsearch%26id%3D<?php echo $id; ?>&amp;via=ratemyspeaker%20">Tweet ! method 1</a><br/>
 		
 		<?php $tinylink = file_get_contents('http://tinyurl.com/api-create.php?url=http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']); ?>
 		
-		<a href="inc/twitter/redirect.php?text=Rate <?php echo $speaker['real_name'];?> on RateMySpeaker <?php echo $tinylink; ?> via @ratemyspeaker&id=<?php echo $id; ?>">Tweet ! method 2</a>
+		<a href="inc/twitter/redirect.php?text=Rate <?php echo $speaker['real_name'];?> on RateMySpeaker <?php echo $tinylink; ?> via @ratemyspeaker&id=<?php echo $id; ?>">Tweet this speaker !</a>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
@@ -128,7 +127,7 @@ while ($conference = mysql_fetch_row($conferences))
 	$(function() {
 		$(".starR").click(function() {
 			$.post("ajax/rate.ajax.php", {
-				id_user: <?php echo $_SESSION['id_twitter_user']; ?>,
+				id_user: <?php echo $_SESSION['id_user']; ?>,
 				id_speaker: $(this).find("input:first-child").attr("value"),
 				score: $(this).find("input:last-child").attr("value")
 			});

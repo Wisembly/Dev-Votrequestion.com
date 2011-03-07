@@ -37,25 +37,32 @@ if (200 == $connection->http_code) {
 	/**
 	/ BALLOON
 	*/
-  
-	$post = $connection->post('statuses/update', array('status' => $_SESSION['twitter_msg']));
-	$user = $post->user;
 	
-	require_once '../config.php';
-  
-	mysql_query("INSERT INTO ".$table_prefix."User SET
-		id_twitter = ".$user->id_str.",
-		pseudo = '".$user->screen_name."',
-		name = '".$user->name."',
-		location = '".$user->location."'
-		bio = '".$user->description."',
-		url_avatar = '".$user->profile_image_url."',
-		site = '".$user->url."'"
-	);
-  
-	$_SESSION['id_twitter_user'] = $user->id_str;
-  
-	header('Location: ../../index.php?page=search&id='.$_SESSION['speaker_id']);
+	if (isset($_SESSION['twitter_msg']) && isset($_SESSION['speaker_id']))
+	{
+		$post = $connection->post('statuses/update', array('status' => $_SESSION['twitter_msg']));
+		
+		header('Location: ../../index.php?page=search&id='.$_SESSION['speaker_id']);
+	}
+	else
+	{
+		require_once '../config.php';
+		
+		$twitterInfos = $connection->get('account/verify_credentials');
+		$user = $twitterInfos->status->entities->user_mentions[0];
+		
+		mysql_query("INSERT INTO ".$table_prefix."User SET 
+			id_twitter = ".$user->id.",
+			pseudo = '".$user->screen_name."',
+			bio = '".$twitterInfos->description."',
+			url_avatar = '".$twitterInfos->profile_image_url."'"
+		);
+		
+		$_SESSION['id_user'] = mysql_insert_id();
+		$_SESSION['pseudo_twitter_user'] = $user->screen_name;
+	  
+		header('Location: ../../index.php');
+	}
   
 	/**
 	/ FIN BALLOON
