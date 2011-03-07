@@ -10,6 +10,7 @@ include 'header.php';
 
 <div id="description">
 	<h1>Rate SXSW speakers and share your opinion on Twitter</h1>
+
 </div>	
 
 <div id="search">
