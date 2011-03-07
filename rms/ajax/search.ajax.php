@@ -38,5 +38,5 @@ function search($what)
 	return $sql;
 }
 
-	
+mysql_close();	
 ?>

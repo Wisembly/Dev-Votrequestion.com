@@ -18,5 +18,5 @@ if ($count == 0) {
 
 	mysql_query("UPDATE ".$table_prefix."Speaker SET nb_stars = nb_stars + ".$_POST['score'].", nb_ratings = nb_ratings + 1, current_score = ((nb_stars + ".$_POST['score'].")/(nb_ratings + 1)) WHERE id = ".$_POST['id_speaker']);
 }
-	
+mysql_close();	
 ?>
