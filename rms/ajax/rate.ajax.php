@@ -2,6 +2,13 @@
 
 require_once '../inc/config.php';
 
+if (!isset($_POST['id_user']) || empty($_POST['id_user']) || !is_numeric($_POST['id_user']))
+	die('Error #1');
+else if (!isset($_POST['id_speaker']) || empty($_POST['id_speaker']) || !is_numeric($_POST['id_speaker']))
+	die('Error #2');
+else if (!isset($_POST['score']) || empty($_POST['score']) || !is_numeric($_POST['score']))
+	die('Error #3');
+
 $count = mysql_result(mysql_query("SELECT COUNT(id) FROM ".$table_prefix."Rate WHERE id_user = ".$_POST['id_user']." AND id_speaker = ".$_POST['id_speaker']), 0);
 
 if ($count == 0) {
