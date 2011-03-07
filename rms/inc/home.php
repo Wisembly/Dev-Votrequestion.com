@@ -46,7 +46,8 @@ include 'header.php';
 		});
 		$("#speaker_name").result(function(event, data) {
 			if (data && data != 'none..No results|none') {
-				window.location = "?page=search&name=" + data[0].replace(/[^a-zA-Z0-9]/g,'') + "&id=" + data[1];
+				var url = data[0].split("http")[0];
+				window.location = "s/" + url.replace(/[^a-zA-Z0-9]/g,'')+ "/" + data[1];
 			}
 		});
 	});	

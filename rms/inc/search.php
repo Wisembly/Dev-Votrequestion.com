@@ -7,21 +7,24 @@ $description = null;
 $keywords = null;
 
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
+{
 	$id = $_GET['id'];
+	$dir = '../../';
+}
 else
 {
-	header('Location: index.php');
-	die();
-}
-
-function resizing($img)
-{
-	if (empty($img))
-		return null;
+	// on search si id existe
+	$search = @mysql_query("SELECT id FROM ".$table_prefix."Speaker WHERE CONCAT(lower(firstname),lower(lastname)) = '".mysql_real_escape_string(strtolower($_GET['name']))."' LIMIT 1");
+	
+	if ( mysql_num_rows($search) > 0 )
+	{
+		$id = mysql_result($search,0) ;
+		$dir = '../';
+	}
 	else
 	{
-		$size = getImageSize($img);
-		return ($size[0] > 50) ? 'resizing_image' : null;
+		// header('Location: index.php');
+		die();
 	}
 }
 
@@ -70,6 +73,7 @@ if (isset($id_user))
 						start:		<?php echo isset($rated) ? $rated : 0; ?>,
 						half:       false,
 						size:       24,
+						path:		'<?php echo $dir; ?>img/',
 						starHalf:   'star-half-big.png',
 						starOff:    'star-off-big.png',
 						starOn:     'star-on-big.png'
@@ -126,6 +130,7 @@ while ($conference = mysql_fetch_row($conferences))
 								start:		<?php echo isset($rated) ? $rated : 0; ?>,
 								half:       false,
 								size:       24,
+								path:		'<?php echo $dir; ?>img/',
 								starHalf:   'star-half-big.png',
 								starOff:    'star-off-big.png',
 								starOn:     'star-on-big.png'
@@ -164,7 +169,7 @@ while ($conference = mysql_fetch_row($conferences))
 			<? } else { ?>
 				var field = $(this);
 				field.fadeOut('slow',function(){
-					field.html('<a href="inc/twitter/redirect.php"><img src="img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div><div id="popup" style="display:none;">Connect to Twitter to rate your speaker !');
+					field.html('<a href="inc/twitter/redirect.php"><img src="<?php echo $dir; ?>img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div><div id="popup" style="display:none;">Connect to Twitter to rate your speaker !');
 					field.fadeIn('slow');
 				});
 			<?php } ?>
@@ -174,6 +179,18 @@ while ($conference = mysql_fetch_row($conferences))
 
 <?php
 
+function resizing($img)
+{
+	if (empty($img))
+		return null;
+	else
+	{
+		$size = getImageSize($img);
+		return ($size[0] > 50) ? 'resizing_image' : null;
+	}
+}
+
+mysql_close();
 include 'footer.php';
 
 ?>

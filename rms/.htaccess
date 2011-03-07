@@ -1,0 +1,25 @@
+#Deny from all
+ErrorDocument 404 http://ratemyspeaker.com/?page=404
+
+#--------------------------------------------------
+# Répertoire : /articles/
+#--------------------------------------------------
+
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+Options +FollowSymlinks
+Options +MultiViews
+RewriteEngine on
+RewriteRule ^(.*)\$ $1.php [NC]
+
+
+RewriteRule ^s/([a-zA-Z0-9_]+)$ index.php?page=search&name=$1 [L]
+RewriteRule ^s/([a-zA-Z0-9_]+)/([0-9]+)$ index.php?page=search&name=$1&id=$2 [L]

@@ -15,6 +15,9 @@ if (isset($_GET['page']))
 		case 'user' :
 			include('inc/user.php');
 			break;	
+		case '404' :
+			include 'inc/404.php';
+			break;
 		default :
 			include('inc/home.php');
 			break;

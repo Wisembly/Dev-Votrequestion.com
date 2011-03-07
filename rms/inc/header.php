@@ -3,6 +3,8 @@
 	
 	require_once('mobile_device_detect/mobile_device_detect.php');
 	$mobile = mobile_device_detect(true,false,true,true,true,true,true,false,false);
+	
+	$dir = isset($dir) ? $dir : '' ;
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -13,18 +15,18 @@
 	<meta name="description" content="<?php echo $description; ?>" /> 
 	<meta name="keywords" content="<?php echo $keywords; ?>" /> 
 	<meta name="author" content="Balloon" />
-	<link rel="shortcut icon" href="favicon.ico" />
-	<link rel="stylesheet" media="all" href="css/styles.css" />
-	<link rel="stylesheet" media="all" href="css/jquery.autocomplete.css" />
+	<link rel="shortcut icon" href="<?php echo $dir; ?>favicon.ico" />
+	<link rel="stylesheet" media="all" href="<?php echo $dir; ?>css/styles.css" />
+	<link rel="stylesheet" media="all" href="<?php echo $dir; ?>css/jquery.autocomplete.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script type="text/javascript">
 	if (typeof jQuery == 'undefined')
 	{
-	    document.write(unescape("%3Cscript src='js/jquery-1.4.2.min.js' type='text/javascript'%3E%3C/script%3E"));
+	    document.write(unescape("%3Cscript src='<?php echo $dir; ?>js/jquery-1.4.2.min.js' type='text/javascript'%3E%3C/script%3E"));
 	}
 	</script>
-	<script type="text/javascript" src="js/raty/jquery.raty.min.js"></script>
-	<script type="text/javascript" src="js/autocomplete/jquery.autocomplete.min.js"></script>
+	<script type="text/javascript" src="<?php echo $dir; ?>js/raty/jquery.raty.min.js"></script>
+	<script type="text/javascript" src="<?php echo $dir; ?>js/autocomplete/jquery.autocomplete.min.js"></script>
 
 	<script type="text/javascript">
 
@@ -41,7 +43,7 @@
 	
 		<?php 
 			// gestion du hack css mobile
-			echo ($mobile == true) ? '<link rel="stylesheet" media="all" href="css/mobile.css" /><meta content="True" name="HandheldFriendly" /><meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport" />' : null;
+			echo ($mobile == true) ? '<link rel="stylesheet" media="all" href="'.$dir.'css/mobile.css" /><meta content="True" name="HandheldFriendly" /><meta content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" name="viewport" />' : null;
 		?>
 </head>
 
@@ -52,12 +54,12 @@
 <?php
 	if (!isset($_SESSION['id_user']))
 	{
-			echo '<div id="twitter_button_connect" ><a href="inc/twitter/redirect.php"><img src="img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div></div>';
+			echo '<div id="twitter_button_connect" ><a href="'.$dir.'inc/twitter/redirect.php"><img src="'.$dir.'img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div></div>';
 	}
 	else
 	{
-		echo '<div id="twitter_button_connect" ><img width="14px" height="14px" src="'.$_SESSION['url_avatar_user'].'" /> @'.$_SESSION['pseudo_twitter_user'].' : <a href="?page=user&pseudo='.$_SESSION['pseudo_twitter_user'].'">Your profile</a></div>';
+		echo '<div id="twitter_button_connect" ><img width="14px" height="14px" src="'.$_SESSION['url_avatar_user'].'" /> @'.$_SESSION['pseudo_twitter_user'].' : <a href="'.$dir.'index.php?page=user&pseudo='.$_SESSION['pseudo_twitter_user'].'">Your profile</a></div>';
 	}
 ?>
 		
-		<a href="http://www.ratemyspeaker.com"><img class="logo" src="img/logo/logo1.png"></a>
+		<a href="http://www.ratemyspeaker.com"><img class="logo" src="<?php echo $dir; ?>img/logo/logo1.png"></a>
