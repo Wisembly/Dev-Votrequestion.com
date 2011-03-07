@@ -51,14 +51,24 @@ if (200 == $connection->http_code) {
 		$twitterInfos = $connection->get('account/verify_credentials');
 		$user = $twitterInfos->status->entities->user_mentions[0];
 		
-		mysql_query("INSERT INTO ".$table_prefix."User SET 
-			id_twitter = ".$user->id.",
-			pseudo = '".$user->screen_name."',
-			bio = '".$twitterInfos->description."',
-			url_avatar = '".$twitterInfos->profile_image_url."'"
-		);
+		echo var_dump($twitterInfos->status); die();
 		
-		$_SESSION['id_user'] = mysql_insert_id();
+		$user_exist = mysql_result(mysql_query("SELECT id FROM ".$table_prefix."User WHERE id_twitter = ".$user->id), 0);
+		
+		if (empty($user_exist))
+		{
+			mysql_query("INSERT INTO ".$table_prefix."User SET 
+				id_twitter = ".$user->id.",
+				pseudo = '".$user->screen_name."',
+				bio = '".$twitterInfos->description."',
+				url_avatar = '".$twitterInfos->profile_image_url."'"
+			);
+			
+			$_SESSION['id_user'] = mysql_insert_id();
+		}
+		else
+			$_SESSION['id_user'] = $user_exist;
+		
 		$_SESSION['pseudo_twitter_user'] = $user->screen_name;
 	  
 		header('Location: ../../index.php');
@@ -67,7 +77,7 @@ if (200 == $connection->http_code) {
 	/**
 	/ FIN BALLOON
 	*/
-  
+	
 } else {
   /* Save HTTP status for error dialog on connnect page.*/
   header('Location: ./clearsessions.php');

@@ -37,7 +37,7 @@ while ($speaker = mysql_fetch_assoc($speakers))
 
 		<div class="speaker">
 			<img class="speaker_picture <?php echo resizing($speaker['url_avatar']); ?>" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : 'img/profile.gif'; ?>" />
-			<?php echo $speaker['real_name']; ?>
+			<a href="?page=search&name=<?php echo $speaker['real_name']; ?>&id=<?php echo $speaker['id']; ?>"><?php echo $speaker['real_name']; ?></a>
 			<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $speaker['id']; ?>">
 				<input type="hidden" value=<?php echo $speaker['id']; ?> />
 			</div><br />
@@ -47,7 +47,7 @@ while ($speaker = mysql_fetch_assoc($speakers))
 					$(function() {
 						$('#star<?php echo $i; ?>').raty({
 							readOnly:	true,
-							start:		<?php echo ($speaker['nb_ratings'] > 0) ? ($speaker['nb_stars']/$speaker['nb_ratings']) : 0; ?>,
+							start:		<?php echo $speaker['current_score']; ?>,
 							half:       true,
 							size:       24,
 							starHalf:   'star-half-big.png',
