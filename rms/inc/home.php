@@ -36,7 +36,8 @@ include 'header.php';
 		{
 			formatItem: function(data, i, n, value) {
 				var img = value.split("..")[1] ;
-				if(img==''){img = "img/profile.gif";}	
+				if (typeof(img) == "undefined"){img = "img/empty.png";}
+				else if(img==''){img = "img/profile.gif";}
 				return "<img src='" + img + "'/> " + value.split("..")[0];
 			},
 			formatResult: function(data, value) {
@@ -44,7 +45,7 @@ include 'header.php';
 			}
 		});
 		$("#speaker_name").result(function(event, data) {
-			if (data) {
+			if (data && data != 'none..No results|none') {
 				window.location = "?page=search&name=" + data[0].replace(/[^a-zA-Z0-9]/g,'') + "&id=" + data[1];
 			}
 		});

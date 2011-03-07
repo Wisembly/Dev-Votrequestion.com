@@ -3,9 +3,16 @@
 require_once '../inc/config.php';
 
 $speakers = mysql_query(search(mysql_real_escape_string($_GET['q'])));
+$results = 0 ;
 
 while ($speaker = mysql_fetch_row($speakers))
+{
 	echo $speaker[1].'..'.$speaker[2].'|'.$speaker[0]."\n";
+	$results++;
+}
+
+if (!$results)
+	echo 'none..No results|none';
 
 // recherche maison selon firstname && lastname
 // http://stackoverflow.com/questions/4770568/sql-condition-a-b-and-c-like-d-or-a-like-b-and-c-d
