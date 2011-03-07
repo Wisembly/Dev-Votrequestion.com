@@ -47,13 +47,18 @@
 
 <?php echo '<body'.($mobile ? ' onload="window.scrollTo(0, 1)"' : null).'>' ; ?>
 
-	<div class="content">
-		<a href="?index.php"><img class="logo" src="img/logo/logo1.png"></a>
-		<?php
+<div class="content">
+
+<?php
+	if (!isset($_SESSION['id_user']))
+	{
+		if (isset($_GET['page']))	
+			echo '<div id="twitter_button_connect" ><a href="inc/twitter/redirect.php"><img src="img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div>';
+	}
+	else
+	{
+		echo '<div id="twitter_button_connect" ><img width="14px" height="14px" src="'.$_SESSION['url_avatar_user'].'" /> @'.$_SESSION['pseudo_twitter_user'].' : <a href="?page=user&pseudo='.$_SESSION['pseudo_twitter_user'].'">Your profile</a></div>';
+	}
+?>
 		
-		if (!isset($_SESSION['id_user']))
-			echo '<a href="inc/twitter/redirect.php">Connect to Twitter to rate your speaker</a>';
-		else
-			echo '<a href="?page=user&pseudo='.$_SESSION['pseudo_twitter_user'].'">Your profile</a>';
-		
-		?>
+		<a href="http://www.ratemyspeaker.com"><img class="logo" src="img/logo/logo1.png"></a>

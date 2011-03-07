@@ -20,13 +20,13 @@ include 'header.php';
 			<input id="speaker_name" value="Enter a speaker name" type="text">
 		</form>
 	<?php } else { ?>
-		<p>Connect to Twitter to rate speakers</p>
+		<div id="twitter_button_connect_home" ><a href="inc/twitter/redirect.php"><img src="img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div>
 	<?php } ?>
 	
 </div>
 
 <br/><h1>or see the best SXSW Speakers</h1>
-<a href="?page=ranking" class="button green">Speaker ranking</a>
+<div id="green_button"><a href="?page=ranking" class="button green">Speaker ranking</a></div>
 
 <script type="text/javascript">
 	$(function() {

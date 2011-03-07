@@ -24,7 +24,15 @@ function resizing($img)
 
 include 'header.php';
 
+$id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
+
 $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker WHERE id = ".$id));
+
+if (isset($id_user))
+{
+	$rated = mysql_query("SELECT rate FROM ".$table_prefix."Rate WHERE id_speaker = ".$id." AND id_user = ".$id_user);
+	$rated = (mysql_num_rows($rated) > 0) ? mysql_result($rated, 0) : null;
+}
 
 ?>
 
@@ -50,6 +58,8 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 			<script type="text/javascript">
 				$(function() {
 					$('#star0').raty({
+						readOnly:	<?php echo isset($rated) ? 'true' : 'false'; ?>,
+						start:		<?php echo isset($rated) ? $rated : 0; ?>,
 						half:       false,
 						size:       24,
 						starHalf:   'star-half-big.png',
@@ -64,7 +74,7 @@ $speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker
 	<br/><h2>Rate other speakers in the same conferences...</h2>
 <?php
 
-$conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$speaker['id']);
+$conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$id);
 
 $i = 1;
 
@@ -86,6 +96,13 @@ while ($conference = mysql_fetch_row($conferences))
 	{
 		while ($other_speaker = mysql_fetch_assoc($other_speakers))
 		{
+		
+			if (isset($id_user))
+			{
+				$rated = mysql_query("SELECT rate FROM ".$table_prefix."Rate WHERE id_speaker = ".$other_speaker['id']." AND id_user = ".$id_user);
+				$rated = (mysql_num_rows($rated) > 0) ? mysql_result($rated, 0) : null;
+			}
+		
 ?>
 			<div class="speaker">
 				<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>" />
@@ -97,6 +114,8 @@ while ($conference = mysql_fetch_row($conferences))
 					<script type="text/javascript">
 						$(function() {
 							$('#star<?php echo $i; ?>').raty({
+								readOnly:	<?php echo isset($rated) ? 'true' : 'false'; ?>,
+								start:		<?php echo isset($rated) ? $rated : 0; ?>,
 								half:       false,
 								size:       24,
 								starHalf:   'star-half-big.png',

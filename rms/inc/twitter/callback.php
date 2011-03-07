@@ -13,7 +13,7 @@ require_once('config.php');
 /* If the oauth_token is old redirect to the connect page. */
 if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
   $_SESSION['oauth_status'] = 'oldtoken';
-  header('Location: ./clearsessions.php');
+  
 }
 
 /* Create TwitteroAuth object with app key/secret and token key/secret from default phase */
@@ -41,35 +41,33 @@ if (200 == $connection->http_code) {
 	if (isset($_SESSION['twitter_msg']) && isset($_SESSION['speaker_id']))
 	{
 		$post = $connection->post('statuses/update', array('status' => $_SESSION['twitter_msg']));
-		
+
 		header('Location: ../../index.php?page=search&id='.$_SESSION['speaker_id']);
 	}
 	else
-	{
+	{	
+		$user = $connection->get('account/verify_credentials');
+		
 		require_once '../config.php';
 		
-		$twitterInfos = $connection->get('account/verify_credentials');
-		$user = $twitterInfos->status->entities->user_mentions[0];
+		$user_exist = mysql_query("SELECT id FROM ".$table_prefix."User WHERE id_twitter = ".$user->id);
 		
-		echo var_dump($twitterInfos->status); die();
-		
-		$user_exist = mysql_result(mysql_query("SELECT id FROM ".$table_prefix."User WHERE id_twitter = ".$user->id), 0);
-		
-		if (empty($user_exist))
+		if (mysql_num_rows($user_exist) == 0)
 		{
 			mysql_query("INSERT INTO ".$table_prefix."User SET 
 				id_twitter = ".$user->id.",
 				pseudo = '".$user->screen_name."',
-				bio = '".$twitterInfos->description."',
-				url_avatar = '".$twitterInfos->profile_image_url."'"
+				bio = '".$user->description."',
+				url_avatar = '".$user->profile_image_url."'"
 			);
 			
 			$_SESSION['id_user'] = mysql_insert_id();
 		}
 		else
-			$_SESSION['id_user'] = $user_exist;
+			$_SESSION['id_user'] = mysql_result($user_exist, 0);
 		
 		$_SESSION['pseudo_twitter_user'] = $user->screen_name;
+		$_SESSION['url_avatar_user'] = $user->profile_image_url;
 	  
 		header('Location: ../../index.php');
 	}
