@@ -36,6 +36,13 @@
 	overflow: hidden;
 }
 
+.ac_results img {
+	vertical-align:middle;
+	-webkit-border-radius: 3px; 
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
 .ac_loading {
 	background: white url('indicator.gif') 95% center no-repeat;
 }
