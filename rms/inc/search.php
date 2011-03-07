@@ -2,7 +2,6 @@
 
 require_once 'config.php';
 
-$title = 'RateMySpeaker';
 $description = null;
 $keywords = null;
 
@@ -35,6 +34,7 @@ if (mysql_num_rows($speaker) == 0)
 
 $speaker = mysql_fetch_assoc($speaker);
 
+$title = 'RateMySpeaker - '.$speaker['real_name'];
 include 'header.php';
 
 $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
