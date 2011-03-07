@@ -22,7 +22,7 @@ function resizing($img)
 	}
 }
 
-$user = mysql_query("SELECT * FROM ".$table_prefix."User WHERE pseudo = '".$pseudo."'");
+$user = mysql_query("SELECT * FROM ".$table_prefix."User WHERE pseudo = '".mysql_real_escape_string($pseudo)."'");
 
 if (mysql_num_rows($user) == 0)
 	header('Location: index.php');
