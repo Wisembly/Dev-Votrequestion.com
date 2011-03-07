@@ -9,6 +9,10 @@ html{
 	margin:auto;
 }
 
+a{
+	color:white;
+}
+
 .clear{
 	clear:both;
 }
@@ -48,7 +52,7 @@ img.logo{
 	display:block;
 	margin: 0 auto 30px;
 	width:413px;
-	margin-top:60px;
+	margin-top:40px;
 	border:none;
 }
 
@@ -137,7 +141,7 @@ img.logo{
 
 #balloon{
 	text-align:center;
-	margin-top:50px;
+	margin-top:25px;
 }
 
 #home {
