@@ -6,7 +6,7 @@ $title = 'RateMySpeaker';
 $description = null;
 $keywords = null;
 
-if (isset($_GET['id']))
+if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 	$id = $_GET['id'];
 else
 	header('Location: index.php');
@@ -22,11 +22,16 @@ function resizing($img)
 	}
 }
 
+$speaker = mysql_query("SELECT * FROM ".$table_prefix."Speaker WHERE id = ".$id);
+
+if (mysql_num_rows($speaker) == 0)
+	header('Location: index.php');
+
+$speaker = mysql_fetch_assoc($speaker);
+
 include 'header.php';
 
 $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
-
-$speaker = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."Speaker WHERE id = ".$id));
 
 if (isset($id_user))
 {
