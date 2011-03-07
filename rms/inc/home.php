@@ -14,18 +14,12 @@ include 'header.php';
 </div>	
 
 <div id="search">
-
-	<?php if (isset($_SESSION['id_user'])) { ?>
-		<form method="post" action="">
-			<input id="speaker_name" value="Enter a speaker name" type="text">
-		</form>
-	<?php } else { ?>
-		<div id="twitter_button_connect_home" ><a href="inc/twitter/redirect.php"><img src="img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div>
-	<?php } ?>
-	
+	<form method="post" action="">
+		<input id="speaker_name" value="Enter a speaker name" type="text">
+	</form>
 </div>
 
-<br/><h1>or see the best SXSW Speakers</h1>
+<br/><h3>or see the best SXSW Speakers</h3>
 <div id="green_button"><a href="?page=ranking" class="button green">Speaker ranking</a></div>
 
 <script type="text/javascript">

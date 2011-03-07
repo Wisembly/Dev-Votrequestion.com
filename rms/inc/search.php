@@ -50,15 +50,15 @@ if (isset($id_user))
 		<div id="star0" class="starR">
 			<input type="hidden" value=<?php echo $id; ?> />
 		</div>
+		<div id="button_tweet_search">
+			<a href="http://twitter.com/share?text=Rate <?php echo $speaker['real_name'];?> on RateMySpeaker" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		</div>
 		
-		<?php $tinylink = file_get_contents('http://tinyurl.com/api-create.php?url=http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']); ?>
-		
-		<a href="inc/twitter/redirect.php?text=Rate <?php echo $speaker['real_name'];?> on RateMySpeaker <?php echo $tinylink; ?> via @ratemyspeaker&id=<?php echo $id; ?>">Tweet this speaker !</a>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
 					$('#star0').raty({
-						readOnly:	<?php echo isset($rated) ? 'true' : 'false'; ?>,
+						readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated)) ? 'true' : 'false'; ?>,
 						start:		<?php echo isset($rated) ? $rated : 0; ?>,
 						half:       false,
 						size:       24,
@@ -114,7 +114,7 @@ while ($conference = mysql_fetch_row($conferences))
 					<script type="text/javascript">
 						$(function() {
 							$('#star<?php echo $i; ?>').raty({
-								readOnly:	<?php echo isset($rated) ? 'true' : 'false'; ?>,
+								readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated)) ? 'true' : 'false'; ?>,
 								start:		<?php echo isset($rated) ? $rated : 0; ?>,
 								half:       false,
 								size:       24,
@@ -147,11 +147,19 @@ while ($conference = mysql_fetch_row($conferences))
 <script type="text/javascript">
 	$(function() {
 		$(".starR").click(function() {
-			$.post("ajax/rate.ajax.php", {
-				id_user: <?php echo $_SESSION['id_user']; ?>,
-				id_speaker: $(this).find("input:first-child").attr("value"),
-				score: $(this).find("input:last-child").attr("value")
-			});
+			<?php if (isset($_SESSION['id_user'])) { ?>
+				$.post("ajax/rate.ajax.php", {
+					id_user: <?php echo $_SESSION['id_user']; ?>,
+					id_speaker: $(this).find("input:first-child").attr("value"),
+					score: $(this).find("input:last-child").attr("value")
+				});
+			<? } else { ?>
+				var field = $(this);
+				field.fadeOut('slow',function(){
+					field.html('<a href="inc/twitter/redirect.php"><img src="img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div><div id="popup" style="display:none;">Connect to Twitter to rate your speaker !');
+					field.fadeIn('slow');
+				});
+			<?php } ?>
 		});
 	});
 </script>

@@ -52,8 +52,7 @@
 <?php
 	if (!isset($_SESSION['id_user']))
 	{
-		if (isset($_GET['page']))	
-			echo '<div id="twitter_button_connect" ><a href="inc/twitter/redirect.php"><img src="img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div>';
+			echo '<div id="twitter_button_connect" ><a href="inc/twitter/redirect.php"><img src="img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div></div>';
 	}
 	else
 	{

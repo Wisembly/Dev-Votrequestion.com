@@ -21,6 +21,25 @@ include 'header.php';
 
 $user = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."User WHERE pseudo = '".$_GET['pseudo']."'"));
 
+if ($user['current_score'] == 5)
+	$message = 'My life missed U #SXSW’s speakers';
+else if ($user['current_score'] < 5 && $user['current_score'] >= 4.5)
+	$message = 'I luv U all #SXSW’s Speakers';
+else if ($user['current_score'] < 4.5 && $user['current_score'] >= 4)
+	$message = 'I’m a speaker luver at #SXSW';
+else if ($user['current_score'] < 4 && $user['current_score'] >= 3.5)
+	$message = 'My $$ ‘ve been well spent on #SXSW Speakers';
+else if ($user['current_score'] < 3.5 && $user['current_score'] >= 3)
+	$message = 'My ears are happy at #SXSW';
+else if ($user['current_score'] < 3 && $user['current_score'] >= 2.5)
+	$message = 'I’m more into TCDiscrupt than #SXSW';
+else if ($user['current_score'] < 2.5 && $user['current_score'] >= 2)
+	$message = 'Hey Speakers at #SXSW: What’s that fuck ?';
+else if ($user['current_score'] < 2 && $user['current_score'] >= 1.5)
+	$message = 'I should visit Austin rather that #SXSW';
+else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
+	$message = 'I shouldn’t ‘ve spent so much $$ for #SXSW';
+
 ?>
 
 <div id="user_profile">
@@ -31,6 +50,10 @@ $user = mysql_fetch_assoc(mysql_query("SELECT * FROM ".$table_prefix."User WHERE
 			
 		<p class="p2">Average Note</p>
 		<div id="star0"></div>
+		<div id="button_tweet_search">
+			<a href="http://twitter.com/share?text=<?php $message; ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		</div>
+		<?php echo $message; ?>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
