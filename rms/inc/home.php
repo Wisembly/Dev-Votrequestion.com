@@ -13,9 +13,15 @@ include 'header.php';
 </div>	
 
 <div id="search">
-	<form method="post" action="">
-		<input id="speaker_name" value="Enter a speaker name" type="text">
-	</form>
+
+	<?php if (isset($_SESSION['id_user'])) { ?>
+		<form method="post" action="">
+			<input id="speaker_name" value="Enter a speaker name" type="text">
+		</form>
+	<?php } else { ?>
+		<p>Connect to Twitter to rate speakers</p>
+	<?php } ?>
+	
 </div>
 
 <br/><h1>or see the best SXSW Speakers</h1>

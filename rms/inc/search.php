@@ -80,37 +80,39 @@ while ($conference = mysql_fetch_row($conferences))
 
 	$other_speakers = mysql_query("SELECT S.id, real_name, url_avatar FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]." AND S.id != '".$id."'");
 	
-	while ($other_speaker = mysql_fetch_assoc($other_speakers))
+	if (mysql_num_rows($other_speakers) == 0)
+		echo '<div class="speaker">No other speaker</div>';
+	else
 	{
+		while ($other_speaker = mysql_fetch_assoc($other_speakers))
+		{
 ?>
-		<div class="speaker">
-			<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>" />
-			<?php echo $other_speaker['real_name']; ?>
-			<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>">
-				<input type="hidden" value=<?php echo $other_speaker['id']; ?> />
-			</div>
-			<div class="source">
-				<script type="text/javascript">
-					$(function() {
-						$('#star<?php echo $i; ?>').raty({
-							half:       false,
-							size:       24,
-							starHalf:   'star-half-big.png',
-							starOff:    'star-off-big.png',
-							starOn:     'star-on-big.png'
+			<div class="speaker">
+				<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : 'img/profile.gif'; ?>" />
+				<a href="?page=search&name=<?php echo $other_speaker['real_name']; ?>&id=<?php echo $other_speaker['id']; ?>"><?php echo $other_speaker['real_name']; ?></a>
+				<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>">
+					<input type="hidden" value=<?php echo $other_speaker['id']; ?> />
+				</div>
+				<div class="source">
+					<script type="text/javascript">
+						$(function() {
+							$('#star<?php echo $i; ?>').raty({
+								half:       false,
+								size:       24,
+								starHalf:   'star-half-big.png',
+								starOff:    'star-off-big.png',
+								starOn:     'star-on-big.png'
+							});
 						});
-					});
-				</script>
+					</script>
+				</div>
 			</div>
-		</div>
-		<div class="clear"></div>
+			<div class="clear"></div>
 		
 <?php
-		$i++;
+			$i++;
+		}
 	}
-
-	if (empty($other_speaker))
-		echo '<div class="speaker">No other speaker</div>';
 
 ?>
 	</div>
