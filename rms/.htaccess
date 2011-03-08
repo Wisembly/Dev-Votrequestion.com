@@ -30,6 +30,3 @@ RewriteRule ^s/([a-zA-Z0-9_]+)$ index.php?page=search&name=$1 [L]
 RewriteRule ^s/([a-zA-Z0-9_]+)/([0-9]+)$ index.php?page=search&name=$1&id=$2 [L]
 
 RewriteRule ^u/([a-zA-Z0-9_]+)$ index.php?page=user&pseudo=$1 [L]
-
-RewriteCond %{HTTP_HOST} ^www.ratemyspeaker.com$ 
-RewriteRule ^(.*)   http://ratemyspeaker.com  [QSA,L,R=301]

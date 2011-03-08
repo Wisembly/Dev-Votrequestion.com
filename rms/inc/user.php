@@ -53,7 +53,7 @@ else
 		<p class="p2">Average Note</p>
 		<div id="star0"></div>
 		<div id="button_tweet_search">
-			<a href="http://twitter.com/share?text=<?php echo utf8_encode($message); ?> on #RateMySpeaker&amp;via=<?php echo $user['pseudo']; ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+			<a href="http://twitter.com/share?text=<?php echo utf8_encode($message); ?> on #RateMySpeaker&amp;via=<?php echo $user['pseudo']; ?>" class="twitter-share-button" data-count="none" data-via="ratemyspeaker">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		</div>
 		<?php echo utf8_encode($message); ?>
 		<div class="source">
