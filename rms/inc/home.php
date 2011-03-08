@@ -1,7 +1,7 @@
 <?php
 
-$title = 'RateMySpeaker';
-$description = 'RateMySpeaker(SXSW) allows you to rate the different speakers during SXSW';
+$title = 'RateMySpeaker - SXSW Edition';
+$description = 'RateMySpeaker.com let you search SXSW speakers by their names or by the conference official #hashtag and rate their performance up to 5 stars!';
 $keywords = null;
 
 include 'header.php';
