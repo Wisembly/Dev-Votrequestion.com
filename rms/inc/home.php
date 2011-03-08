@@ -2,14 +2,14 @@
 
 $title = 'RateMySpeaker - SXSW Edition';
 $description = 'RateMySpeaker.com let you search SXSW speakers by their names or by the conference official #hashtag and rate their performance up to 5 stars!';
-$keywords = null;
+$keywords = 'SXSW, Balloon, Conference, Speaker, Rate, Rating, Rank, Best Speaker, Music, Austin, Texas, Web, Twitter';
 
 include 'header.php';
 
 ?>
 
 <div id="description">
-	<h1>Rate SXSW speakers and share your opinion on Twitter</h1>
+	<h1><strong>I'm the attendee, bitch!</strong></h1>
 
 </div>	
 
@@ -20,7 +20,7 @@ include 'header.php';
 </div>
 
 <br/><h3>or see the best SXSW Speakers</h3>
-<div id="green_button"><a href="?page=ranking" class="button green">Best speakers</a></div>
+<div id="green_button"><a href="?page=ranking" class="button green">Check best SXSW speakers!</a></div>
 
 <script type="text/javascript">
 	$(function() {
