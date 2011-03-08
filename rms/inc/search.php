@@ -131,6 +131,7 @@ ob_end_clean();
 */
 
 $tweet = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW';
+$tweet2 = 'Just rated '.$speaker['real_name'].' on %23RateMySpeaker for %23SXSW';
 
 if (isset($hashtag[0]))
 {
@@ -139,6 +140,7 @@ if (isset($hashtag[0]))
 	if (strlen($str) <= 140)
 	{
 		$tweet = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0];
+		$tweet2 = 'Just rated '.$speaker['real_name'].' on %23RateMySpeaker for %23SXSW '.urlencode($hashtag[0]);
 		
 		if (isset($hashtag[1]))
 		{
@@ -147,6 +149,7 @@ if (isset($hashtag[0]))
 			if (strlen($str) <= 140)
 			{
 				$tweet = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0].' '.$hashtag[1];
+				$tweet2 = 'Just rated '.$speaker['real_name'].' on %23RateMySpeaker for %23SXSW '.urlencode($hashtag[0]).' '.urlencode($hashtag[1]);
 				
 				if (isset($hashtag[2]))
 				{
@@ -155,6 +158,7 @@ if (isset($hashtag[0]))
 					if (strlen($str) <= 140)
 					{
 						$tweet = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0].' '.$hashtag[1].' '.$hashtag[2];
+						$tweet2 = 'Just rated '.$speaker['real_name'].' on %23RateMySpeaker for %23SXSW '.urlencode($hashtag[0]).' '.urlencode($hashtag[1]).' '.urlencode($hashtag[2]);
 					}
 				}
 			}
@@ -174,12 +178,12 @@ if (isset($hashtag[0]))
 			<?php if ($speaker['bio'] != '</p>') echo $speaker['bio']; ?>
 		</p>
 			
-		<p class="p2">Rate him</p>
+		<p class="p2">Rate <?php echo $speaker['firstname']; ?></p>
 		<div id="star0" class="starR">
 			<input type="hidden" value=<?php echo $id; ?> />
 		</div>
 		<div id="button_tweet_search" style="<?php if (!$rated1) echo 'display:none'; ?>;">
-			<a href="http://twitter.com/share?text=<?php echo $tweet; ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+			<a href="http://twitter.com/share?text=<?php echo $tweet; ?>" class="twitter-share-button" data-count="none" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		</div>
 		
 		<div class="source">
@@ -221,8 +225,12 @@ if (isset($hashtag[0]))
 				});
 				var targetID = $(this).attr("id");
 				$.fn.raty.readOnly(true, '#' + targetID);
-				$("#button_tweet_search").show("fast");
-				window.open("http://twitter.com/share?text=<?php echo $tweet; ?>", "Tweet !", "width=600,height=400");
+				if ($(this).attr("id") == "star0") {
+					$("#button_tweet_search").show("fast");
+					var Left=window.screen.width/2-300;
+					var Top=window.screen.height/2-200;
+					window.open("http://twitter.com/share?text=<?php echo $tweet2; ?>&via=ratemyspeaker", "Tweet <?php echo $speaker['real_name']; ?> !", "width=600, height=400, left=" + Left + ", top=" + Top + "toolbar=no, menubar=no, location=no, directories=no, status=no, resizeable=no");
+				}
 			<? } else { ?>
 				var field = $(this);
 				field.fadeOut('slow',function(){
