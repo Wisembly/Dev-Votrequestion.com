@@ -54,7 +54,7 @@ $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 	
 		if (isset($id_user))
 		{
-			$rated = mysql_query("SELECT rate FROM ".$table_prefix."Rate AS R, ".$table_prefix."SpeakerInConf AS S WHERE id_user = ".$id_user." AND R.id_speaker = S.id_speaker AND S.id_conf = ".$id);
+			$rated = mysql_query("SELECT rate FROM ".$table_prefix."Rate WHERE id_user = ".$id_user." AND id_speaker = ".$speaker['id']);
 			$rated = (mysql_num_rows($rated) > 0) ? mysql_result($rated, 0) : null;
 		}
 	
