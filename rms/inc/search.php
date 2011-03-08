@@ -165,7 +165,7 @@ if (isset($hashtag[0]))
 ?>
 
 <div id="speaker_profile">
-	<img class="speaker_picture" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>">
+	<img class="speaker_picture <?php echo resizing($speaker['url_avatar']); ?>" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>">
 	<div class="speaker_description">
 		<h2><?php echo $speaker['real_name']; ?></h2>
 		<p class="p1">
@@ -221,7 +221,8 @@ if (isset($hashtag[0]))
 				});
 				var targetID = $(this).attr("id");
 				$.fn.raty.readOnly(true, '#' + targetID);
-				$("#button_tweet_search").show('fast');
+				$("#button_tweet_search").show("fast");
+				window.open("http://twitter.com/share?text=<?php echo $tweet; ?>", "Tweet !", "width=600,height=400");
 			<? } else { ?>
 				var field = $(this);
 				field.fadeOut('slow',function(){

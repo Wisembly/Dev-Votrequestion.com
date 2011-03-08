@@ -11,17 +11,6 @@ if (isset($_GET['pseudo']) && !empty($_GET['pseudo']))
 else
 	header('Location: index.php');
 
-function resizing($img)
-{
-	if (empty($img))
-		return null;
-	else
-	{
-		$size = getImageSize($img);
-		return ($size[0] > 50) ? 'resizing_image' : null;
-	}
-}
-
 $user = mysql_query("SELECT * FROM ".$table_prefix."User WHERE lower(pseudo) = '".mysql_real_escape_string(strtolower($pseudo))."'");
 
 $dir = '../' ;
@@ -136,6 +125,18 @@ else
 
 <?php
 
+function resizing($img)
+{
+	if (empty($img))
+		return null;
+	else
+	{
+		$size = getImageSize($img);
+		return ($size[0] > 50) ? 'resizing_image' : null;
+	}
+}
+
+mysql_close();
 include 'footer.php';
 
 ?>

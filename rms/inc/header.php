@@ -58,8 +58,8 @@
 	}
 	else
 	{
-		echo '<div id="twitter_button_connect" ><a href="'.$dir.'u/'.$_SESSION['pseudo_twitter_user'].'"><img width="151" height="24" src="'.$_SESSION['url_avatar_user'].'" alt="Connect to Twitter to rate your speaker" /> @'.$_SESSION['pseudo_twitter_user'].'</a> - <a href="'.$dir.'inc/twitter/clearsessions.php">Logout</a></div>';
+		echo '<div id="twitter_button_connect" ><a href="'.$dir.'u/'.$_SESSION['pseudo_twitter_user'].'"><img width="14" height="14" src="'.$_SESSION['url_avatar_user'].'" alt="Connect to Twitter to rate your speaker" /> @'.$_SESSION['pseudo_twitter_user'].'</a> - <a href="'.$dir.'inc/twitter/clearsessions.php">Logout</a></div>';
 	}
 ?>
 		
-		<a href="http://www.ratemyspeaker.com"><img class="logo" width="413" height="106" src="<?php echo $dir; ?>img/logo/logo1.png" alt="Logo RateMySpeaker" /></a>
+		<a href="http://www.ratemyspeaker.com"><img class="logo" src="<?php echo $dir; ?>img/logo/logo1.png" alt="Logo RateMySpeaker" /></a>
