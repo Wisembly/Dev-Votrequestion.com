@@ -15,7 +15,7 @@ include 'header.php';
 
 <div id="search">
 	<form method="post" action="">
-		<input id="speaker_name" value="Enter a speaker name" type="text">
+		<input id="speaker_name" value="Enter a speaker name or #hashtag" type="text">
 	</form>
 </div>
 
@@ -25,12 +25,12 @@ include 'header.php';
 <script type="text/javascript">
 	$(function() {
 		$("#speaker_name").click(function() {
-			if ($(this).attr("value") == "Enter a speaker name")
+			if ($(this).attr("value") == "Enter a speaker name or #hashtag")
 				$(this).attr("value", "");
 		});
 		$("#speaker_name").blur(function() {
 			if ($(this).attr("value") == "")
-				$(this).attr("value", "Enter a speaker name");
+				$(this).attr("value", "Enter a speaker name or #hashtag");
 		});
 		$("#speaker_name").autocomplete("ajax/search.ajax.php",
 		{
