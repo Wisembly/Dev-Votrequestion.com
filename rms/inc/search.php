@@ -178,7 +178,7 @@ if (isset($hashtag[0]))
 		<div id="star0" class="starR">
 			<input type="hidden" value=<?php echo $id; ?> />
 		</div>
-		<div id="button_tweet_search">
+		<div id="button_tweet_search" style="<?php if (!$rated1) echo 'display:none'; ?>;">
 			<a href="http://twitter.com/share?text=<?php echo $tweet; ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		</div>
 		
@@ -221,6 +221,7 @@ if (isset($hashtag[0]))
 				});
 				var targetID = $(this).attr("id");
 				$.fn.raty.readOnly(true, '#' + targetID);
+				$("#button_tweet_search").show('fast');
 			<? } else { ?>
 				var field = $(this);
 				field.fadeOut('slow',function(){
