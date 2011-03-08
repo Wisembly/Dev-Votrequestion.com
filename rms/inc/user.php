@@ -86,7 +86,7 @@ else
 	</div>
 	
 	<br/><h2>His ratings</h2>
-	
+			<div id="speaker_conferences">
 	<?php
 	
 	$rates = mysql_query("SELECT S.id, real_name, url_avatar, rate FROM ".$table_prefix."Speaker AS S, ".$table_prefix."Rate AS R WHERE S.id = R.id_speaker AND R.id_user = ".$user['id']);
@@ -101,7 +101,6 @@ else
 		{
 	
 	?>
-			<div id="speaker_conferences">
 				<div class="speaker">
 					<img class="speaker_picture <?php echo resizing($speaker['url_avatar']); ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : $dir.'img/profile.gif'; ?>" />
 					<a href="<?php echo $dir.'s/'.str_replace(' ','',$rate['real_name']); ?>/<?php echo $rate['id']; ?>"><?php echo $rate['real_name']; ?></a>
@@ -124,7 +123,6 @@ else
 					</div>
 				</div>
 				<div class="clear"></div>
-			</div>
 
 <?php
 
@@ -132,8 +130,12 @@ else
 		}
 	}
 
+?>
+		</div>
+</div>
+
+<?php
+
 include 'footer.php';
 
 ?>
-
-</div>
