@@ -18,6 +18,9 @@ if (isset($_GET['page']))
 		case '404' :
 			include 'inc/404.php';
 			break;
+		case 'logout' :
+			include 'inc/twitter/clearsessions.php';
+			break;
 		default :
 			include('inc/home.php');
 			break;
