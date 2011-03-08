@@ -225,7 +225,7 @@ if (isset($hashtag[0]))
 			<? } else { ?>
 				var field = $(this);
 				field.fadeOut('slow',function(){
-					field.html('<a href="<?php echo $dir; ?>inc/twitter/redirect.php"><img src="<?php echo $dir; ?>img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div><div id="popup" style="display:none;">Connect to Twitter to rate your speaker !');
+					field.html('<a href="<?php echo $dir; ?>inc/twitter/redirect.php"><img width="151" height="24" src="<?php echo $dir; ?>img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div><div id="popup" style="display:none;">Connect to Twitter to rate your speaker !');
 					field.fadeIn('slow');
 				});
 			<?php } ?>
