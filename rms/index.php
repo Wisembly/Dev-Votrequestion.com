@@ -6,6 +6,9 @@ if (isset($_GET['page']))
 	
 	switch ($page)
 	{
+		case 'conference' :
+			include 'inc/conference.php';
+			break;
 		case 'ranking' :
 			include 'inc/ranking.php';
 			break;
