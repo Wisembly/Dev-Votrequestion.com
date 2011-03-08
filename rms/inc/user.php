@@ -50,6 +50,8 @@ else if ($user['current_score'] < 2 && $user['current_score'] >= 1.5)
 	$message = 'I should visit Austin rather that #SXSW';
 else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
 	$message = 'I shouldn’t ‘ve spent so much $$ for #SXSW';
+else
+	$message = null;
 
 ?>
 
@@ -62,7 +64,7 @@ else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
 		<p class="p2">Average Note</p>
 		<div id="star0"></div>
 		<div id="button_tweet_search">
-			<a href="http://twitter.com/share?text=<?php utf8_encode($message); ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+			<a href="http://twitter.com/share?text=<?php echo utf8_encode($message); ?> on #RateMySpeaker&amp;via=<?php echo $user['pseudo']; ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		</div>
 		<?php echo utf8_encode($message); ?>
 		<div class="source">

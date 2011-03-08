@@ -38,14 +38,14 @@ if (200 == $connection->http_code) {
 	/ BALLOON
 	*/
 	
-	if (isset($_SESSION['twitter_msg']) && isset($_SESSION['speaker_id']))
-	{
-		$post = $connection->post('statuses/update', array('status' => $_SESSION['twitter_msg']));
+	// if (isset($_SESSION['twitter_msg']) && isset($_SESSION['speaker_id']))
+	// {
+		// $post = $connection->post('statuses/update', array('status' => $_SESSION['twitter_msg']));
 
-		header('Location: ../../index.php?page=search&id='.$_SESSION['speaker_id']);
-	}
-	else
-	{	
+		// header('Location: '.$_SESSION['page_redirect_after_login']);
+	// }
+	// else
+	// {	
 		$user = $connection->get('account/verify_credentials');
 		
 		require_once '../config.php';
@@ -69,8 +69,8 @@ if (200 == $connection->http_code) {
 		$_SESSION['pseudo_twitter_user'] = $user->screen_name;
 		$_SESSION['url_avatar_user'] = $user->profile_image_url;
 	  
-		header('Location: ../../index.php');
-	}
+		header('Location: '.$_SESSION['page_redirect_after_login']);
+	// }
   
 	/**
 	/ FIN BALLOON

@@ -62,7 +62,7 @@ if (isset($id_user))
 			<input type="hidden" value=<?php echo $id; ?> />
 		</div>
 		<div id="button_tweet_search">
-			<a href="http://twitter.com/share?text=Rate <?php echo $speaker['real_name'];?> on RateMySpeaker" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+			<a href="http://twitter.com/share?text=Just rated <?php echo $speaker['real_name'];?> on #RateMySpeaker for #SXSW" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		</div>
 		
 		<div class="source">
@@ -85,6 +85,7 @@ if (isset($id_user))
 	
 	<br/><h2>Rate other speakers in the same conferences...</h2>
 <?php
+ob_start();
 
 $conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$id);
 
