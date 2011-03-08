@@ -22,14 +22,14 @@ function resizing($img)
 	}
 }
 
-$user = mysql_query("SELECT * FROM ".$table_prefix."User WHERE pseudo = '".mysql_real_escape_string($pseudo)."'");
+$user = mysql_query("SELECT * FROM ".$table_prefix."User WHERE lower(pseudo) = '".mysql_real_escape_string(strtolower($pseudo))."'");
 
+$dir = '../' ;
 if (mysql_num_rows($user) == 0)
-	header('Location: index.php');
+	header('Location: '.$dir.'index.php');
 	
 $user = mysql_fetch_assoc($user);
 
-$dir = '../' ;
 include 'header.php';
 
 if ($user['current_score'] == 5)
@@ -101,8 +101,8 @@ else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
 	?>
 			<div id="speaker_conferences">
 				<div class="speaker">
-					<img class="speaker_picture <?php echo resizing($speaker['url_avatar']); ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : 'img/profile.gif'; ?>" />
-					<a href="?page=search&name=<?php echo $rate['real_name']; ?>&id=<?php echo $rate['id']; ?>"><?php echo $rate['real_name']; ?></a>
+					<img class="speaker_picture <?php echo resizing($speaker['url_avatar']); ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : $dir.'img/profile.gif'; ?>" />
+					<a href="<?php echo $dir.'s/'.str_replace(' ','',$rate['real_name']); ?>/<?php echo $rate['id']; ?>"><?php echo $rate['real_name']; ?></a>
 					<div id="star<?php echo $i; ?>" class="starR fivestars"></div>
 					<div class="source">
 						<script type="text/javascript">

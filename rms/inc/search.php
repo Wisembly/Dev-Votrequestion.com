@@ -22,7 +22,7 @@ else
 	}
 	else
 	{
-		// header('Location: index.php');
+		header('Location: index.php');
 		die();
 	}
 }
@@ -48,7 +48,7 @@ if (isset($id_user))
 ?>
 
 <div id="speaker_profile">
-	<img class="speaker_picture" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : 'img/profile.gif'; ?>">
+	<img class="speaker_picture" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>">
 	<div class="speaker_description">
 		<h2><?php echo $speaker['real_name']; ?></h2>
 		<p class="p1">
@@ -118,7 +118,7 @@ while ($conference = mysql_fetch_row($conferences))
 ?>
 			<div class="speaker">
 				<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : $dir.'img/profile.gif'; ?>" />
-				<a href="?page=search&name=<?php echo $other_speaker['real_name']; ?>&id=<?php echo $other_speaker['id']; ?>"><?php echo $other_speaker['real_name']; ?></a>
+				<a href="<?php echo $dir.'s/'.str_replace(' ','',$other_speaker['real_name']); ?>/<?php echo $other_speaker['id']; ?>"><?php echo $other_speaker['real_name']; ?></a>
 				<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>">
 					<input type="hidden" value=<?php echo $other_speaker['id']; ?> />
 				</div>
