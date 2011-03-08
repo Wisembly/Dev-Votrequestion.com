@@ -1,7 +1,7 @@
 <?php
 
 $title = 'RateMySpeaker';
-$description = null;
+$description = 'RateMySpeaker(SXSW) allows you to rate the different speakers during SXSW';
 $keywords = null;
 
 include 'header.php';
