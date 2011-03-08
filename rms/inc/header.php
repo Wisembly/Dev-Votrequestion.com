@@ -79,4 +79,4 @@
 	}
 ?>
 		
-		<a href="http://www.ratemyspeaker.com"><img class="logo" src="<?php echo $dir; ?>img/logo/logo1.png"></a>
+		<a href="http://www.ratemyspeaker.com"><img class="logo" width="413" height="106" src="<?php echo $dir; ?>img/logo/logo1.png" /></a>
