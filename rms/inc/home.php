@@ -15,22 +15,22 @@ include 'header.php';
 
 <div id="search">
 	<form method="post" action="">
-		<input id="speaker_name" value="Enter a speaker name or #hashtag" type="text">
+		<input id="speaker_name" value="Enter speaker name or conf #hashtag" type="text">
 	</form>
 </div>
 
 <br/><h3>or see the best SXSW Speakers</h3>
-<div id="green_button"><a href="?page=ranking" class="button green">Speaker ranking</a></div>
+<div id="green_button"><a href="?page=ranking" class="button green">Best speakers</a></div>
 
 <script type="text/javascript">
 	$(function() {
 		$("#speaker_name").click(function() {
-			if ($(this).attr("value") == "Enter a speaker name or #hashtag")
+			if ($(this).attr("value") == "Enter speaker name or conf #hashtag")
 				$(this).attr("value", "");
 		});
 		$("#speaker_name").blur(function() {
 			if ($(this).attr("value") == "")
-				$(this).attr("value", "Enter a speaker name or #hashtag");
+				$(this).attr("value", "Enter speaker name or conf #hashtag");
 		});
 		$("#speaker_name").autocomplete("ajax/search.ajax.php",
 		{

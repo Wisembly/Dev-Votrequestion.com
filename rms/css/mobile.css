@@ -1,3 +1,7 @@
+html {
+	background:#426777 !important;
+}
+
 .content{
 	width:99%;
 }
@@ -11,26 +15,29 @@ p1{
 }
 
 p2{
+	margin-top:0.4em;
 	font-size:1.5em;
 }
 
 #description{
-	margin-top:-2em;
+	margin-top:2em;
+	margin-bottom:2em;
 }
 
 img.logo{
 	margin: 0 auto;
-	width:100%;
+	width:80%;
 	margin-top:1em;
 }
 
 #search{
-	margin:0;
+	margin-top:2em;
+	margin-bottom:2em;
+	margin:auto;
 }
 
 #speaker_name{
-	height:2em;
-	width:95%;
+	width:85%;
 	border: solid 1px black;
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
@@ -40,9 +47,12 @@ img.logo{
 	-moz-border-radius-topright: 5px;
 	-moz-border-radius-bottomright: 5px;
 	-moz-border-radius-bottomleft: 5px;
-	font-size:2.5em;
-	padding-left:0.2em;
-	padding-right:0.2em;
+	padding-left:0.5em;
+	padding-right:0.5em;
+	font-size:1em;
+	vertical-align:middle;
+	margin:auto;
+	
 }
 
 /*CSS Bouton */
@@ -86,4 +96,23 @@ img.logo{
 	background: -webkit-gradient(linear, left top, left bottom, from(#4e7d0e), to(#7db72f));
 	background: -moz-linear-gradient(top,  #4e7d0e,  #7db72f);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e', endColorstr='#7db72f');
+}
+
+#twitter_button_connect {
+	position:absolute;
+	top:0;
+	right:0.2em;
+}	
+
+#speaker_profile,#user_profile{
+	width:90%;
+}
+
+#button_tweet_search{
+	display:block;
+	margin:0;
+}
+
+.attendee-about{
+	margin-bottom:1em;
 }
