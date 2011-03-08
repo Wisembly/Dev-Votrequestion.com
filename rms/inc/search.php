@@ -41,58 +41,26 @@ $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 
 if (isset($id_user))
 {
-	$rated = mysql_query("SELECT rate FROM ".$table_prefix."Rate WHERE id_speaker = ".$id." AND id_user = ".$id_user);
-	$rated = (mysql_num_rows($rated) > 0) ? mysql_result($rated, 0) : null;
+	$rated1 = mysql_query("SELECT rate FROM ".$table_prefix."Rate WHERE id_speaker = ".$id." AND id_user = ".$id_user);
+	$rated1 = (mysql_num_rows($rated1) > 0) ? mysql_result($rated1, 0) : null;
 }
 
-?>
+/**
+/ ON MET LES CONF EN BUFFER POUR RECUP LES HASHTAG ET LES METTRE DANS LE TWEET
+*/
 
-<div id="speaker_profile">
-	<img class="speaker_picture" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>">
-	<div class="speaker_description">
-		<h2><?php echo $speaker['real_name']; ?></h2>
-		<p class="p1">
-			<?php if ($speaker['position'] != '</p>') echo $speaker['position']; ?><br/>
-			<?php if ($speaker['company'] != '</p>') echo $speaker['company']; ?><br/>
-			<?php if ($speaker['bio'] != '</p>') echo $speaker['bio']; ?>
-		</p>
-			
-		<p class="p2">Rate him</p>
-		<div id="star0" class="starR">
-			<input type="hidden" value=<?php echo $id; ?> />
-		</div>
-		<div id="button_tweet_search">
-			<a href="http://twitter.com/share?text=Just rated <?php echo $speaker['real_name'];?> on #RateMySpeaker for #SXSW" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-		</div>
-		
-		<div class="source">
-			<script type="text/javascript">
-				$(function() {
-					$('#star0').raty({
-						readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated)) ? 'true' : 'false'; ?>,
-						start:		<?php echo isset($rated) ? $rated : 0; ?>,
-						half:       false,
-						size:       24,
-						path:		'<?php echo $dir; ?>img/',
-						starHalf:   'star-half-big.png',
-						starOff:    'star-off-big.png',
-						starOn:     'star-on-big.png'
-					});
-				});
-			</script>
-		</div>
-	</div>
-	
-	<br/><h2>Rate other speakers in the same conferences...</h2>
-<?php
+$hashtag = array();
+
 ob_start();
 
-$conferences = mysql_query("SELECT C.id, name FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$id);
+$conferences = mysql_query("SELECT C.id, name, hashtag FROM ".$table_prefix."Conference AS C, ".$table_prefix."SpeakerInConf AS S WHERE C.id = S.id_conf AND id_speaker = ".$id);
 
 $i = 1;
 
 while ($conference = mysql_fetch_row($conferences))
 {
+
+array_push($hashtag, $conference[2]);
 
 ?>
 
@@ -112,8 +80,8 @@ while ($conference = mysql_fetch_row($conferences))
 		
 			if (isset($id_user))
 			{
-				$rated = mysql_query("SELECT rate FROM ".$table_prefix."Rate WHERE id_speaker = ".$other_speaker['id']." AND id_user = ".$id_user);
-				$rated = (mysql_num_rows($rated) > 0) ? mysql_result($rated, 0) : null;
+				$rated2 = mysql_query("SELECT rate FROM ".$table_prefix."Rate WHERE id_speaker = ".$other_speaker['id']." AND id_user = ".$id_user);
+				$rated2 = (mysql_num_rows($rated2) > 0) ? mysql_result($rated2, 0) : null;
 			}
 		
 ?>
@@ -127,8 +95,8 @@ while ($conference = mysql_fetch_row($conferences))
 					<script type="text/javascript">
 						$(function() {
 							$('#star<?php echo $i; ?>').raty({
-								readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated)) ? 'true' : 'false'; ?>,
-								start:		<?php echo isset($rated) ? $rated : 0; ?>,
+								readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated2)) ? 'true' : 'false'; ?>,
+								start:		<?php echo isset($rated2) ? $rated2 : 0; ?>,
 								half:       false,
 								size:       24,
 								path:		'<?php echo $dir; ?>img/',
@@ -154,7 +122,91 @@ while ($conference = mysql_fetch_row($conferences))
 	
 }
 
+$conf = ob_get_contents();
+
+ob_end_clean();
+
+/**
+/ FIN BUFFER
+*/
+
+$tweet = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW';
+
+if (isset($hashtag[0]))
+{
+	$str = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0].' http://t.co/ZFBSoDW via @ratemyspeaker';
+	
+	if (strlen($str) <= 140)
+	{
+		$tweet = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0];
+		
+		if (isset($hashtag[1]))
+		{
+			$str = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0].' '.$hashtag[1].' http://t.co/ZFBSoDW via @ratemyspeaker';
+			
+			if (strlen($str) <= 140)
+			{
+				$tweet = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0].' '.$hashtag[1];
+				
+				if (isset($hashtag[2]))
+				{
+					$str = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0].' '.$hashtag[1].' '.$hashtag[2].' http://t.co/ZFBSoDW via @ratemyspeaker';
+					
+					if (strlen($str) <= 140)
+					{
+						$tweet = 'Just rated '.$speaker['real_name'].' on #RateMySpeaker for #SXSW '.$hashtag[0].' '.$hashtag[1].' '.$hashtag[2];
+					}
+				}
+			}
+		}
+	}
+}
+
 ?>
+
+<div id="speaker_profile">
+	<img class="speaker_picture" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>">
+	<div class="speaker_description">
+		<h2><?php echo $speaker['real_name']; ?></h2>
+		<p class="p1">
+			<?php if ($speaker['position'] != '</p>') echo $speaker['position']; ?><br/>
+			<?php if ($speaker['company'] != '</p>') echo $speaker['company']; ?><br/>
+			<?php if ($speaker['bio'] != '</p>') echo $speaker['bio']; ?>
+		</p>
+			
+		<p class="p2">Rate him</p>
+		<div id="star0" class="starR">
+			<input type="hidden" value=<?php echo $id; ?> />
+		</div>
+		<div id="button_tweet_search">
+			<a href="http://twitter.com/share?text=<?php echo $tweet; ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		</div>
+		
+		<div class="source">
+			<script type="text/javascript">
+				$(function() {
+					$('#star0').raty({
+						readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated1)) ? 'true' : 'false'; ?>,
+						start:		<?php echo isset($rated1) ? $rated1 : 0; ?>,
+						half:       false,
+						size:       24,
+						path:		'<?php echo $dir; ?>img/',
+						starHalf:   'star-half-big.png',
+						starOff:    'star-off-big.png',
+						starOn:     'star-on-big.png'
+					});
+				});
+			</script>
+		</div>
+	</div>
+	
+	<br/><h2>Rate other speakers in the same conferences...</h2>
+	
+	<?php
+	
+	echo $conf;
+	
+	?>
 
 </div>
 	
@@ -167,6 +219,8 @@ while ($conference = mysql_fetch_row($conferences))
 					id_speaker: $(this).find("input:first-child").attr("value"),
 					score: $(this).find("input:last-child").attr("value")
 				});
+				var targetID = $(this).attr("id");
+				$.fn.raty.readOnly(true, '#' + targetID);
 			<? } else { ?>
 				var field = $(this);
 				field.fadeOut('slow',function(){
