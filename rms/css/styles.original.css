@@ -1,0 +1,259 @@
+* {
+	margin:0;
+	padding:0;
+}
+
+html{
+	background: 50% 50%, -webkit-gradient(radial, 40% 315, 140, 40% 315, 415, from(#7198a5), to(#426777)) !important;
+	background: 27% 37px, -moz-radial-gradient(40% 315px, circle, #7198a5 140px, #426777 415px) !important;
+	font-family: "Trebuchet MS",Trebuchet,sans-serif;
+	height:100%;
+	background-color:#426777;
+}
+
+a {
+	border:none;
+	color:white;
+}
+
+.content{
+	width:900px;
+	margin:auto;
+}
+
+.clear{
+	clear:both;
+}
+
+h1, h2 {
+	font-size: 25px;
+	font-weight:bold;
+	text-shadow:white 0.5px 0.4px 1px;
+}
+
+h1, h3{
+	text-align:center;
+}
+
+h2{
+	color:white;
+}
+
+.p1, .p2 {
+	font-weight:bold;
+	text-shadow:white 0.5px 0.4px 1px;
+}
+
+.p1{
+	font-size: 15px;
+}
+
+.p2{
+	font-size: 18px;
+	margin: 4px 0;
+}
+
+img.logo{
+	display:block;
+	margin: 0 auto 30px;
+	width:413px;
+	margin-top:40px;
+	border:none;
+}
+
+#search{
+	margin-top:50px;
+	margin-bottom:20px;
+}
+
+/*CSS Bouton */
+
+#green_button {
+	margin: 0 auto;
+	margin-top:20px;
+}
+
+.button {
+	display: block;
+	outline: none;
+	margin-top:-0.1em;
+	margin-bottom:0.1em;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	padding: 0.8em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	margin:auto;
+	width:120px;
+	height:12px;
+	line-height:14px;
+}
+
+.button:active {
+	display:block;
+	margin:auto;
+}
+
+.green {
+	color: #e8f0de;
+	border: solid 1px #538312;
+	background: #64991e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+	background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+}
+
+.green:hover {
+	background: #538018;
+	background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+	background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28', endColorstr='#436b0c');
+}
+
+.green:active {
+	color: #a9c08c;
+	background: -webkit-gradient(linear, left top, left bottom, from(#4e7d0e), to(#7db72f));
+	background: -moz-linear-gradient(top,  #4e7d0e,  #7db72f);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e', endColorstr='#7db72f');
+}
+
+#speaker_name{
+	height:60px;
+	width:550px;
+	display:block;
+	margin:auto;
+	border: solid 1px black;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	font-size:30px;
+	padding-left:10px;
+	padding-right:10px;
+	color:grey;
+}
+
+#balloon{
+	text-align:center;
+	margin-top:25px;
+}
+
+#home {
+	text-align:center;
+	margin-top:80px;
+}
+
+#balloon .logoballoon, #home .logoballoon {
+	vertical-align:middle;
+	width:80px;
+	border:none;
+}
+
+#speaker_profile{
+	width:600px;
+	margin:auto;
+}
+
+.speaker_picture{
+	float:left;
+	margin-right:5px;
+	-webkit-border-radius:3px; 
+	-moz-border-radius:3px;
+	border-radius:3px;
+}
+
+.resizing_image {
+	width:50px;
+	height:50px;
+}
+
+.speaker_description{
+	margin-left:80px;
+}
+
+#speaker_conferences{
+	background: rgba(0,0,0,0.1);
+	margin-top:20px;
+	padding: 5px 5px 5px 5px;
+	border: solid 1px #445a63;
+	-webkit-border-radius: 5px;
+	-moz-border-radius : 5px;
+	border-radius: 5px;
+}
+
+.speaker{
+	margin-top:20px;
+	margin-bottom:0px;
+}
+
+.fivestars{
+	float:right;
+}
+
+/*Page User*/
+
+#user_profile{
+	width:600px;
+	margin:auto;
+}
+
+.user_picture{
+	float:left;
+	width:100px;
+	margin-right:5px;
+}
+
+#twitter_button_connect {
+	float: right;
+}
+
+#twitter_button_connect a {
+	text-decoration: none;
+}
+
+#twitter_button_connect a:hover {
+	text-decoration: underline;
+}
+
+.arobat {
+	color: #7db72f;
+}
+
+#twitter_button_connect_home {
+	margin: 0 auto;
+	width: 600px;
+	text-align: center;
+}
+
+#button_tweet_search {
+	margin: -27px 0 0 170px;
+}
+
+#four0four{
+	background:#fafafa;
+	font-weight:bold;
+	color:#484848;
+	text-align:center;
+	width:60%;
+	border:1px solid #ccc;
+	-webkit-border-radius: 5px; 
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin:auto;
+	margin-top:20px;
+	padding-bottom:20px;
+}
+
+#four0four strong{
+	font-size:1500%;
+}
