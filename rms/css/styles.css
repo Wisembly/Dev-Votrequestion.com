@@ -16,10 +16,6 @@ a {
 	color:white;
 }
 
-img {
-	border:none;
-}
-
 .content{
 	width:900px;
 	margin:auto;
@@ -159,6 +155,7 @@ img.logo{
 
 #balloon .logoballoon, #home .logoballoon {
 	vertical-align:middle;
+	width:80px;
 	border:none;
 }
 
