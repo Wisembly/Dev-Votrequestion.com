@@ -161,7 +161,7 @@ while ($conference = mysql_fetch_row($conferences))
 	$(function() {
 		$(".starR").click(function() {
 			<?php if (isset($_SESSION['id_user'])) { ?>
-				$.post("ajax/rate.ajax.php", {
+				$.post("<?php echo $dir; ?>ajax/rate.ajax.php", {
 					id_user: <?php echo $_SESSION['id_user']; ?>,
 					id_speaker: $(this).find("input:first-child").attr("value"),
 					score: $(this).find("input:last-child").attr("value")
@@ -169,7 +169,7 @@ while ($conference = mysql_fetch_row($conferences))
 			<? } else { ?>
 				var field = $(this);
 				field.fadeOut('slow',function(){
-					field.html('<a href="inc/twitter/redirect.php"><img src="<?php echo $dir; ?>img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div><div id="popup" style="display:none;">Connect to Twitter to rate your speaker !');
+					field.html('<a href="<?php echo $dir; ?>inc/twitter/redirect.php"><img src="<?php echo $dir; ?>img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div><div id="popup" style="display:none;">Connect to Twitter to rate your speaker !');
 					field.fadeIn('slow');
 				});
 			<?php } ?>

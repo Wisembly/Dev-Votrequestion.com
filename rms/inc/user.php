@@ -62,9 +62,9 @@ else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
 		<p class="p2">Average Note</p>
 		<div id="star0"></div>
 		<div id="button_tweet_search">
-			<a href="http://twitter.com/share?text=<?php $message; ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+			<a href="http://twitter.com/share?text=<?php utf8_encode($message); ?>" class="twitter-share-button" data-count="horizontal" data-via="ratemyspeaker" data-related="balloon">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		</div>
-		<?php echo $message; ?>
+		<?php echo utf8_encode($message); ?>
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
