@@ -4,10 +4,11 @@
 }
 
 html{
-	background: 50% 50%, -webkit-gradient(radial, 40% 315, 140, 40% 315, 415, from(#7198a5), to(#426777));
-	background: 27% 37px, -moz-radial-gradient(40% 315px, circle, #7198a5 140px, #426777 415px);
+	background: 50% 50%, -webkit-gradient(radial, 40% 315, 140, 40% 315, 415, from(#7198a5), to(#426777)) !important;
+	background: 27% 37px, -moz-radial-gradient(40% 315px, circle, #7198a5 140px, #426777 415px) !important;
 	font-family: "Trebuchet MS",Trebuchet,sans-serif;
 	height:100%;
+	background-color:#426777;
 }
 
 body{
