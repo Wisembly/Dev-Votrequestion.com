@@ -21,7 +21,7 @@ function resizing($img)
 
 include 'header.php';
 
-$speakers = mysql_query("SELECT * FROM ".$table_prefix."Speaker ORDER BY current_score DESC LIMIT 20");
+$speakers = mysql_query("SELECT id,real_name,url_avatar,nb_ratings,current_score FROM ".$table_prefix."Speaker ORDER BY current_score DESC LIMIT 20");
 
 $i = 1;
 

@@ -21,7 +21,7 @@ include 'header.php';
 </div>
 
 <br/><h3>or see the best SXSW Speakers</h3>
-<div id="green_button"><a href="?page=ranking" class="button green">Check best SXSW speakers!</a></div>
+<div id="green_button"><a href="ranking" class="button green">Check best SXSW speakers!</a></div>
 
 <script type="text/javascript">	
 $(function(){$("#speaker_name").click(function(){if($(this).attr("value")=="Enter speaker name or conf #hashtag")

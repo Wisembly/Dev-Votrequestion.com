@@ -40,6 +40,7 @@ RewriteRule ^(.*)\$ $1.php [NC]
 
 RewriteRule ^logout$ index.php?page=logout [L]
 RewriteRule ^oops!$ index.php?page=404 [L]
+RewriteRule ^ranking$ index.php?page=ranking [L]
 
 RewriteRule ^c/([a-zA-Z0-9_]+)$ index.php?page=conference&name=$1 [L]
 RewriteRule ^c/([a-zA-Z0-9_]+)/([0-9]+)$ index.php?page=conference&name=$1&id=$2 [L]
