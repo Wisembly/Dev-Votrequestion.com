@@ -1,9 +1,9 @@
 <?php
 
-$db_host = '10.0.211.162';
-$db_user = 'rms';
-$db_pass = 'ball00nSXSW2011';
-$db_name = 'rms';
+$db_host = 'localhost';
+$db_user = 'root';
+$db_pass = 'root';
+$db_name = 'ratemyspeaker';
 $db_port = '';
 $table_prefix = 'ratemyspeaker_';
 
