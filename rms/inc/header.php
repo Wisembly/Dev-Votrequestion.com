@@ -39,7 +39,7 @@
 <?php
 	if (!isset($_SESSION['id_user']))
 	{
-			echo '<div id="twitter_button_connect" ><a href="'.$dir.'inc/twitter/redirect.php"><img src="'.$dir.'img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div></div>';
+			echo '<div id="twitter_button_connect" ><a href="'.$dir.'inc/twitter/redirect.php"><img src="'.$dir.'img/twitter-login.png" alt="Connect to Twitter to rate your speaker" width="151" height="24"/></a></div></div>';
 	}
 	else
 	{
@@ -47,4 +47,4 @@
 	}
 ?>
 		
-		<a href="http://www.ratemyspeaker.com"><img class="logo" src="<?php echo $dir; ?>img/logo/logo1.png" alt="Logo RateMySpeaker" /></a>
+		<a href="http://www.ratemyspeaker.com"><img class="logo" src="<?php echo $dir; ?>img/logo/logo1.png" alt="Logo RateMySpeaker" width="413" height="106"/></a>
