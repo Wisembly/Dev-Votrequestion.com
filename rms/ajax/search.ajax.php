@@ -12,7 +12,7 @@ while ($speaker = mysql_fetch_row($speakers))
 }
 
 if (!$count_results)
-	echo 'No results..none|none';
+	echo '<font size="2px">Oops, we apparently miss one :( Let us know on @RateMySpeaker!</font>..none|none';
 
 
 // recherche maison selon firstname && lastname
