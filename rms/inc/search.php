@@ -3,8 +3,6 @@
 require_once 'config.php';
 
 $keywords = 'SXSW, Balloon, Conference, Speaker, Rate, Rating, Rank, Best Speaker, Music, Austin, Texas, Web, Twitter';
-$header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
-
 
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 {
@@ -37,6 +35,7 @@ $speaker = mysql_fetch_assoc($speaker);
 
 $description = $speaker['real_name'].'s profile page. RateMySpeaker.com let you search SXSW speakers by their names or by the conference official #hashtag and rate their performance up to 5 stars!';
 $title = 'RateMySpeaker - '.$speaker['real_name'];
+$header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
 include 'header.php';
 
 $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
