@@ -1,6 +1,4 @@
-<?php 
-	session_start() ;
-	
+<?php 	
 	require_once('mobile_device_detect/mobile_device_detect.php');
 	$mobile = mobile_device_detect(true,false,true,true,true,true,true,false,false);
 	

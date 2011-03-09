@@ -23,7 +23,7 @@ else
 	}
 	else
 	{
-		header('Location: index.php');
+		header('Location: ');
 		die();
 	}
 }
@@ -61,7 +61,7 @@ $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 	
 ?>
 		<div class="speaker">
-			<img class="speaker_picture <?php echo resizing($speaker['url_avatar']); ?>" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>" />
+			<img class="speaker_picture <?php echo $speaker['url_avatar']; ?>" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>" />
 			<a href="<?php echo $dir.'s/'.str_replace(' ','',$speaker['real_name']); ?>/<?php echo $speaker['id']; ?>"><?php echo $speaker['real_name']; ?></a>
 			<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $speaker['id']; ?>">
 				<input type="hidden" value=<?php echo $speaker['id']; ?> />
@@ -117,17 +117,6 @@ $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 </script>
 
 <?php
-
-function resizing($img)
-{
-	if (empty($img))
-		return null;
-	else
-	{
-		$size = getImageSize($img);
-		return ($size[0] > 50) ? 'resizing_image' : null;
-	}
-}
 
 mysql_close();
 include 'footer.php';

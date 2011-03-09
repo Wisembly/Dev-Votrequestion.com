@@ -9,13 +9,13 @@ $keywords = 'SXSW, Balloon, Conference, Speaker, Rate, Rating, Rank, Best Speake
 if (isset($_GET['pseudo']) && !empty($_GET['pseudo']))
 	$pseudo = $_GET['pseudo'];
 else
-	header('Location: index.php');
+	header('Location: ');
 
 $user = mysql_query("SELECT * FROM ".$table_prefix."User WHERE lower(pseudo) = '".mysql_real_escape_string(strtolower($pseudo))."'");
 
 $dir = '../' ;
 if (mysql_num_rows($user) == 0)
-	header('Location: '.$dir.'index.php');
+	header('Location: '.$dir.'');
 	
 $user = mysql_fetch_assoc($user);
 $header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
@@ -46,7 +46,7 @@ else
 ?>
 
 <div id="user_profile">
-	<img class="speaker_picture <?php echo resizing($user['url_avatar']); ?>" src="<?php echo $user['url_avatar']; ?>">
+	<img class="speaker_picture <?php echo $user['url_avatar']; ?>" src="<?php echo $user['url_avatar']; ?>" width="50" height="50">
 	<div class="speaker_description">
 		<h2><?php echo $user['pseudo']; ?></h2>
 		<p class="p1"><?php echo $user['bio']; ?></p><div class="clear"></div><br/>
@@ -92,7 +92,7 @@ else
 	
 	?>
 				<div class="speaker">
-					<img class="speaker_picture <?php echo resizing($speaker['url_avatar']); ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : $dir.'img/profile.gif'; ?>" />
+					<img class="speaker_picture <?php echo $speaker['url_avatar']; ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : $dir.'img/profile.gif'; ?>" width="50" height="50"/>
 					<a href="<?php echo $dir.'s/'.str_replace(' ','',$rate['real_name']); ?>/<?php echo $rate['id']; ?>"><?php echo $rate['real_name']; ?></a>
 					<div id="star<?php echo $i; ?>" class="starR fivestars"></div>
 					<div class="source">
@@ -125,17 +125,6 @@ else
 </div>
 
 <?php
-
-function resizing($img)
-{
-	if (empty($img))
-		return null;
-	else
-	{
-		$size = getImageSize($img);
-		return ($size[0] > 50) ? 'resizing_image' : null;
-	}
-}
 
 mysql_close();
 include 'footer.php';

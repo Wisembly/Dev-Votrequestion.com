@@ -21,7 +21,7 @@ else
 	}
 	else
 	{
-		header('Location: index.php');
+		header('Location: ');
 		die();
 	}
 }
@@ -29,7 +29,7 @@ else
 $speaker = mysql_query("SELECT * FROM ".$table_prefix."Speaker WHERE id = ".$id);
 
 if (mysql_num_rows($speaker) == 0)
-	header('Location: index.php');
+	header('Location: ');
 
 $speaker = mysql_fetch_assoc($speaker);
 
@@ -87,7 +87,7 @@ array_push($hashtag, $conference[2]);
 		
 ?>
 			<div class="speaker">
-				<img class="speaker_picture <?php echo resizing($other_speaker['url_avatar']); ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : $dir.'img/profile.gif'; ?>" />
+				<img class="speaker_picture <?php echo $other_speaker['url_avatar']; ?>" src="<?php echo !empty($other_speaker['url_avatar']) ? $other_speaker['url_avatar'] : $dir.'img/profile.gif'; ?>" width="50" height="50"/>
 				<a href="<?php echo $dir.'s/'.str_replace(' ','',$other_speaker['real_name']); ?>/<?php echo $other_speaker['id']; ?>"><?php echo $other_speaker['real_name']; ?></a>
 				<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>">
 					<input type="hidden" value=<?php echo $other_speaker['id']; ?> />
@@ -170,7 +170,7 @@ if (isset($hashtag[0]))
 ?>
 
 <div id="speaker_profile">
-	<img class="speaker_picture <?php echo resizing($speaker['url_avatar']); ?>" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>">
+	<img class="speaker_picture <?php echo $speaker['url_avatar']; ?>" src="<?php echo !empty($speaker['url_avatar']) ? $speaker['url_avatar'] : $dir.'img/profile.gif'; ?>">
 	<div class="speaker_description">
 		<h2><?php echo $speaker['real_name']; ?></h2>
 		<p class="p1">
@@ -244,17 +244,6 @@ if (isset($hashtag[0]))
 </script>
 
 <?php
-
-function resizing($img)
-{
-	if (empty($img))
-		return null;
-	else
-	{
-		$size = getImageSize($img);
-		return ($size[0] > 50) ? 'resizing_image' : null;
-	}
-}
 
 mysql_close();
 include 'footer.php';
