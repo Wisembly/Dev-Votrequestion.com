@@ -5,6 +5,7 @@ require_once 'config.php';
 $title = 'RateMySpeaker - Your profile';
 $description = 'RateMySpeaker.com let you search SXSW speakers by their names or by the conference official #hashtag and rate their performance up to 5 stars!';
 $keywords = 'SXSW, Balloon, Conference, Speaker, Rate, Rating, Rank, Best Speaker, Music, Austin, Texas, Web, Twitter';
+$header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
 
 if (isset($_GET['pseudo']) && !empty($_GET['pseudo']))
 	$pseudo = $_GET['pseudo'];

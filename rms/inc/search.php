@@ -3,6 +3,8 @@
 require_once 'config.php';
 
 $keywords = 'SXSW, Balloon, Conference, Speaker, Rate, Rating, Rank, Best Speaker, Music, Austin, Texas, Web, Twitter';
+$header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
+
 
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 {

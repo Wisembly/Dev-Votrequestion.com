@@ -18,28 +18,15 @@
 	<link rel="shortcut icon" href="<?php echo $dir; ?>favicon.ico" />
 	<link rel="stylesheet" media="all" href="<?php echo $dir; ?>css/styles.css" />
 	<link rel="stylesheet" media="all" href="<?php echo $dir; ?>css/jquery.autocomplete.css" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 	<script type="text/javascript">
-	if (typeof jQuery == 'undefined')
-	{
-	    document.write(unescape("%3Cscript src='<?php echo $dir; ?>js/jquery-1.4.2.min.js' type='text/javascript'%3E%3C/script%3E"));
-	}
+		if (typeof jQuery == 'undefined'){document.write(unescape("%3Cscript src='<?php echo $dir; ?>js/jquery-1.4.4.min.js' type='text/javascript'%3E%3C/script%3E"));}
 	</script>
-	<script type="text/javascript" src="<?php echo $dir; ?>js/raty/jquery.raty.min.js"></script>
-	<script type="text/javascript" src="<?php echo $dir; ?>js/autocomplete/jquery.autocomplete.min.js"></script>
 
+	<?php echo isset($header)?$header:null; ?>
 	<script type="text/javascript">
-
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-17949982-2']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-	</script>
+var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-17949982-2']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})();
+</script>
 	
 		<?php 
 			// gestion du hack css mobile
