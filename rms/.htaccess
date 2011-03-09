@@ -1,3 +1,6 @@
+SetEnv ZEND_OPTIMIZER 1
+SetEnv PHP_VER 5
+
 #Deny from all
 ErrorDocument 404 http://ratemyspeaker.com/oops!
 
@@ -10,6 +13,21 @@ Options +FollowSymlinks
 
 # Activation du module de réécriture d'URL :
 RewriteEngine on
+
+#--------------------------------------------------
+# Activation de la compréssion GZip :
+#--------------------------------------------------
+
+<IfModule mod_deflate.c>
+  <FilesMatch "\.(js|css|php|eot|ttf|otf|svg)$">
+    SetOutputFilter DEFLATE
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+	BrowserMatch ^Mozilla/4\.0[678] no-gzip
+	BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+	BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+    Header append Vary User-Agent env=!dont-vary
+  </FilesMatch>
+</IfModule>
 
 #--------------------------------------------------
 # Règles de réécriture d'URL :
