@@ -10,8 +10,15 @@ include 'header.php';
 ?>
 
 <div id="description">
-	<h1><strong>I'm the attendee, bitch!</strong></h1>
-
+	<?php if ($mobile == false) { ?>
+	<div style="width:660px;margin:0 auto;">
+		<iframe style="float:left;" src="http://player.vimeo.com/video/20836338?title=0&amp;byline=0&amp;portrait=0" width="330" height="203" frameborder="0"></iframe>
+		<br /><br /><br /><br /><h1 style="font-size:28px; margin-top:-6px;"><strong>I'm the attendee, bitch!</strong></h1>
+	</div>
+	<div class="clear"></div>
+	<?php } else { ?>
+		<h1><strong>I'm the attendee, bitch!</strong></h1>
+	<?php } ?>
 </div>	
 
 <div id="search">
