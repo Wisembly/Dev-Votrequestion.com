@@ -25,7 +25,7 @@ while ( $r = mysql_fetch_row($speakers) )
 	);
 }
 
-echo (sizeof($results)>0) ? json_encode($results) : '[]' ;
+echo (sizeof($results)>0) ? json_encode(array('results'=>$results)) : '[]' ;
 
 echo isset($_GET['callback']) ? ');' : null;
 

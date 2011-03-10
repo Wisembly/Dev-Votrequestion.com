@@ -176,7 +176,7 @@ if (isset($hashtag[0]))
 		<p class="p1">
 			<?php if ($speaker['position'] != '</p>') echo $speaker['position']; ?><br/>
 			<?php if ($speaker['company'] != '</p>') echo $speaker['company']; ?><br/>
-			<?php if ($speaker['bio'] != '</p>') echo $speaker['bio']; ?>
+			<?php if ($speaker['bio'] != '</p>') echo utf8_encode($speaker['bio']); ?>
 		</p>
 			
 		<p class="p2">Rate <?php echo $speaker['firstname']; ?></p>
