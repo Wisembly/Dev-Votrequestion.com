@@ -45,4 +45,4 @@
 	}
 ?>
 		
-		<a href="http://www.ratemyspeaker.com"><img class="logo" src="<?php echo $dir; ?>img/logo/logo1.png" alt="Logo RateMySpeaker" width="413" height="106"/></a>
+		<a href="http://ratemyspeaker.com"><img class="logo" src="<?php echo $dir; ?>img/logo/logo1.png" alt="Logo RateMySpeaker" width="413" height="106"/></a>

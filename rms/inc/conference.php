@@ -4,7 +4,6 @@ require_once 'config.php';
 
 $description = 'RateMySpeaker.com let you search SXSW speakers by their names or by the conference official #hashtag and rate their performance up to 5 stars!';
 $keywords = 'SXSW, Balloon, Conference, Speaker, Rate, Rating, Rank, Best Speaker, Music, Austin, Texas, Web, Twitter';
-$header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
 
 if (isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 {
@@ -29,6 +28,7 @@ else
 }
 
 $conference = mysql_fetch_row(mysql_query("SELECT * FROM ".$table_prefix."Conference WHERE id = ".$id." LIMIT 1"));
+$header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
 
 $title = 'RateMySpeaker - '.$conference[1];
 

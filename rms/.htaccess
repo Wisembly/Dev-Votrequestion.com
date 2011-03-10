@@ -47,7 +47,7 @@ RewriteEngine on
 	Header set Cache-Control "max-age=172800, proxy-revalidate"
 	</FilesMatch>
 	# 1 MIN
-	<FilesMatch "\.(html|htm|php)$">
+	<FilesMatch "\.(html|htm)$">
 	Header set Cache-Control "max-age=60, private, proxy-revalidate"
 	</FilesMatch>
 </IfModule>
@@ -60,6 +60,11 @@ Options +FollowSymlinks
 Options +MultiViews
 RewriteEngine on
 RewriteRule ^(.*)\$ $1.php [NC]
+
+RewriteBase /
+RewriteCond %{HTTP_HOST} !^ratemyspeaker.com$ [NC]
+RewriteRule ^(.*)$ http://ratemyspeaker.com/$1 [L,R=301]
+
 
 RewriteRule ^ranking$ ?page=ranking [L]
 RewriteRule ^logout$ ?page=logout [L]
