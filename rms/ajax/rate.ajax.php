@@ -32,12 +32,11 @@ if ($count == 0)
 	$steps[0] = ($steps[0] == 0) ? 1 : 0;
 	$steps[1] = ($steps[1] == 0 && $score == 5) ? 1 : 0;
 	$steps[2] = ($steps[2] == 0 && $score == 1) ? 1 : 0;
-	$steps[4] = ($steps[4] == 0 && mysql_result(mysql_query("SELECT nb_ratings FROM ".$table_prefix."User WHERE id_user = ".$id_user), 0) >= 3) ? 1 : 0;
-	$steps[5] = ($steps[5] == 0 && mysql_result(mysql_query("SELECT COUNT(DISTINCT id_conf) FROM ".$table_prefix."Rate AS R, ".$table_prefix."SpeakerInConf AS S WHERE R.id_speaker = S.id_speaker AND id_user = ".$id_user), 0) >= 3) ? 1 : 0;
-	$steps[6] = ($steps[6] == 0 && mysql_result(mysql_query("SELECT COUNT(id_user) FROM ".$table_prefix."User WHERE id_user = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
+	$steps[4] = $profileSteps->tryStep5($id_user);
+	$steps[5] = $profileSteps->tryStep6($id_user);
+	$steps[6] = $profileSteps->tryStep7($id_user);
 	
-	mysql_query("UPDATE ".$table_prefix."Profile_Steps SET step1 = ".$steps[0].", step2 = ".$steps[1].", step3 = ".$steps[2].", step5 = ".$steps[4].", step6 = ".$steps[5].", step7 = ".$steps[6]." WHERE id_user = ".$id_user);
-	
+	$profileSteps->setProfileSteps($steps);
 	$profileSteps->setProfileScore($steps);
 }
 

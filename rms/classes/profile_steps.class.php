@@ -4,15 +4,15 @@
 	{
 	
 		public $lib_steps = array(
-			0 => 'Sign In on RateMySpeaker with your Twitter account!',
-			1 => 'Make your first rate for someone!', 										//step1
-			2 => 'Reward an incredible speaker with a 5-stars rate!',	 					//step2
-			3 => 'Sanction a bad speaker with a 1-star rate!',			 					//step3
-			4 => 'Tweet your rate! - <b>coming soon!</b>',				 					//step4
-			5 => 'Rate three different speakers',						 					//step5
-			6 => 'Rate speakers in three different conferences',							//step6
-			7 => 'After at least 10 rates, have an average rating score of 4!',				//step7
-			8 => 'Have three Twitter friends using RateMySpeaker - <b>coming soon!</b>' 	//step8
+			0 => 'Signin',
+			1 => 'First rate', 							//step1
+			2 => 'Five-stars rate', 					//step2
+			3 => 'One-star rate', 						//step3
+			4 => 'Tweet', 								//step4
+			5 => 'Three rates', 						//step5
+			6 => 'Three confs',							//step6
+			7 => 'Ten rates and average note >= 4', 	//step7
+			8 => 'Three friends' 						//step8
 		);
 		
 		public $value_steps = array(
@@ -34,11 +34,21 @@
 		public function checkSteps($id_user)
 		{
 			global $table_prefix;
+			
 			return mysql_fetch_row(mysql_query("SELECT step1, step2, step3, step4, step5, step6, step7, step8 FROM ".$table_prefix."Profile_Steps WHERE id_user = ".$id_user));
+		}
+		
+		public function setProfileSteps($steps)
+		{
+			global $table_prefix;
+			
+			mysql_query("UPDATE ".$table_prefix."Profile_Steps SET step1 = ".$steps[0].", step2 = ".$steps[1].", step3 = ".$steps[2].", step4 = ".$steps[3].", step5 = ".$steps[4].", step6 = ".$steps[5].", step7 = ".$steps[6].", step8 = ".$steps[7]." WHERE id_user = ".$id_user);
 		}
 		
 		public function setProfileScore($steps)
 		{
+			global $table_prefix;
+			
 			$value = self::$value_steps[0];
 			
 			for ($i = 0; $i < 8; $i++)
@@ -47,6 +57,27 @@
 			}
 			
 			mysql_query("UPDATE ".$table_prefix."User SET profile_score = ".$value);
+		}
+		
+		public function tryStep5($id_user)
+		{
+			global $table_prefix;
+			
+			return ($steps[4] == 0 && mysql_result(mysql_query("SELECT nb_ratings FROM ".$table_prefix."User WHERE id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+		}
+		
+		public function tryStep6($id_user)
+		{
+			global $table_prefix;
+			
+			return ($steps[5] == 0 && mysql_result(mysql_query("SELECT COUNT(DISTINCT id_conf) FROM ".$table_prefix."Rate AS R, ".$table_prefix."SpeakerInConf AS S WHERE R.id_speaker = S.id_speaker AND id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+		}
+		
+		public function tryStep7($id_user)
+		{
+			global $table_prefix;
+			
+			return ($steps[6] == 0 && mysql_result(mysql_query("SELECT COUNT(id_user) FROM ".$table_prefix."User WHERE id_user = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
 		}
 	
 	}
