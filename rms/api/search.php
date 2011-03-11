@@ -20,7 +20,7 @@ while ( $r = mysql_fetch_row($speakers) )
 	array_push($results, array(
 			'real_name'			=>	$r[0],
 			'firstname'			=>	$r[4],
-			'url_avatar'		=>	empty($r[1]) ? 'ratemyspeaker.com/img/profile.gif' : $r[1],
+			'url_avatar'		=>	empty($r[1]) ? 'http://ratemyspeaker.com/img/profile.gif' : $r[1],
 			'nb_votes'			=>	$r[2],
 			'current_score'		=>	$r[3]
 		)
