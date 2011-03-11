@@ -59,25 +59,40 @@
 			mysql_query("UPDATE ".$table_prefix."User SET profile_score = ".$value);
 		}
 		
-		public function tryStep5($id_user)
+		public function tryStep1($step)
 		{
-			global $table_prefix;
-			
-			return ($steps[4] == 0 && mysql_result(mysql_query("SELECT nb_ratings FROM ".$table_prefix."User WHERE id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+			return ($steps[0] == 0) ? 1 : 0;
 		}
 		
-		public function tryStep6($id_user)
+		public function tryStep2($step)
 		{
-			global $table_prefix;
-			
-			return ($steps[5] == 0 && mysql_result(mysql_query("SELECT COUNT(DISTINCT id_conf) FROM ".$table_prefix."Rate AS R, ".$table_prefix."SpeakerInConf AS S WHERE R.id_speaker = S.id_speaker AND id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+			return ($steps[1] == 0 && $score == 5) ? 1 : 0;
 		}
 		
-		public function tryStep7($id_user)
+		public function tryStep3($step)
+		{
+			return ($steps[2] == 0 && $score == 1) ? 1 : 0;
+		}
+		
+		public function tryStep5($step, $id_user)
 		{
 			global $table_prefix;
 			
-			return ($steps[6] == 0 && mysql_result(mysql_query("SELECT COUNT(id_user) FROM ".$table_prefix."User WHERE id_user = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
+			return ($step == 0 && mysql_result(mysql_query("SELECT nb_ratings FROM ".$table_prefix."User WHERE id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+		}
+		
+		public function tryStep6($step, $id_user)
+		{
+			global $table_prefix;
+			
+			return ($step == 0 && mysql_result(mysql_query("SELECT COUNT(DISTINCT id_conf) FROM ".$table_prefix."Rate AS R, ".$table_prefix."SpeakerInConf AS S WHERE R.id_speaker = S.id_speaker AND id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+		}
+		
+		public function tryStep7($step, $id_user)
+		{
+			global $table_prefix;
+			
+			return ($step == 0 && mysql_result(mysql_query("SELECT COUNT(id_user) FROM ".$table_prefix."User WHERE id_user = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
 		}
 	
 	}
