@@ -61,7 +61,12 @@ if (200 == $connection->http_code) {
 				url_avatar = '".$user->profile_image_url."'"
 			);
 			
-			$_SESSION['id_user'] = mysql_insert_id();
+			$new_user_id = mysql_insert_id();
+			
+			// on lui crée sa ligne de steps
+			mysql_query("INSERT INTO ".$table_prefix."Profile_Steps SET id_user = ".$new_user_id) ;
+			
+			$_SESSION['id_user'] = $new_user_id;
 		}
 		else
 			$_SESSION['id_user'] = mysql_result($user_exist, 0);
