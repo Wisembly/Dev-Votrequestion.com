@@ -49,11 +49,11 @@
 		{
 			global $table_prefix;
 			
-			$value = self::$value_steps[0];
+			$value = $this->value_steps[0];
 			
 			for ($i = 0; $i < 8; $i++)
 			{
-				if (self::$steps[$i] == 1) $value += self::$value_steps[$i + 1];
+				if ($this->steps[$i] == 1) $value += $this->value_steps[$i + 1];
 			}
 			
 			mysql_query("UPDATE ".$table_prefix."User SET profile_score = ".$value);
