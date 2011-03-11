@@ -28,23 +28,23 @@ $completed_steps = $profile_steps->checkSteps($user['id']);
 include 'header.php';
 
 if ($user['current_score'] == 5)
-	$message = 'My life missed U #SXSW’s speakers';
+	$message = 'My life missed U #SXSWÃ­s speakers';
 else if ($user['current_score'] < 5 && $user['current_score'] >= 4.5)
-	$message = 'I luv U all #SXSW’s Speakers';
+	$message = 'I luv U all #SXSWÃ­s Speakers';
 else if ($user['current_score'] < 4.5 && $user['current_score'] >= 4)
-	$message = 'I’m a speaker luver at #SXSW';
+	$message = 'IÃ­m a speaker luver at #SXSW';
 else if ($user['current_score'] < 4 && $user['current_score'] >= 3.5)
-	$message = 'My $$ ‘ve been well spent on #SXSW Speakers';
+	$message = 'My $$ Ã«ve been well spent on #SXSW Speakers';
 else if ($user['current_score'] < 3.5 && $user['current_score'] >= 3)
 	$message = 'My ears are happy at #SXSW';
 else if ($user['current_score'] < 3 && $user['current_score'] >= 2.5)
-	$message = 'I’m more into TCDiscrupt than #SXSW';
+	$message = 'IÃ­m more into TCDiscrupt than #SXSW';
 else if ($user['current_score'] < 2.5 && $user['current_score'] >= 2)
-	$message = 'Hey Speakers at #SXSW: What’s that fuck ?';
+	$message = 'Hey Speakers at #SXSW: WhatÃ­s that fuck ?';
 else if ($user['current_score'] < 2 && $user['current_score'] >= 1.5)
 	$message = 'I should visit Austin rather that #SXSW';
 else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
-	$message = 'I shouldn’t ‘ve spent so much $$ for #SXSW';
+	$message = 'I shouldnÃ­t Ã«ve spent so much $$ for #SXSW';
 else
 	$message = null;
 
@@ -119,7 +119,7 @@ else
 	
 	?>
 				<div class="speaker">
-					<img class="speaker_picture <?php echo $rate['url_avatar']; ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : $dir.'img/profile.gif'; ?>" width="50" height="50"/>
+					<img class="speaker_picture <?php echo $speaker['url_avatar']; ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : $dir.'img/profile.gif'; ?>" width="50" height="50"/>
 					<a href="<?php echo $dir.'s/'.str_replace(' ','',$rate['real_name']); ?>/<?php echo $rate['id']; ?>"><?php echo $rate['real_name']; ?></a>
 					<div id="star<?php echo $i; ?>" class="starR fivestars"></div>
 					<div class="source">
