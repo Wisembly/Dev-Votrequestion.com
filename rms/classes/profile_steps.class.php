@@ -64,12 +64,12 @@
 			return ($steps[0] == 0) ? 1 : 0;
 		}
 		
-		public function tryStep2($step)
+		public function tryStep2($step, $score)
 		{
 			return ($steps[1] == 0 && $score == 5) ? 1 : 0;
 		}
 		
-		public function tryStep3($step)
+		public function tryStep3($step, $score)
 		{
 			return ($steps[2] == 0 && $score == 1) ? 1 : 0;
 		}
