@@ -99,6 +99,9 @@ margin-after: 1em;
 margin-start: 0px;
 margin-end: 0px;
 padding-start: 40px;
+
+width:80%;
+margin:0 auto;
 }
 
 ul#progress li {
