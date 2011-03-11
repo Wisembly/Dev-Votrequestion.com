@@ -29,15 +29,14 @@ if ($count == 0)
 
 	$steps = $profileSteps->checkSteps($id_user);
 	
-	$steps[0] = $profileSteps->tryStep1($steps[0]);
-	$steps[1] = $profileSteps->tryStep2($steps[1], $score);
-	$steps[2] = $profileSteps->tryStep3($steps[2], $score);
-	$steps[4] = $profileSteps->tryStep5($steps[4], $id_user);
-	$steps[5] = $profileSteps->tryStep6($steps[5], $id_user);
-	$steps[6] = $profileSteps->tryStep7($steps[6], $id_user);
+	$steps[0] = !$steps[0] ? 2 : 0 ;
+	$steps[1] = !$steps[1] ? $profileSteps->tryStep2($score) : 0 ;
+	$steps[2] = !$steps[2] ? $profileSteps->tryStep3($score) : 0 ;
+	$steps[4] = !$steps[4] ? $profileSteps->tryStep5($id_user) : 0 ;
+	$steps[5] = !$steps[5] ? $profileSteps->tryStep6($id_user) : 0 ;
+	$steps[6] = !$steps[6] ? $profileSteps->tryStep7($id_user) : 0 ;
 	
-	$profileSteps->setProfileSteps($steps, $id_user);
-	$profileSteps->setProfileScore($steps);
+	$profileSteps->setProfileStepsAndScore($steps, $id_user);
 }
 
 mysql_close();

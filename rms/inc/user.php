@@ -93,9 +93,9 @@ else
 				</li>
 			<?php 
 				foreach ( $completed_steps as $key => $step )
-				{
+				{	
 					echo '<li'.(!$step?' style="position:relative;"':null).'>';
-					echo (!$step?'<span>':'<p>').$profile_steps->lib_steps[$key+1].' +'.$profile_steps->value_steps[$key].'%'.(!$step?'</span>':'</p>');
+					echo (!$step?'<span>':'<p>').$profile_steps->lib_steps[$key+1].' +'.$profile_steps->value_steps[$key+1].'%'.(!$step?'</span>':'</p>');
 					echo '</li>';
 				}
 			?>
