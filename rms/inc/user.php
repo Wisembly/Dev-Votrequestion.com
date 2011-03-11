@@ -25,26 +25,32 @@ $header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.j
 $profile_steps = new ProfileSteps();
 $completed_steps = $profile_steps->checkSteps($user['id']);
 
+if ( isset($_SESSION['id_user']) && $user['id'] == $_SESSION['id_user'] && $completed_steps[3] == 0 )
+{
+	require_once 'twittertest.php';
+	$completed_steps = $profile_steps->checkSteps($user['id']);
+}
+
 include 'header.php';
 
 if ($user['current_score'] == 5)
-	$message = 'My life missed U #SXSW’s speakers';
+	$message = 'My life missed U #SXSWÃ­s speakers';
 else if ($user['current_score'] < 5 && $user['current_score'] >= 4.5)
-	$message = 'I luv U all #SXSW’s Speakers';
+	$message = 'I luv U all #SXSWÃ­s Speakers';
 else if ($user['current_score'] < 4.5 && $user['current_score'] >= 4)
-	$message = 'I’m a speaker luver at #SXSW';
+	$message = 'IÃ­m a speaker luver at #SXSW';
 else if ($user['current_score'] < 4 && $user['current_score'] >= 3.5)
-	$message = 'My $$ ‘ve been well spent on #SXSW Speakers';
+	$message = 'My $$ Ã«ve been well spent on #SXSW Speakers';
 else if ($user['current_score'] < 3.5 && $user['current_score'] >= 3)
 	$message = 'My ears are happy at #SXSW';
 else if ($user['current_score'] < 3 && $user['current_score'] >= 2.5)
-	$message = 'I’m more into TCDiscrupt than #SXSW';
+	$message = 'IÃ­m more into TCDiscrupt than #SXSW';
 else if ($user['current_score'] < 2.5 && $user['current_score'] >= 2)
-	$message = 'Hey Speakers at #SXSW: What’s that fuck ?';
+	$message = 'Hey Speakers at #SXSW: WhatÃ­s that fuck ?';
 else if ($user['current_score'] < 2 && $user['current_score'] >= 1.5)
 	$message = 'I should visit Austin rather that #SXSW';
 else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
-	$message = 'I shouldn’t ‘ve spent so much $$ for #SXSW';
+	$message = 'I shouldnÃ­t Ã«ve spent so much $$ for #SXSW';
 else
 	$message = null;
 
@@ -84,7 +90,8 @@ else
 		<div id="speaker_conferences" class="progress">
 			<div class="loadbar">
 				<p style="width:<?php echo $profile_score; ?>%;">
-					<span><?php echo $profile_score; ?>%</span>
+					<span><?php if ( $profile_score == 100 ) echo '<b style="float:left;padding-left:10px;">I\'m the attendee, bitch!â„¢</b>' ; ?>
+					<?php echo $profile_score; ?>%</span>
 				</p>
 			</div>
 			<ul id="progress">
