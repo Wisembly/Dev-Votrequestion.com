@@ -109,6 +109,11 @@ list-style: none;
 margin-bottom: 4px;
 }
 
+ul#progress li b{
+	font-size:1.1em;
+	color:#f4a201;
+}
+
 ul#progress li p {
 background: url(../img/todo-list.png) no-repeat left 1px;
 color: #A2A2A2;
