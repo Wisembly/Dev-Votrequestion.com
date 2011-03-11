@@ -61,6 +61,10 @@ Options +MultiViews
 RewriteEngine on
 RewriteRule ^(.*)\$ $1.php [NC]
 
+#RewriteBase /
+#RewriteCond %{HTTP_HOST} !^ratemyspeaker.com$ [NC]
+#RewriteRule ^(.*)$ http://ratemyspeaker.com/$1 [L,R=301]
+
 RewriteRule ^ranking$ ?page=ranking [L]
 RewriteRule ^logout$ ?page=logout [L]
 RewriteRule ^oops!$ ?page=404 [L]
