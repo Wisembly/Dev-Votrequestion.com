@@ -92,7 +92,7 @@
 		{
 			global $table_prefix;
 			
-			return ($step == 0 && mysql_result(mysql_query("SELECT COUNT(id_user) FROM ".$table_prefix."User WHERE id = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
+			return ($step == 0 && mysql_result(mysql_query("SELECT COUNT(id) FROM ".$table_prefix."User WHERE id = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
 		}
 	
 	}
