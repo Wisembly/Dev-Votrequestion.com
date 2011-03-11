@@ -78,7 +78,7 @@
 		{
 			global $table_prefix;
 			
-			return ($step == 0 && mysql_result(mysql_query("SELECT nb_ratings FROM ".$table_prefix."User WHERE id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+			return ($step == 0 && mysql_result(mysql_query("SELECT nb_ratings FROM ".$table_prefix."User WHERE id = ".$id_user), 0) >= 3) ? 1 : 0;
 		}
 		
 		public function tryStep6($step, $id_user)
@@ -92,7 +92,7 @@
 		{
 			global $table_prefix;
 			
-			return ($step == 0 && mysql_result(mysql_query("SELECT COUNT(id_user) FROM ".$table_prefix."User WHERE id_user = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
+			return ($step == 0 && mysql_result(mysql_query("SELECT COUNT(id_user) FROM ".$table_prefix."User WHERE id = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
 		}
 	
 	}
