@@ -1,6 +1,8 @@
 <?php
 
 require_once 'config.php';
+require_once 'classes/profile_steps.class.php' ;
+$profile_steps = new ProfileSteps();
 
 $title = 'RateMySpeaker - Your profile';
 $description = 'RateMySpeaker.com let you search SXSW speakers by their names or by the conference official #hashtag and rate their performance up to 5 stars!';
@@ -18,6 +20,7 @@ if (mysql_num_rows($user) == 0)
 	header('Location: '.$dir.'');
 	
 $user = mysql_fetch_assoc($user);
+$profile_score = $user['profile_score'];
 $header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
 
 include 'header.php';
@@ -75,7 +78,33 @@ else
 		</div>
 	</div>
 	
-	<br/><h2>His ratings</h2>
+<?php $steps = mysql_fetch_row(mysql_query("SELECT id,step1,step2,step3,step4,step5,step6,step7,step8 FROM ".$table_prefix."Profile_Steps WHERE id_user = ".$user['id'])); 
+?>	
+
+	<br/><br/>
+	<h2><?php echo $user['pseudo']; ?>'s SXSW completeness</h2>
+		<div id="speaker_conferences" class="progress">
+			<div class="loadbar">
+				<p style="width:<?php echo $profile_score; ?>%;">
+					<span><?php echo $profile_score; ?>%</span>
+				</p>
+			</div>
+			<ul id="progress">
+				<li>
+					<p>Connect to RateMySpeaker with your Twitter Account +10%</p>
+				</li>
+			<?php 
+				foreach ( $steps as $key => $step )
+				{
+					echo '<li'.(!$step?' style="position:relative;"':null).'>';
+					echo (!$step?'<span>':'<p>').$profile_steps->lib_steps[$key].' +'.$profile_steps->value_steps[$key].'%'.(!$step?'</span>':'</p>');
+					echo '</li>';
+				}
+			?>
+			</ul>
+		</div>
+	
+	<br/><h2><?php echo $user['pseudo']; ?>'s ratings</h2>
 			<div id="speaker_conferences">
 	<?php
 	

@@ -45,3 +45,87 @@ img.logo{display:block;margin:0 auto 30px;width:413px;margin-top:40px;border:non
 .ac_loading{background:white url('indicator.gif') 95% center no-repeat;}
 .ac_odd{background-color:#eee;}
 .ac_over{background-color:#484848;color:white;}
+
+.progress {
+	display: block;
+	padding-left:20%;
+	padding-right:20%;
+}
+
+.loadbar {
+background: #E9F2FA;
+height: 22px;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+display:block;
+width:80%;
+margin:0 auto;
+margin-bottom: 15px;
+margin-top: 15px;
+}
+.loadbar p {
+background: url(../img/loadbar-pattern2.jpeg) repeat-x;
+height: 22px;
+line-height: 22px;
+margin: 0!important;
+text-align: right;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+border-radius: 4px;
+}
+.loadbar p span {
+color: white;
+font-size: 14px;
+font-weight: bold;
+padding: 0 10px;
+}
+ul#progress{
+list-style-type: disc;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 40px;
+
+-moz-margin-before: 1em;
+-moz-margin-after: 1em;
+-moz-margin-start: 0px;
+-moz-margin-end: 0px;
+-moz-padding-start: 40px;
+
+margin-before: 1em;
+margin-after: 1em;
+margin-start: 0px;
+margin-end: 0px;
+padding-start: 40px;
+}
+
+ul#progress li {
+list-style: none;
+margin-bottom: 4px;
+}
+
+ul#progress li p {
+background: url(../img/todo-list.png) no-repeat left 1px;
+color: #A2A2A2;
+font-size: 13px;
+font-weight: bold;
+color:#fff;
+margin-bottom: 0!important;
+padding: 3px 0 3px 25px;
+text-decoration: line-through;
+font-style:italic;
+margin-bottom: 5px!important;
+}
+
+ul#progress li span {
+background: url(../img/todo-list.png) no-repeat left -30px;
+display: block;
+font-size: 13px;
+padding: 3px 0 3px 25px;
+text-decoration: none!important;
+-webkit-transition: none;
+color:#fff;
+font-weight:bold;
+}
