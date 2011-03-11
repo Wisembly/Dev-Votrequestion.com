@@ -34,23 +34,23 @@ if ( isset($_SESSION['id_user']) && $user['id'] == $_SESSION['id_user'] && $comp
 include 'header.php';
 
 if ($user['current_score'] == 5)
-	$message = 'My life missed U #SXSWís speakers';
+	$message = 'My life missed U #SXSW\'s speakers';
 else if ($user['current_score'] < 5 && $user['current_score'] >= 4.5)
-	$message = 'I luv U all #SXSWís Speakers';
+	$message = 'I luv U all #SXSW\'s Speakers';
 else if ($user['current_score'] < 4.5 && $user['current_score'] >= 4)
-	$message = 'Iím a speaker luver at #SXSW';
+	$message = 'I\'m a speaker luver at #SXSW';
 else if ($user['current_score'] < 4 && $user['current_score'] >= 3.5)
-	$message = 'My $$ ëve been well spent on #SXSW Speakers';
+	$message = 'My $$ \'ve been well spent on #SXSW Speakers';
 else if ($user['current_score'] < 3.5 && $user['current_score'] >= 3)
 	$message = 'My ears are happy at #SXSW';
 else if ($user['current_score'] < 3 && $user['current_score'] >= 2.5)
-	$message = 'Iím more into TCDiscrupt than #SXSW';
+	$message = 'I\'m more into TCDiscrupt than #SXSW';
 else if ($user['current_score'] < 2.5 && $user['current_score'] >= 2)
-	$message = 'Hey Speakers at #SXSW: Whatís that fuck ?';
+	$message = 'Hey Speakers at #SXSW : What\'s that fuck ?';
 else if ($user['current_score'] < 2 && $user['current_score'] >= 1.5)
 	$message = 'I should visit Austin rather that #SXSW';
 else if ($user['current_score'] < 1.5 && $user['current_score'] >= 1)
-	$message = 'I shouldnít ëve spent so much $$ for #SXSW';
+	$message = 'I shouldn\'t \'ve spent so much $$ for #SXSW';
 else
 	$message = null;
 
