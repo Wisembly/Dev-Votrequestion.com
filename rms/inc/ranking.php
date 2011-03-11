@@ -31,7 +31,7 @@ while ($speaker = mysql_fetch_row($speakers))
 			<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $speaker[0]; ?>">
 				<input type="hidden" value=<?php echo $speaker[0]; ?> />
 			</div><br />
-			Ratings : <?php echo $speaker[3]; ?>
+			<!-- Ratings : <?php echo $speaker[3]; ?> -->
 			<div class="source">
 				<script type="text/javascript">
 					$(function() {
