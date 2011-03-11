@@ -36,7 +36,7 @@ if ($count == 0)
 	$steps[5] = $profileSteps->tryStep6($steps[5], $id_user);
 	$steps[6] = $profileSteps->tryStep7($steps[6], $id_user);
 	
-	$profileSteps->setProfileSteps($steps);
+	$profileSteps->setProfileSteps($steps, $id_user);
 	$profileSteps->setProfileScore($steps);
 }
 

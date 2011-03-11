@@ -38,7 +38,7 @@
 			return mysql_fetch_row(mysql_query("SELECT step1, step2, step3, step4, step5, step6, step7, step8 FROM ".$table_prefix."Profile_Steps WHERE id_user = ".$id_user));
 		}
 		
-		public function setProfileSteps($steps)
+		public function setProfileSteps($steps, $id_user)
 		{
 			global $table_prefix;
 			
@@ -53,7 +53,7 @@
 			
 			for ($i = 0; $i < 8; $i++)
 			{
-				if ($this->steps[$i] == 1) $value += $this->value_steps[$i + 1];
+				if ($steps[$i] == 1) $value += $this->value_steps[$i + 1];
 			}
 			
 			mysql_query("UPDATE ".$table_prefix."User SET profile_score = ".$value);
