@@ -46,7 +46,7 @@ $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 	
 <?php
 
-	$speakers = mysql_query("SELECT S.id, real_name, url_avatar FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]);
+	$speakers = mysql_query("SELECT S.id, real_name, url_avatar, current_score FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]);
 
 	$i = 0;
 	
@@ -66,9 +66,20 @@ $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
 			<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $speaker['id']; ?>">
 				<input type="hidden" value=<?php echo $speaker['id']; ?> />
 			</div>
+			<div id="starAverage<?php echo $i; ?>" class="starR"></div>
 			<div class="source">
 				<script type="text/javascript">
 					$(function() {
+						$('#starAverage<?php echo $i; ?>').raty({
+							readOnly:	'true',
+							start:		<?php echo $speaker['current_score']; ?>,
+							half:       true,
+							size:       24,
+							path:		'<?php echo $dir; ?>img/',
+							starHalf:   'star-half.png',
+							starOff:    'star-off.png',
+							starOn:     'star-on.png'
+						});
 						$('#star<?php echo $i; ?>').raty({
 							readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated)) ? 'true' : 'false'; ?>,
 							start:		<?php echo isset($rated) ? $rated : 0; ?>,

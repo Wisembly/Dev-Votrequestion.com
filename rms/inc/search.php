@@ -70,7 +70,7 @@ array_push($hashtag, $conference[2]);
 
 <?php
 
-	$other_speakers = mysql_query("SELECT S.id, real_name, url_avatar FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]." AND S.id != '".$id."'");
+	$other_speakers = mysql_query("SELECT S.id, real_name, url_avatar, current_score FROM ".$table_prefix."Speaker AS S, ".$table_prefix."SpeakerInConf AS L WHERE S.id = L.id_speaker AND id_conf = ".$conference[0]." AND S.id != '".$id."'");
 	
 	if (mysql_num_rows($other_speakers) == 0)
 		echo '<div class="speaker">No other speaker</div>';
@@ -92,9 +92,20 @@ array_push($hashtag, $conference[2]);
 				<div id="star<?php echo $i; ?>" class="starR fivestars" value="<?php echo $other_speaker['id']; ?>">
 					<input type="hidden" value=<?php echo $other_speaker['id']; ?> />
 				</div>
+				<div id="starAverage<?php echo $i; ?>" class="starR"></div>
 				<div class="source">
 					<script type="text/javascript">
 						$(function() {
+							$('#starAverage<?php echo $i; ?>').raty({
+								readOnly:	'true',
+								start:		<?php echo $other_speaker['current_score']; ?>,
+								half:       true,
+								size:       24,
+								path:		'<?php echo $dir; ?>img/',
+								starHalf:   'star-half.png',
+								starOff:    'star-off.png',
+								starOn:     'star-on.png'
+							});
 							$('#star<?php echo $i; ?>').raty({
 								readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated2)) ? 'true' : 'false'; ?>,
 								start:		<?php echo isset($rated2) ? $rated2 : 0; ?>,
@@ -178,8 +189,12 @@ if (isset($hashtag[0]))
 			<?php if ($speaker['company'] != '</p>') echo $speaker['company']; ?><br/>
 			<?php if ($speaker['bio'] != '</p>') echo utf8_encode($speaker['bio']); ?>
 		</p>
-			
-		<p class="p2">Rate <?php echo $speaker['firstname']; ?></p>
+		
+		<p class="p1" style="margin-top:4px;">Average Note</p>
+		<div id="starAverage0" class="starR">
+		</div>
+		
+		<p class="p2">Rate <?php echo $speaker['firstname']; ?> !</p>
 		<div id="star0" class="starR">
 			<input type="hidden" value=<?php echo $id; ?> />
 		</div>
@@ -190,6 +205,16 @@ if (isset($hashtag[0]))
 		<div class="source">
 			<script type="text/javascript">
 				$(function() {
+					$('#starAverage0').raty({
+						readOnly:	'true',
+						start:		<?php echo $speaker['current_score']; ?>,
+						half:       true,
+						size:       24,
+						path:		'<?php echo $dir; ?>img/',
+						starHalf:   'star-half.png',
+						starOff:    'star-off.png',
+						starOn:     'star-on.png'
+					});
 					$('#star0').raty({
 						readOnly:	<?php echo (!isset($_SESSION['id_user']) || isset($rated1)) ? 'true' : 'false'; ?>,
 						start:		<?php echo isset($rated1) ? $rated1 : 0; ?>,
