@@ -36,7 +36,7 @@ $(this).attr("value","");});$("#speaker_name").blur(function(){if($(this).attr("
 $(this).attr("value","Enter speaker name or conf #hashtag");});$("#speaker_name").autocomplete("ajax/search.ajax.php",{formatItem:function(data,i,n,value){var img=value.split("..")[1];if(img=='none'){img="img/empty.png";}
 else if(img==''){img="img/profile.gif";}
 else if(img=='hashtag'){img="img/twitter.gif";}
-return"<img src='"+img+"'/> "+value.split("..")[0];},formatResult:function(data,value){return strip_tags(value.split(".")[0]);}});$("#speaker_name").result(function(event,data){if(data&&data!='none..No results|none'){if(data[0].substr(0,1)=='#')
+return"<img src='"+img+"' width='50' height='50'/> "+value.split("..")[0];},formatResult:function(data,value){return strip_tags(value.split(".")[0]);}});$("#speaker_name").result(function(event,data){if(data&&data!='none..No results|none'){if(data[0].substr(0,1)=='#')
 {var url=data[0].split("hashtag")[0];var redirect="c/"+url.replace(/[^a-zA-Z0-9]/g,'')+"/"+data[1];}
 else if(data[1]=='none')
 {redirect='http://twitter.com/#!/ratemyspeaker';}
