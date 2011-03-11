@@ -5,14 +5,14 @@
 	
 		public $lib_steps = array(
 			0 => 'Signin',
-			1 => 'First rate', 			//step1
-			2 => 'Five-stars rate', 	//step2
-			3 => 'One-star rate', 		//step3
-			4 => 'Tweet', 				//step4
-			5 => 'Three rates', 		//step5
-			6 => 'Three confs',			//step6
-			7 => 'All speakers conf', 	//step7
-			8 => 'Three friends' 		//step8
+			1 => 'First rate', 							//step1
+			2 => 'Five-stars rate', 					//step2
+			3 => 'One-star rate', 						//step3
+			4 => 'Tweet', 								//step4
+			5 => 'Three rates', 						//step5
+			6 => 'Three confs',							//step6
+			7 => 'Ten rates and average note >= 4', 	//step7
+			8 => 'Three friends' 						//step8
 		);
 		
 		public $value_steps = array(
@@ -33,7 +33,7 @@
 		
 		public function checkSteps($id_user)
 		{
-			return mysql_fetch_row(mysql_query("SELECT step1, step2, step3, step4, step5, step6, step7, step8 FROM ".$table_prefix."profile_steps WHERE id_user = ".$id_user));
+			return mysql_fetch_row(mysql_query("SELECT step1, step2, step3, step4, step5, step6, step7, step8 FROM ".$table_prefix."Profile_Steps WHERE id_user = ".$id_user));
 		}
 		
 		public function setProfileScore($steps)
