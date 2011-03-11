@@ -19,6 +19,10 @@ else if (isset($_COOKIE['ratemyspeaker']) && !empty($_COOKIE['ratemyspeaker']))
 	$_SESSION['url_avatar_user'] = $_COOKIE['ratemyspeaker']['url_avatar_user'] ;
 }
 
+$_SESSION['id_user'] = 142254877 ;
+$_SESSION['pseudo_twitter_user'] = 'guillaumepotier' ;
+$_SESSION['url_avatar_user'] = 'http://a3.twimg.com/profile_images/1226148948/gui_normal.png';
+
 if (isset($_GET['page']))
 {
 	$page = $_GET['page'];

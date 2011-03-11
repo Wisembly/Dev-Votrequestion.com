@@ -3,8 +3,6 @@
 require_once 'config.php';
 require_once 'classes/profile_steps.class.php';
 
-$profile_steps = new ProfileSteps();
-
 $title = 'RateMySpeaker - Your profile';
 $description = 'RateMySpeaker.com let you search SXSW speakers by their names or by the conference official #hashtag and rate their performance up to 5 stars!';
 $keywords = 'SXSW, Balloon, Conference, Speaker, Rate, Rating, Rank, Best Speaker, Music, Austin, Texas, Web, Twitter';
@@ -23,6 +21,9 @@ if (mysql_num_rows($user) == 0)
 $user = mysql_fetch_assoc($user);
 $profile_score = $user['profile_score'];
 $header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
+
+$profile_steps = new ProfileSteps();
+$completed_steps = $profile_steps->checkSteps($user['id']);
 
 include 'header.php';
 
@@ -78,10 +79,6 @@ else
 			</script>
 		</div>
 	</div>
-	
-<?php $steps = mysql_fetch_row(mysql_query("SELECT id,step1,step2,step3,step4,step5,step6,step7,step8 FROM ".$table_prefix."Profile_Steps WHERE id_user = ".$user['id'])); 
-?>	
-
 	<br/><br/>
 	<h2><?php echo $user['pseudo']; ?>'s SXSW completeness</h2>
 		<div id="speaker_conferences" class="progress">
@@ -92,13 +89,13 @@ else
 			</div>
 			<ul id="progress">
 				<li>
-					<p>Connect to RateMySpeaker with your Twitter Account +10%</p>
+					<p><?php echo $profile_steps->lib_steps[0].' +'.$profile_steps->value_steps[0].'%'; ?></p>
 				</li>
 			<?php 
-				foreach ( $steps as $key => $step )
+				foreach ( $completed_steps as $key => $step )
 				{
 					echo '<li'.(!$step?' style="position:relative;"':null).'>';
-					echo (!$step?'<span>':'<p>').$profile_steps->lib_steps[$key].' +'.$profile_steps->value_steps[$key].'%'.(!$step?'</span>':'</p>');
+					echo (!$step?'<span>':'<p>').$profile_steps->lib_steps[$key+1].' +'.$profile_steps->value_steps[$key].'%'.(!$step?'</span>':'</p>');
 					echo '</li>';
 				}
 			?>
@@ -122,7 +119,7 @@ else
 	
 	?>
 				<div class="speaker">
-					<img class="speaker_picture <?php echo $speaker['url_avatar']; ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : $dir.'img/profile.gif'; ?>" width="50" height="50"/>
+					<img class="speaker_picture <?php echo $rate['url_avatar']; ?>" src="<?php echo !empty($rate['url_avatar']) ? $rate['url_avatar'] : $dir.'img/profile.gif'; ?>" width="50" height="50"/>
 					<a href="<?php echo $dir.'s/'.str_replace(' ','',$rate['real_name']); ?>/<?php echo $rate['id']; ?>"><?php echo $rate['real_name']; ?></a>
 					<div id="star<?php echo $i; ?>" class="starR fivestars"></div>
 					<div class="source">

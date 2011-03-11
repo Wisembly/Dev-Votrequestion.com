@@ -232,7 +232,7 @@ if (isset($hashtag[0]))
 					var Top=window.screen.height/2-200;
 					window.open("http://twitter.com/share?text=<?php echo $tweet2; ?>&via=ratemyspeaker", "Tweet <?php echo $speaker['real_name']; ?> !", "width=600, height=400, left=" + Left + ", top=" + Top + "toolbar=no, menubar=no, location=no, directories=no, status=no, resizeable=no");
 				}
-			<? } else { ?>
+			<?php } else { ?>
 				var field = $(this);
 				field.fadeOut('slow',function(){
 					field.html('<a href="<?php echo $dir; ?>inc/twitter/redirect.php"><img width="151" height="24" src="<?php echo $dir; ?>img/twitter-login.png" alt="Connect to Twitter to rate your speaker" /></a></div><div id="popup" style="display:none;">Connect to Twitter to rate your speaker !');

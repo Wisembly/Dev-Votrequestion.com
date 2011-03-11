@@ -4,15 +4,15 @@
 	{
 	
 		public $lib_steps = array(
-			0 => 'Signin',
-			1 => 'First rate', 							//step1
-			2 => 'Five-stars rate', 					//step2
-			3 => 'One-star rate', 						//step3
-			4 => 'Tweet', 								//step4
-			5 => 'Three rates', 						//step5
-			6 => 'Three confs',							//step6
-			7 => 'Ten rates and average note >= 4', 	//step7
-			8 => 'Three friends' 						//step8
+			0 => 'Sign In on RateMySpeaker with your Twitter account!',
+			1 => 'Make your first rate for someone!', 										//step1
+			2 => 'Reward an incredible speaker with a 5-stars rate!',	 					//step2
+			3 => 'Sanction a bad speaker with a 1-star rate!',			 					//step3
+			4 => 'Tweet your rate! - <b>coming soon!</b>',				 					//step4
+			5 => 'Rate three different speakers',						 					//step5
+			6 => 'Rate speakers in three different conferences',							//step6
+			7 => 'After at least 10 rates, have an average rating score of 4!',				//step7
+			8 => 'Have three Twitter friends using RateMySpeaker - <b>coming soon!</b>' 	//step8
 		);
 		
 		public $value_steps = array(
