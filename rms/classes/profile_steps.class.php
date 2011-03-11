@@ -33,11 +33,22 @@
 		
 		public function checkSteps($id_user)
 		{
+			global $table_prefix;
+			
 			return mysql_fetch_row(mysql_query("SELECT step1, step2, step3, step4, step5, step6, step7, step8 FROM ".$table_prefix."Profile_Steps WHERE id_user = ".$id_user));
+		}
+		
+		public function setProfileSteps($steps)
+		{
+			global $table_prefix;
+			
+			mysql_query("UPDATE ".$table_prefix."Profile_Steps SET step1 = ".$steps[0].", step2 = ".$steps[1].", step3 = ".$steps[2].", step4 = ".$steps[3].", step5 = ".$steps[4].", step6 = ".$steps[5].", step7 = ".$steps[6].", step8 = ".$steps[7]." WHERE id_user = ".$id_user);
 		}
 		
 		public function setProfileScore($steps)
 		{
+			global $table_prefix;
+			
 			$value = self::$value_steps[0];
 			
 			for ($i = 0; $i < 8; $i++)
@@ -46,6 +57,27 @@
 			}
 			
 			mysql_query("UPDATE ".$table_prefix."User SET profile_score = ".$value);
+		}
+		
+		public function tryStep5($id_user)
+		{
+			global $table_prefix;
+			
+			return ($steps[4] == 0 && mysql_result(mysql_query("SELECT nb_ratings FROM ".$table_prefix."User WHERE id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+		}
+		
+		public function tryStep6($id_user)
+		{
+			global $table_prefix;
+			
+			return ($steps[5] == 0 && mysql_result(mysql_query("SELECT COUNT(DISTINCT id_conf) FROM ".$table_prefix."Rate AS R, ".$table_prefix."SpeakerInConf AS S WHERE R.id_speaker = S.id_speaker AND id_user = ".$id_user), 0) >= 3) ? 1 : 0;
+		}
+		
+		public function tryStep7($id_user)
+		{
+			global $table_prefix;
+			
+			return ($steps[6] == 0 && mysql_result(mysql_query("SELECT COUNT(id_user) FROM ".$table_prefix."User WHERE id_user = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 1 : 0;
 		}
 	
 	}
