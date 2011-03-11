@@ -33,7 +33,8 @@
 		
 		public function checkSteps($id_user)
 		{
-			return mysql_fetch_row(mysql_query("SELECT step1, step2, step3, step4, step5, step6, step7, step8 FROM ".$table_prefix."profile_steps WHERE id_user = ".$id_user));
+			global $table_prefix;
+			return mysql_fetch_row(mysql_query("SELECT step1, step2, step3, step4, step5, step6, step7, step8 FROM ".$table_prefix."Profile_Steps WHERE id_user = ".$id_user));
 		}
 		
 		public function setProfileScore($steps)
