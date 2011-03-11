@@ -89,7 +89,7 @@ else
 			</div>
 			<ul id="progress">
 				<li>
-					<p>Connect to RateMySpeaker with your Twitter Account +10%</p>
+					<p><?php echo $profile_steps->lib_steps[0].' +'.$profile_steps->value_steps[0].'%'; ?></p>
 				</li>
 			<?php 
 				foreach ( $completed_steps as $key => $step )
