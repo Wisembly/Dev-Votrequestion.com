@@ -1,7 +1,8 @@
 <?php
 
 require_once 'config.php';
-require_once 'classes/profile_steps.class.php' ;
+require_once 'classes/profile_steps.class.php';
+
 $profile_steps = new ProfileSteps();
 
 $title = 'RateMySpeaker - Your profile';
