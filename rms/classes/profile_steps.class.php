@@ -8,7 +8,7 @@
 			1 => 'Make your first rate for someone!', 										//step1
 			2 => 'Reward an incredible speaker with a 5-stars rate!',	 					//step2
 			3 => 'Sanction a bad speaker with a 1-star rate!',			 					//step3
-			4 => 'Tweet your rate! - <b>coming soon!</b>',				 					//step4
+			4 => 'Tweet your rate!',									 					//step4
 			5 => 'Rate three different speakers',						 					//step5
 			6 => 'Rate speakers in three different conferences',							//step6
 			7 => 'After at least 10 rates, have an average rating score of 4!'				//step7
