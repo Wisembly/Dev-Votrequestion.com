@@ -11,7 +11,7 @@
 			4 => 'Tweet your rate!',									 					//step4
 			5 => 'Rate three different speakers',						 					//step5
 			6 => 'Rate speakers in three different conferences',							//step6
-			7 => 'After at least 10 rates, have an average rating score of 4!'				//step7
+			7 => 'Rate at least 50 speakers!'												//step7
 		);
 		
 		public $value_steps = array(
@@ -92,7 +92,7 @@
 		{
 			global $table_prefix;
 			
-			return (mysql_result(mysql_query("SELECT COUNT(id) FROM ".$table_prefix."User WHERE id = ".$id_user." AND nb_ratings >= 10 AND current_score >= 4"), 0) > 0) ? 2 : 0;
+			return (mysql_result(mysql_query("SELECT nb_ratings FROM ".$table_prefix."User WHERE id = ".$id_user), 0) >= 50) ? 2 : 0;
 		}
 	
 	}
