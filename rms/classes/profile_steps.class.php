@@ -61,6 +61,8 @@
 				// on maj ici score	
 				mysql_query("UPDATE ".$table_prefix."User SET profile_score = (profile_score + $score ) WHERE id = ".$id_user)or die(mysql_error());
 			}
+			
+			return mysql_result(mysql_query("SELECT profile_score FROM ".$table_prefix."User WHERE id = ".$id_user),0);
 		}
 		
 		public function tryStep2($score)

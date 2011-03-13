@@ -10,6 +10,7 @@ if (isset($_SESSION['id_user']))
 		setcookie("ratemyspeaker[user_id]", $_SESSION['id_user'], time()+60*60*24*30) ;
 		setcookie("ratemyspeaker[pseudo_twitter_user]", $_SESSION['pseudo_twitter_user'], time()+60*60*24*30) ;
 		setcookie("ratemyspeaker[url_avatar_user]", $_SESSION['url_avatar_user'], time()+60*60*24*30) ;
+		setcookie("ratemyspeaker[completenes]", $_SESSION['completenes'], time()+60*60*24*30) ;
 	}
 }
 else if (isset($_COOKIE['ratemyspeaker']) && !empty($_COOKIE['ratemyspeaker']))
@@ -17,6 +18,7 @@ else if (isset($_COOKIE['ratemyspeaker']) && !empty($_COOKIE['ratemyspeaker']))
 	$_SESSION['id_user'] = $_COOKIE['ratemyspeaker']['user_id'] ;
 	$_SESSION['pseudo_twitter_user'] = $_COOKIE['ratemyspeaker']['pseudo_twitter_user'] ; 
 	$_SESSION['url_avatar_user'] = $_COOKIE['ratemyspeaker']['url_avatar_user'] ;
+	$_SESSION['completenes'] = $_COOKIE['ratemyspeaker']['completenes'] ;
 }
 
 // $_SESSION['id_user'] = 6 ;

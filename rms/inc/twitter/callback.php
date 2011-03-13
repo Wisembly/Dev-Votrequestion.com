@@ -50,7 +50,7 @@ if (200 == $connection->http_code) {
 		
 		require_once '../config.php';
 		
-		$user_exist = mysql_query("SELECT id FROM ".$table_prefix."User WHERE id_twitter = ".$user->id);
+		$user_exist = mysql_query("SELECT id,profile_score FROM ".$table_prefix."User WHERE id_twitter = ".$user->id);
 		
 		if (mysql_num_rows($user_exist) == 0)
 		{
@@ -69,7 +69,11 @@ if (200 == $connection->http_code) {
 			$_SESSION['id_user'] = $new_user_id;
 		}
 		else
-			$_SESSION['id_user'] = mysql_result($user_exist, 0);
+		{
+			$get_infos = mysql_fetch_row($user_exist);
+			$_SESSION['id_user'] = $get_infos[0];
+			$_SESSION['completenes'] = $get_infos[1];
+		}
 		
 		$_SESSION['pseudo_twitter_user'] = $user->screen_name;
 		$_SESSION['url_avatar_user'] = $user->profile_image_url;

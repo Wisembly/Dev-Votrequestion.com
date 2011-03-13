@@ -8,6 +8,7 @@ else if (!isset($_POST['score']) || empty($_POST['score']) || !is_numeric($_POST
 	die('Error #3');
 
 require_once '../inc/config.php';
+session_start();
 
 $id_user = $_POST['id_user'];
 $id_speaker = $_POST['id_speaker'];
@@ -36,7 +37,9 @@ if ($count == 0)
 	$steps[5] = !$steps[5] ? $profileSteps->tryStep6($id_user) : 0 ;
 	$steps[6] = !$steps[6] ? $profileSteps->tryStep7($id_user) : 0 ;
 	
-	$profileSteps->setProfileStepsAndScore($steps, $id_user);
+	$_SESSION['completenes'] = $profileSteps->setProfileStepsAndScore($steps, $id_user);
+	setcookie("ratemyspeaker[completenes]", $_SESSION['completenes'], time()+60*60*24*30) ; 
+	
 }
 
 mysql_close();

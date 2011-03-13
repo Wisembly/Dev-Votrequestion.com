@@ -22,6 +22,8 @@ $user = mysql_fetch_assoc($user);
 $profile_score = $user['profile_score'];
 $header = '<script type="text/javascript" src="'.$dir.'js/raty/jquery.raty.min.js"></script>';
 
+$_SESSION['completenes'] = $user['profile_score'] ;
+
 $profile_steps = new ProfileSteps();
 $completed_steps = $profile_steps->checkSteps($user['id']);
 

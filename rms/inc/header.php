@@ -41,7 +41,7 @@
 	}
 	else
 	{
-		echo '<div id="twitter_button_connect" ><a href="'.$dir.'u/'.$_SESSION['pseudo_twitter_user'].'"><img width="14" height="14" src="'.$_SESSION['url_avatar_user'].'" alt="Connect to Twitter to rate your speaker" /> @'.$_SESSION['pseudo_twitter_user'].'</a> - <a href="'.$dir.'inc/twitter/clearsessions.php">Logout</a></div>';
+		echo '<div id="twitter_button_connect" ><a href="'.$dir.'u/'.$_SESSION['pseudo_twitter_user'].'"><img width="14" height="14" src="'.$_SESSION['url_avatar_user'].'" alt="See your profile and your SXSW Completenes!" /> @'.$_SESSION['pseudo_twitter_user'].' ('.$_SESSION['completenes'].'%)</a> - <a href="'.$dir.'inc/twitter/clearsessions.php">Logout</a></div>';
 	}
 ?>
 		
