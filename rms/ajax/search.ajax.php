@@ -1,5 +1,6 @@
 <?php
 
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
 require_once '../inc/config.php';
 
 $speakers = mysql_query(search(mysql_real_escape_string($_GET['q'])));
