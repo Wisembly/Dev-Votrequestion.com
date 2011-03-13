@@ -33,7 +33,7 @@ include 'header.php';
 <script type="text/javascript">	
 $(function(){$("#speaker_name").click(function(){if($(this).attr("value")=="Enter speaker name or conf #hashtag")
 $(this).attr("value","");});$("#speaker_name").blur(function(){if($(this).attr("value")=="")
-$(this).attr("value","Enter speaker name or conf #hashtag");});$("#speaker_name").autocomplete("ajax/search.ajax.php",{formatItem:function(data,i,n,value){var img=value.split("..")[1];if(img=='none'){img="img/empty.png";}
+$(this).attr("value","Enter speaker name or conf #hashtag");});$("#speaker_name").autocomplete("ajax/search.ajax.php",{cacheLength:0,formatItem:function(data,i,n,value){var img=value.split("..")[1];if(img=='none'){img="img/empty.png";}
 else if(img==''){img="img/profile.gif";}
 else if(img=='hashtag'){img="img/twitter.gif";}
 return"<img src='"+img+"' width='50' height='50'/> "+value.split("..")[0];},formatResult:function(data,value){return strip_tags(value.split(".")[0]);}});$("#speaker_name").result(function(event,data){if(data&&data!='none..No results|none'){if(data[0].substr(0,1)=='#')
